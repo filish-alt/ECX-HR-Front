@@ -1,0 +1,75 @@
+<div class="modal">
+    <div class="modal-content">
+        <h2>Edit Other Leave Balance</h2>
+      
+        
+        <form (ngSubmit)="saveEditedData(leaveBalance.empId,leaveBalance)"  *ngFor="let leaveBalance of selectedEmployeeLeaveBalance">
+          <!-- Display editable fields for the leave balance data -->
+         
+      
+          <div class="form-group">
+            <label>Sick Leave Balance Remaining </label>
+            <input type="text" id="sickRemainingBalance" name="sickRemainingBalance"  value="{{leaveBalance.sickRemainingBalance}}"[(ngModel)]="leaveBalance.sickRemainingBalance" class="form-control">
+          </div>
+   
+      
+    
+                <div class="form-group">
+            <label for="maternityRemainingBalance">Maternity Remaining Balance</label>
+            <input type="text" id="maternityRemainingBalance" name="maternityRemainingBalance" value="{{leaveBalance.maternityRemainingBalance}}" [(ngModel)]="leaveBalance.maternityRemainingBalance" class="form-control">
+          </div>
+    
+          <div class="form-group">
+            <label for="paternityRemainingBalance">Paternity Remaining Balance</label>
+            <input type="text" id="paternityRemainingBalance" name="paternityRemainingBalance" value="{{leaveBalance.paternityRemainingBalance}}" [(ngModel)]="leaveBalance.paternityRemainingBalance" class="form-control">
+          </div>
+      
+      
+          <div class="form-group">
+            <label for="marriageRemainingBalance">marriage Remaining Balance</label>
+            <input type="text" id="marriageRemainingBalance" name="marriageRemainingBalance" value="{{leaveBalance.marriageRemainingBalance}}" [(ngModel)]="leaveBalance.marriageRemainingBalance" class="form-control">
+          </div>
+
+
+       
+          <div class="form-group">
+            <label for="leaveWotPayRemainingBalance">leaveWotPay Remaining Balance</label>
+            <input type="text" id="leaveWotPayRemainingBalance" name="leaveWotPayRemainingBalance" value="{{leaveBalance.leaveWotPayRemainingBalance}}" [(ngModel)]="leaveBalance.leaveWotPayRemainingBalance" class="form-control">
+          </div>
+    
+
+          <div class="form-group">
+            <label for="courtLeaveRemainingBalance">courtLeave Remaining Balance</label>
+            <input type="text" id="courtLeaveRemainingBalance" name="courtLeaveRemainingBalance" value="{{leaveBalance.courtLeaveRemainingBalance}}" [(ngModel)]="leaveBalance.courtLeaveRemainingBalance" class="form-control">
+          </div>
+    
+      
+ 
+          <div class="form-group">
+            <label for=" abortionLeaveRemainingBalance"> abortionLeave Remaining Balance</label>
+            <input type="text" id=" abortionLeaveRemainingBalance" name=" abortionLeaveRemainingBalance" value="{{leaveBalance. abortionLeaveRemainingBalance}}" [(ngModel)]="leaveBalance. abortionLeaveRemainingBalance" class="form-control">
+          </div>
+    
+          
+          <div class="form-group">
+            <label for="compassinateRemainingBalance">compassinate Remaining Balance</label>
+            <input type="text" id="compassinateRemainingBalance" name="compassinateRemainingBalance" value="{{leaveBalance.compassinateRemainingBalance}}" [(ngModel)]="leaveBalance.compassinateRemainingBalance" class="form-control">
+          </div>
+         
+     
+          <div class="form-group">
+            <label for=" educationRemainingBalance"> education Remaining Balance</label>
+            <input type="text" id=" educationRemainingBalance" name=" educationRemainingBalance" value="{{leaveBalance. educationRemainingBalance}}" [(ngModel)]="leaveBalance. educationRemainingBalance" class="form-control">
+          </div>
+
+          <div class="form-group">
+            <div *ngIf="successMessage" class="success-message">
+                {{ successMessage }}
+              </div>
+            <button type="submit" class="btn btnedit">Save</button>
+            <button type="button" class="btn btn-secondary" (click)="onCancelClick()">Cancel</button>
+          
+          </div>
+        </form>
+      </div>
+    </div>

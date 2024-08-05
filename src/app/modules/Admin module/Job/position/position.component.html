@@ -1,0 +1,86 @@
+
+
+
+
+  <app-shared-nav [buttons]="buttons"></app-shared-nav> 
+  <div class="col-md-8 ml-5">
+    <div class="card " >
+  <form (ngSubmit)="addposition()"> 
+<div class="row mt-3 ml-4" > 
+  <h6 class="card-title ml-3">Position</h6>
+  <div class="col-4 mt-2"> 
+    <div class="form-field"> 
+ 
+      <mat-form-field  style="width: 180px;height: 65px;"> 
+        <mat-label>Select Division 
+ 
+        </mat-label> 
+        <mat-select placeholder="Select Division" name="selectedDivision" required [(ngModel)]="selectedDivision"> 
+          <mat-option *ngFor="let division of divisions" [value]="division.divisionId"> 
+            {{ division.description }} 
+          </mat-option> 
+        </mat-select> 
+      </mat-form-field> 
+    </div> 
+    </div> 
+  <div class="col-4 ml-3 mt-3"> 
+    <div class="form-field "> 
+ 
+      
+      <input type="text"  id="positionName" placeholder=" " required [(ngModel)]="addPositionRequest.name"name="name" required> 
+   <label for="positionName">Position Name</label>  </div> 
+  </div> 
+  <div class="col-3 mt-3"> 
+    <div class="form-field"> 
+     
+      <input  id="positionDescription" rows="1" placeholder=" " required [(ngModel)]="addPositionRequest.description" name="description" required> 
+    <label for="positionDescription">Position Description</label>  </div> 
+  </div> 
+ 
+ 
+ 
+ 
+</div> 
+<button type="submit" class="btn btn-sm btnsave ml-3">
+  <mat-icon>add</mat-icon>Save</button> 
+<div *ngIf="positionSaved" class=" btndanger btn-sm pull-right">
+  Successfully Added!
+</div>
+</form> 
+<h6 class="mb-3 ml-3 mt-2"> 
+  List Of Position
+  </h6>
+<div class="mt-3">
+ 
+<input  class="search" type="search" placeholder="Search By Position Name..." [(ngModel)]="searchTerm" (input)="onSearch()">
+<table class="table mt-2 table-striped col-md-8 compact-table" > 
+  <thead> 
+  <tr> 
+    <th>Division </th>
+    <th> Position Name</th>
+    <th>Description</th>
+  </tr> 
+</thead> 
+ <tbody> 
+      <tr *ngFor="let position of filteredPosition || positions"> 
+        <td>{{ getDivisionName(position.divisionId) }}</td>
+        <td>{{position.name}}</td>
+        <td>{{position.description}}</td>
+     
+        
+        <td>   
+          <button  class="btn btn-sm btndanger" (click)="deletePosition(position.positionId)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
+            <mat-icon>delete</mat-icon></button>
+            
+      </td>
+
+          <!-- <td> <a [routerLink]="['/position','edit',position.id]">  
+              View 
+              </a> 
+          </td> --> 
+      </tr> 
+  </tbody> 
+</table>
+</div>
+</div>
+</div>

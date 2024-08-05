@@ -1,0 +1,38 @@
+.custom-modal{
+    width: 1200px; /* Set a fixed width for your modal */
+  max-height: 80vh; /* Set a maximum height */
+  overflow-y: auto; /* Add scrollbars for content that overflows the modal */
+}
+
+.logo-img{
+  width:7%;
+  height: 7%;
+
+    }
+    .hs{
+      position:absolute;
+      align-content:center;
+        }
+ 
+ p{
+    margin-left: 100;
+}
+.compact-table th {
+  font-size: 13px;
+  color: black;
+  font-weight: bold; /* Adjust the font size as needed */
+}
+.compact-table tr {
+  font-size: 13px; /* Adjust the font size as needed */
+}
+
+.compact-table th, .compact-table td {
+  padding: 4px 8px; 
+}
+td ,th{
+  white-space: nowrap; /* Prevent text wrapping */
+}
+.card-head{
+  background-color: rgb(224, 224, 217);
+
+}

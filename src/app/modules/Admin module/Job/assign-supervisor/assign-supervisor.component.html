@@ -1,0 +1,147 @@
+
+
+
+
+<app-shared-nav [buttons]="buttons"></app-shared-nav> 
+<div class="row" > 
+  <div class="col-md-9 ml-5">
+    <div class="card " >
+<form (ngSubmit)="addAssignSupervisor()"> 
+
+  <div class="row mt-4 ml-3" >
+    <h6 class="card-title mt-3">Assign Supervisor</h6>
+<div class="col-3 mt-3"> 
+  <div class="form-field "> 
+
+    <mat-form-field > 
+      <mat-label>Select position 
+
+      </mat-label> 
+      <mat-select placeholder="Select position" name="selectedposition" required [(ngModel)]="selectedPosition"> 
+        <mat-option *ngFor="let position of positions" [value]="position.positionId"> 
+          {{ position.name }} 
+        </mat-option> 
+      </mat-select> 
+    </mat-form-field> 
+  </div> 
+  </div> 
+
+
+<div class="col-3 ml-4 mt-3"> 
+ 
+
+    <mat-form-field  > 
+      <mat-label>Select First Supervisor
+
+      </mat-label> 
+      <mat-select placeholder="First Supervisor" name="selectedFirstSupervisor" required [(ngModel)]="selectedFirstSupervisor"> 
+        <mat-option *ngFor="let supervisor of firstSupervisors" [value]="supervisor.positionId"> 
+          {{ getPositionName(supervisor.positionId)}} 
+        </mat-option> 
+      </mat-select> 
+    </mat-form-field> 
+  </div>
+  
+  <div class="col-3  ml-4" *ngIf="selectedFirstSupervisor !== ''"> 
+
+    <mat-form-field  style="width: 180px;height: 65px;"> 
+      <mat-label>Select Second Supervisor
+
+      </mat-label> 
+      <mat-select placeholder="Second Supervisor" name="selectedSecondSupervisor" required [(ngModel)]="selectedSecondSupervisor"> 
+        <mat-option *ngFor="let supervisor of secondSupervisors" [value]="supervisor.positionId"> 
+          {{ getPositionName(supervisor.positionId)}} 
+        </mat-option> 
+      </mat-select> 
+    </mat-form-field> 
+  </div> 
+</div>
+
+<div class="row mt-3 ml-3" >
+  <div class="col-3" *ngIf="selectedSecondSupervisor !== ''"> 
+
+    <mat-form-field  style="width: 180px;height: 65px;"> 
+      <mat-label>Select Third Supervisor
+
+      </mat-label> 
+      <mat-select placeholder="Third Supervisor" name="selectedThirdSupervisor" required [(ngModel)]="selectedThirdSupervisor"> 
+        <mat-option *ngFor="let supervisor of thirdSupervisors" [value]="supervisor.positionId"> 
+          {{ getPositionName(supervisor.positionId)}} 
+        </mat-option> 
+      </mat-select> 
+    </mat-form-field> 
+  </div> 
+ 
+  <div class="col-3 ml-4" *ngIf="selectedThirdSupervisor !== ''"> 
+
+    <mat-form-field  style="width: 180px;height: 65px;"> 
+      <mat-label>Select Forth Supervisor
+
+      </mat-label> 
+      <mat-select placeholder="Forth Supervisor" name="selectedForthSupervisor" required [(ngModel)]="selectedFourthSupervisor"> 
+        <mat-option *ngFor="let supervisor of fourthSupervisors" [value]="supervisor.positionId"> 
+          {{getPositionName(supervisor.positionId)}} 
+        </mat-option> 
+      </mat-select> 
+    </mat-form-field> 
+  </div> 
+  <div class="col-3 ml-4"> 
+
+    <mat-form-field  style="width: 180px;height: 65px;" *ngIf="selectedFourthSupervisor !== ''"> 
+      <mat-label>Select Fifth Supervisor
+
+      </mat-label> 
+      <mat-select placeholder="Fifth Supervisor" name="selectedFifthSupervisor" required [(ngModel)]="selectedFifthSupervisor"> 
+        <mat-option *ngFor="let supervisor of fifthSupervisors" [value]="supervisor.positionId"> 
+          {{ getPositionName(supervisor.positionId)}} 
+        </mat-option> 
+      </mat-select> 
+    </mat-form-field> 
+  </div> 
+</div>
+
+<button type="submit" class="btn btn-sm btnsave ml-2"><mat-icon>add</mat-icon>Save</button> 
+<div *ngIf="assignSupervisorSaved" class=" btndanger btn-sm pull-right">
+  Successfully Added!
+  </div>
+</form> 
+<h6 class="mb-3 ml-3 mt-2"> 
+  List Of Assign Supervisor
+  </h6> 
+<table id="example1" class="table table-bordered table-striped compact-table"> 
+<thead> 
+<tr> 
+  <th>position </th>
+  <th>First Supervisor</th>
+  <th>Second Supervisor</th>
+  <th>Third Supervisor</th>
+  <th>Forth Supervisor</th>
+  <th>Fifth Supervisor</th>
+</tr> 
+</thead> 
+<tbody> 
+    <tr *ngFor="let assignSupervisor of assignSupervisors"> 
+      <td>{{ getPositionName(assignSupervisor.positionId) }}</td>
+      <td>{{getFirstPositionName(assignSupervisor.firstSupervisor)}}</td>
+      <td>{{getSecondPositionName(assignSupervisor.secondSupervisor)}}</td>
+      <td>{{getThirdPositionName(assignSupervisor.thirdSupervisor)}}</td>
+      <td>{{getFourthPositionName(assignSupervisor.fourthSupervisor)}}</td>
+      <td>{{getFifthPositionName(assignSupervisor.fifthSupervisor)}}</td>
+   
+      
+      <td>   
+        <button  class="btn btn-sm btndanger" (click)="deleteAssignSupervisor(assignSupervisor.id)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
+          <mat-icon>delete</mat-icon></button>
+    </td>
+
+      
+        <!-- <td> <a [routerLink]="['/position','edit',position.id]">  
+            View 
+            </a> 
+        </td> --> 
+    </tr> 
+</tbody> 
+</table>
+</div>
+</div>
+</div>

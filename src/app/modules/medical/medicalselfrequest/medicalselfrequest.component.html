@@ -1,0 +1,227 @@
+
+<app-shared-nav class="sharednav"[buttons]="buttons"></app-shared-nav>
+<!-- First Column -->
+<div class="col-md-11 ml-5">
+  <div class="card mb-5">
+    <div class="card-body " >
+      <div class="card-header ">
+        <h4 class="card-title">Medical Request</h4>
+        <p class="card-category">Complete your Medical Request</p>
+      </div>
+      <div class="container mt-3">
+
+      <button class="btn btndanger" (click)="toggleMedicalForm()"><mat-icon>add</mat-icon>Fill Medical Request</button>
+        </div> 
+    <!-- Vacancy Form (Initially Hidden) -->
+    <div *ngIf="showMedicalForm"class="mt-4">
+      <h6 class="mb-3">Medical Form</h6>
+      <form   >
+        <div class="card-body ml-2 ">
+          <div class="row">
+          
+            <div class="col-md-4 form-field">
+              <mat-select class="select" placeholder="Select Spouse" name="selectedSpouse" required [(ngModel)]="selectedSpouse">
+                <mat-option *ngFor="let spouse of spouses" [value]="spouse.id">
+                  {{getSpouseName(spouse.id) }}
+                </mat-option>
+              </mat-select>
+            </div>
+            <div class="col-md-4">
+              <!-- <label *ngIf="selectedMedicalBalance > 0">Available Balance</label>
+              <input class="form-control" *ngIf="selectedMedicalBalance > 0" name="selectedMedicalBalance" required [(ngModel)]="selectedMedicalBalance" [disabled]="true">
+              <div *ngIf="selectedMedicalBalance <= 0 ">
+                <p class="insufficient-balance">Insufficient Balance</p>
+              </div> -->
+            
+            
+            </div></div>
+         
+     
+             
+            <div class="row mt-5 ">
+              <div class="col-md-4 form-field ">
+              <table   class="table table-striped table-bordered compact-table">
+                <thead>
+                  <tr>  <th>Self Balance</th>
+                  </tr>
+                </thead>
+                <tbody>
+                   <td>{{selfMedBalance}}</td>
+             
+              </table></div>
+              
+   <div class="col-md-4 form-field">
+    <table   class="table table-striped table-bordered compact-table">
+      <thead>
+        <tr>
+          <th>Spouse</th>
+          
+          <th>Family Balance</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Use *ngFor to loop through the medicalRequests array and display each medicalRequest record -->
+        <tr *ngFor="let medb of spouseMedBalance">
+          <td>{{ getSpouseName(medb.spouseId) }}</td>
+          <td>{{ medb.familyBalance }}</td>
+   
+    </table>
+    
+   </div></div>
+          
+            <div class="row mt-3">
+            <div class="col-md-4 ">
+                             
+              <label> Employee Position</label><br>
+              <input class="form-field select2" placeholder=" " name="selectedPosition"
+              required [(ngModel)]="selectedPosition" [disabled]="true">
+                <!-- Use *ngFor on mat-option to loop through departments -->
+              
+                
+           
+          </div>
+      
+          <div class="col-md-4">
+                             
+            <label>Department</label><br>
+            <input class="form-field select2" placeholder=" " name="selectedEmployeeDepartment"
+            required [(ngModel)]="selectedEmployeeDepartment" [disabled]="true">
+              <!-- Use *ngFor on mat-option to loop through departments -->
+            
+              
+         
+        </div>
+      </div>
+            
+          
+          <div class="row ">
+            <div class="col-md-4  form-field mt-4 ">
+              <input  placeholder=" " type="text" name="institutionName" [(ngModel)]="medicalRequest.institutionName">
+              <label >Institution Name</label>
+            </div>
+            <div class="col-md-4  form-field mt-4">
+           
+              <input placeholder=" " type="text" name="address" [(ngModel)]="medicalRequest.address">
+                 <label>Address</label>
+            </div></div>
+            <button class="btn mt-5" (click)="toggleInnerForm()">Add Expenses</button>
+            <div *ngIf="showInnerForm"class="mt-4">
+                <h6 class="mb-3">Medical Form</h6>
+              <form>
+               
+                <div class="row" >
+                <div class="col-md-4  form-field mt-4 ">
+                    <input  placeholder=" " type="text" name="hospitalBed" [(ngModel)]="medicalRequest.hospitalBed">
+                    <label >Hospital Bed Cost</label>
+                  </div>   </div>
+                  <div class="row" >
+              
+                  <div class="col-md-4  form-field mt-4">
+                 
+                    <input placeholder=" " type="text" name="laboratory" [(ngModel)]="medicalRequest.laboratory">
+                       <label>Laboratory Cost</label>
+                  </div></div>
+                  <div class="row" >
+              
+                  <div class="col-md-4  form-field mt-4 ">
+                    <input  placeholder=" " type="text" name="medicalExamination" [(ngModel)]="medicalRequest.medicalExamination">
+                    <label >Medical Examination Cost</label>
+                  </div></div>
+                  <div class="row" >
+              
+                  <div class="col-md-4  form-field mt-4">
+                 
+                    <input placeholder=" " type="text" name="medicine" [(ngModel)]="medicalRequest.medicine">
+                       <label>Medicine Cost</label>
+                  </div></div>
+                  <div class="row" >
+              
+                  <div class="col-md-4  form-field mt-4">
+                 
+                    <input placeholder=" " type="text" name="otherRelated" [(ngModel)]="medicalRequest.otherRelated">
+                       <label>Other Related Cost</label>
+                  </div></div>
+              </form></div>
+           
+            <div class="col-md-4 mt-3 ">
+              <label for="name" >Supporting File</label>
+              <input placeholder=" " name="file" class="form-control" type="file" id="file"  (change)="onFileSelected($event)" #fileInput>
+              <mat-error *ngIf="IsPdf" class=" pull-right">Selected file is not a PDF</mat-error>
+              <mat-error  *ngIf="IsBig" class="  pull-right">File size exceeds 200MB</mat-error >
+    
+            </div>
+   
+          <div class="mt-3">
+            <div *ngIf="errormessage" >
+              <p class="insufficient-balance">Insufficient Balance</p>
+            </div>
+            <button type="button" class="btn btnsave btn-sm" *ngIf="!medicalRequest.medicalRequestId" (click)="addmedicalRequest()"><mat-icon>add</mat-icon>Add</button>
+            <div *ngIf="medicalRequestSaved" class=" btndanger btn-sm pull-right">Added successfully!</div>
+            <button type="button" class="btn btnsave btn-sm" *ngIf="medicalRequest.medicalRequestId" (click)="updatemedicalRequest()"><mat-icon>add</mat-icon>Update</button>
+            <div *ngIf="medicalRequestUpdated" class=" btndanger btn-sm pull-right">Updated successfully!</div>
+          </div>
+
+        </div>
+      </form>
+      
+     
+      </div>
+</div>
+<div class="mt-3 card-header yellow"><h6 >Medical Request History</h6></div>
+              <table *ngIf="medicalRequest" class="table table-striped table-bordered compact-table">
+                <thead>
+                  <tr>
+                    <th>Employee</th>
+                    
+                    <th>Hospital Bed</th>
+                    <th>laboratory</th>
+                    <th>Medical Examination</th>
+                    <th>Medicine</th>
+                    <th>Other Related</th>
+                    <th>Total</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Use *ngFor to loop through the medicalRequests array and display each medicalRequest record -->
+                  <tr *ngFor="let medicalRequest of medicalRequests">
+                    <td>{{ capitalizeFirstLetter(getEmployeeName(medicalRequest.empId)) }}</td>
+                    <td>{{ medicalRequest.hospitalBed }}</td>
+                    <td>{{ medicalRequest.laboratory }}</td>
+                     <td>{{ medicalRequest.medicalExamination}}</td>
+                    <td>{{ medicalRequest.medicine  }}</td>
+                    <td>{{ medicalRequest.otherRelated }}</td>
+                    <td>{{ medicalRequest.total }}</td>
+            
+                  
+                    
+                    <td>  <button class="btn btn-sm " (click)="fetchAndDisplayPDF(medicalRequest)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"
+                      style="background-color: rgb(224, 224, 217); color: #0c0c0c; border: none;  cursor: pointer; border-radius: 5px;"  download="filename.pdf" >
+                      <mat-icon>get_app</mat-icon></button>
+                      <mat-error  *ngIf="FileNull && id == medicalRequest.medicalRequestId"
+                      class="  pull-right">No File</mat-error >
+                      
+    
+                  </td>
+                    <td>
+                      <button class="btn btn-sm btnedit" (click)="editmedicalRequest(medicalRequest)"[ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
+                        <mat-icon>edit</mat-icon>
+                      </button>
+                      <button class="btn btn-sm btndanger" *ngIf="medicalRequest.approvalStatus === 'Pendding'" (click)="deletemedicalRequest(medicalRequest)"
+                      [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              
+            
+               
+            </div>
+     
+                
+       
+ 
+

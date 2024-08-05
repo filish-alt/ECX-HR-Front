@@ -1,0 +1,19 @@
+
+  .fixed-header {
+    position:absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    
+    z-index: 100;
+
+  }
+  .headcolor{
+    background-color: #557a2c;
+    background: linear-gradient(rgba(255, 255, 255,0.2) ,rgb(255, 255, 255,0.2) ), #76a53b;
+    box-shadow:0 0 10px rgba(118, 165, 59,0.5);
+    color:#fff;
+  }
+  .white{
+    color:white;
+  }

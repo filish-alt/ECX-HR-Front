@@ -1,0 +1,241 @@
+<div class="custom-modal">
+
+  <div class="col-md-12">
+    <div #printableCard>
+
+
+     <div>
+            <a href="#" class="simple-text">
+                <div>
+                    <img  class="logo-img"src="/assets/img/ECXLogo.png"/>
+                </div>
+           
+                  
+            </a>
+            <h5>    ETHIOPIAN COMMODITY EXCHANGE</h5>
+            <P>Tel.+251 554 7010, Fax +251 554 7010, P.O.Box 17341 Alsam Chelelek Tower 2, Addis Ababa,Ethiopia www.ecx.com.et</P>
+     
+        </div>
+    <div class="employee-details" *ngIf="employeeData ">
+        <div class="container-fluid">
+       
+              <!-- Selected Column -->
+          
+                <h6>Employee Details</h6>
+                <!-- Content for selected column -->
+              </div>
+          
+              <!-- Tables Column -->
+           
+                <div class="row">
+                  
+                      <div class="col-md-6 card"> 
+                        <p class="card-head">Employee</p>
+                        <!-- Table for addresses -->
+                        <div class="table-responsive ">
+                          <table *ngIf="employeeData.addresses" class="table table-border table-striped col-md-6 compact-table">
+                            <thead>
+                              <tr>
+                                <th>First Name</th>
+                                <th>Sex</th>
+           
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngIf="employeeData.employee">
+                                <td>{{ employeeData.employee.firstName }}  {{ employeeData.employee.middleName }}  {{ employeeData.employee.lastName }}</td>
+                                <td>{{ employeeData.employee.sex }}</td>
+
+                           
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="col-md-6 card"> 
+                    <p class="card-head">Contact</p>
+                    <!-- Table for addresses -->
+                    <div class="table-responsive ">
+                      <table *ngIf="employeeData.addresses" class="table table-border table-striped col-md-6 compact-table">
+                        <thead>
+                          <tr>
+                            <th>Region</th>
+                            <th>Town</th>
+                            <th>Phone Number</th>
+                            <th>Email</th>
+                            <th>Post Code</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngIf="employeeData.addresses">
+                            <td>{{ employeeData.addresses.region }}</td>
+                            <td>{{ employeeData.addresses.town }}</td>
+                            <td>{{ employeeData.addresses.phoneNumber }}</td>
+                            <td>{{ employeeData.addresses.email }}</td>
+                            <td>{{ employeeData.addresses.postCode }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+          
+                  <div class="col-md-6 card">
+                    <p class="card-head">Emergency Contact</p>
+                    <!-- Table for emergency contacts -->
+                    <div class="table-responsive">
+                      <table *ngIf="employeeData.emergencyContacts" class="table table-border table-striped compact-table">
+                        <thead>
+                          <tr>
+                            <td>Name</td>
+                            <td>Phone Number</td>
+                            <td>Relationship</td>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let contact of employeeData.emergencyContacts">
+                            <td>{{ contact.name }}</td>
+                            <td>{{ contact.phoneNumber }}</td>
+                            <td>{{ contact.relationship }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="col-md-6 card">
+                    <p class="card-head">Spouse</p>
+                    <!-- Table for spouse -->
+                    <div class="table-responsive">
+                      <table *ngIf="employeeData.spouses" class="table table-border table-striped compact-table">
+                        <thead>
+                          <tr>
+                            <th>Name</th>
+                            <th>Date of Birth</th>
+                            <th>Relationship</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let spouse of employeeData.spouses">
+                            <td>{{ spouse.name }}</td>
+                            <td>{{ spouse.dateOfBirth| date:'yyyy-MM-dd' }}</td>
+                            <td>{{ spouse.relationship }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  
+                  <div class="col-md-6 card">
+                    <p class="card-head">Education</p>
+                    <!-- Table for education -->
+                    <div class="table-responsive">
+                      <table *ngIf="employeeData.educations" class="table table-border  table-striped compact-table">
+                        <thead>
+                          <tr>
+                            <th>Education Level</th>
+                            <th>Name of Institute</th>
+                            <th>Field of Study</th>
+                            <th>From</th>
+                            <th>To</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let education of employeeData.educations">
+                            <td>{{getEducationName(education.eductionName)}}</td>
+                            <td>{{ education.nameOfInstitute }}</td>
+                            <td>{{ education.fieldOfStudy }}</td>
+                            <td>{{ education.from| date:'yyyy-MM-dd' }}</td>
+                            <td>{{ education.to | date:'yyyy-MM-dd'}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  
+                  <div class="col-md-6 card">
+                    <p class="card-head">Employee Position</p>
+                    <!-- Table for employee position -->
+                    <div class="table-responsive">
+                      <table *ngIf="employeeData.employeePostions" class="table table-border table-striped  compact-table">
+                        <thead>
+                          <tr>
+                            <th>Division</th>
+                            <th>Position</th>
+                            <th>Step</th>
+                            <th>Branch</th>
+                            <th>Start Date</th>
+                          </tr>
+                        </thead>
+               
+            <tbody>
+              <tr *ngIf="employeeData.employeePostions">
+                <td>{{ getDivisionName(employeeData.employeePostions.divisionId) }}</td>
+                <td>{{ getPositionName(employeeData.employeePostions.position) }}</td>
+                <td>{{ getStepName(employeeData.employeePostions.stepId) }}</td>
+                <td>{{ getBranchName(employeeData.employeePostions.branchId) }}</td>
+                <td>{{ employeeData.employeePostions.startDate| date:'yyyy-MM-dd' }}</td>
+              </tr>
+            </tbody>
+          </table> </div>
+                  </div>
+                  <div class="col-md-6 card">
+                    <p class="card-head">Work Experience</p>
+                    <!-- Table for work experience -->
+                    <div class="table-responsive">
+                      <table *ngIf="employeeData.workExperiences" class="table table-border compact-table">
+                        <thead>
+                          <tr>
+                            <th>Company Name</th>
+                            <th>Position Held</th>
+                            <th>From</th>
+                            <th>To</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let workExperience of employeeData.workExperiences">
+                            <td>{{ workExperience.companyName }}</td>
+                            <td>{{ workExperience.postionHeld }}</td>
+                            <td>{{ workExperience.from | date:'yyyy-MM-dd'}}</td>
+                            <td>{{ workExperience.to | date:'yyyy-MM-dd'}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  
+                  <div class="col-md-6 card">
+                    <p class="card-head">Training</p>
+                    <!-- Table for training -->
+                    <div class="table-responsive">
+                      <table *ngIf="employeeData.trainings" class="table table-border table-striped col-md-6 compact-table">
+                        <thead>
+                          <tr>
+                            <th>Type of Training</th>
+                            <th>From</th>
+                            <th>To</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let training of employeeData.trainings">
+                            <td>{{ training.typeOfTraining }}</td>
+                            <td>{{ training.from| date:'yyyy-MM-dd' }}</td>
+                            <td>{{ training.to| date:'yyyy-MM-dd' }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  
+                </div>
+      </div>
+    </div>
+
+      <button (click)="printCard()" class="btn btnedit">Print</button> 
+         
+      <button (click)="onCancelClick()" class="btn btncancel ml-2">Cancel</button>
+  
+
+</div>
+
+</div>
+
+

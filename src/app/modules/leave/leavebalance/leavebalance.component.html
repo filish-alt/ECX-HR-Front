@@ -1,0 +1,155 @@
+<app-shared-nav class="sharednav"[buttons]="buttons"></app-shared-nav>
+    <div class="card col-md-12 mb-5 ">
+      <div class="">
+        <div class="card-header  ">
+              <h4 class="card-title">Leave Balance</h4>
+            </div>
+            <div class="container">
+                    
+
+  
+    <table  *ngIf="leaveBalance"  class="table col-md-8 table-bordered table-striped compact-table" >
+      <thead> 
+         <tr><td><button class="btn btn-sm btndanger" (click)="addLeaveBalancesForSelectedEmployees()">
+            <mat-icon>perm_data_setting</mat-icon> Generate </button></td></tr> 
+        <tr>
+        
+          <th>Unregistered Employees</th>
+          
+  
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Use *ngFor to loop through the leaveBalances array and display each employee position -->
+        <tr *ngFor="let emp of selectedEmployee"  >
+            <td>{{emp.firstName }}</td>
+            <td>{{emp.middleName }}</td>
+            <td>{{emp.lastName }}</td>
+          
+        </tr>
+       
+      </tbody>
+    </table>
+    <p *ngIf="!(selectedEmployee.length || selectedEmployee.length)">No Unregistered Leave Balance found</p>
+            </div>
+          </div>
+        
+   
+  <div class="card-body ">
+            <input class="search" type="search" placeholder="Search Employee..." [(ngModel)]="searchTerm" (input)="onSearch()">
+          </div>
+      <!-- Second Column -->
+    
+            <p>Annual Leave Balance</p>
+    <table  *ngIf="leaveBalance"  class="table-responsive table table-bordered table-striped table-sm compact-table" >
+      <thead>
+        <tr>
+        
+          <th>Employee</th>
+          <th>Annual Start Date</th>
+          <th>Annual End Date</th> 
+          <th>Annual Default</th>
+          <th>Annual Remainig</th>
+          <th>Previous Annual</th>
+          <th>Previous Two Year</th>
+ <th>UnusedDays</th>
+
+         
+  
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Use *ngFor to loop through the leaveBalances array and display each employee position -->
+        <tr *ngFor="let leaveBalance of filteredLeaveBalances"  >
+            <td>{{ getEmployeeName( leaveBalance.empId) }}</td> 
+              <td>{{ leaveBalance.startDate| date:'yyyy-MM-dd' }}</td>
+          <td>{{ leaveBalance.endDate| date:'yyyy-MM-dd' }}</td>
+          <td>{{ leaveBalance.annualDefaultBalance }}</td>
+          <td>{{ leaveBalance.annualRemainingBalance }}</td>
+          <td>{{ leaveBalance.previousYearAnnualBalance }}</td>
+          <td>{{ leaveBalance.previousTwoYear }}</td>
+          <td>{{ leaveBalance.unusedDays }}</td>
+
+          <td>      <button class="btn btn-sm btnedit" (click)="openLeaveDetailsModal(leaveBalance.empId)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
+            <mat-icon>edit</mat-icon>
+          </button></td>
+      
+         
+        </tr>
+      </tbody>
+    </table>
+    <p *ngIf="!(filteredLeaveBalances.length || leaveBalances.length)">No Leave Balance found</p>
+
+
+
+    <p>Other Leave Balance</p>
+    <div style="overflow-x: auto; ">
+            <table  *ngIf="otherleaveBalances"  class="table table-responsive table-bordered table-striped  table-sm compact-table" >
+              <thead>
+                <tr  >
+                
+                  <th scope="col">Employee</th>
+                  
+                  <th scope="col">Sick </th>
+                  <th scope="col">SickStartDate</th>
+                  <th scope="col">SickEndDate</th> 
+               
+                  <th scope="col">Marraige</th>
+                 
+                  <th scope="col">Paternity </th>
+            
+                  <th scope="col">Maternity</th>
+                 
+                  <th scope="col">compasionate </th>
+             
+                  <th scope="col">Education </th>
+          
+                  <th scope="col">LeaveWOP </th>
+               
+                  <th scope="col">Court </th>
+               
+                  <th scope="col">Abortion </th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Use *ngFor to loop through the leaveBalances array and display each employee position -->
+                <tr *ngFor="let otherLeave of filteredotherLeaveBalances"  >
+                    <td>{{ getEmployeeName( otherLeave.empId) }}</td> 
+                     
+
+                  <td>{{ otherLeave.sickRemainingBalance }}</td>
+                  <td>{{ otherLeave.startDate| date:'yyyy-MM-dd' }}</td>
+                  <td>{{ otherLeave.endDate| date:'yyyy-MM-dd' }}</td>
+         
+                  <td>{{ otherLeave.marriageRemainingBalance}}</td>
+                  
+                
+                  <td>{{ otherLeave.paternityRemainingBalance}}</td>
+              
+               
+             
+                      <td>{{ otherLeave.maternityRemainingBalance}}</td>
+                     
+                      <td>{{ otherLeave.compassinateRemainingBalance}}</td>
+                   
+                      <td>{{ otherLeave.educationRemainingBalance}}</td>
+                
+                      <td>{{ otherLeave.leaveWotPayRemainingBalance}}</td>
+                  
+                      <td>{{ otherLeave.courtLeaveRemainingBalance}}</td>
+                     
+                      <td>{{ otherLeave.abortionLeaveRemainingBalance}}</td>
+                   
+                 <td>      <button class="btn btn-sm btnedit" (click)="openOtherLeaveDetailsModal(otherLeave.empId)"[ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
+                  <mat-icon>edit</mat-icon>
+                </button></td>
+                </tr>
+              </tbody>
+            </table>
+            <p *ngIf="!(filteredotherLeaveBalances.length || otherleaveBalances.length)">No Leave Balance found</p>
+          </div>
+          </div>
+
+       
+
+  

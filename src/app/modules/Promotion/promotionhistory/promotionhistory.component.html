@@ -1,0 +1,43 @@
+
+<app-shared-nav class="sharednav"[buttons]="buttons"></app-shared-nav>
+<div class="col-md-11 main-body">
+ 
+    <div class="card card-body">
+<div class="container ">
+    <div class="">
+    <h5 class="text-center card-title ">Promotions </h5>
+</div></div>
+  <div class="container ">
+
+<div  class="promotion-item card mb-3">
+  <div class="card-body">
+     <h6 class="yellow">promotion history</h6>
+    <table class="table table-bordered table-striped compact-table">
+      <thead>
+        <tr>
+          <th>Employee</th> 
+          <th>Position</th>
+          <th>Grade</th>
+          <th>Branch</th>
+          <th>startDate</th>
+          <th>Evaluation</th>
+   
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let promotion of Promotions">
+          
+          <td>{{ capitalizeFirstLetter(getEmployeeName(promotion.empId ))}}</td>  
+            <td>{{ getPositionName(promotion.positionId)}}</td>
+          <td>{{ getGradeName(promotion.levelId)}}</td>
+          <td>{{ getBranchName(promotion.branchId)}}</td>
+          <td>{{ promotion.startDate| date:'yyyy-MM-dd' }}</td>
+      <td>{{getEvaluation(promotion.empId)}}</td>
+      <button class="btn btn-sm btnedit" (click)="openResultModal(promotion.empId,promotion.vacancyId)"[ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
+        <mat-icon>info</mat-icon> 
+      </button>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

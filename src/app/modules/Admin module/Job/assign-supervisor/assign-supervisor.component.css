@@ -1,0 +1,21 @@
+.margin{
+  margin-left: 25%;
+}.compact-table th {
+    font-size: 13px;
+    color: black;
+    font-weight: bold; /* Adjust the font size as needed */
+  }
+  .compact-table tr {
+    font-size: 13px; /* Adjust the font size as needed */
+  }
+  
+  .compact-table th, .compact-table td {
+    padding: 4px 8px; 
+  }
+  td ,th{
+    white-space: nowrap; /* Prevent text wrapping */
+  }
+  mat-form-field {
+    width: 180px;
+    height: 65px;
+  }

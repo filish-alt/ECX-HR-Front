@@ -1,0 +1,79 @@
+
+<app-shared-nav  [buttons]="buttons"></app-shared-nav>
+  <div class="main-content">
+    <div class="container-fluid">
+        <div class="pagination">
+           
+        <input  class="search" type="search" placeholder="Search..." [(ngModel)]="searchTerm" (input)="onSearch()">
+    
+            <button mat-button (click)="onPreviousPage()" [disabled]="currentPage === 1">
+                <mat-icon class="custom-icon">keyboard_arrow_left</mat-icon></button>
+            <span>Page {{ currentPage }}</span>
+            <button mat-button (click)="onNextPage()"  [disabled]="(currentPage * pageSize) >= employees.length">
+                <mat-icon class="custom-icon">keyboard_arrow_right</mat-icon>
+            </button>
+        <p>{{pageSize * currentPage}} of {{ employees.length }}</p>
+          </div>
+        <div class="row">
+            <div class="col-md-11 ml-5">
+                <div class="card" >
+             
+                   
+                    <div class="card-header ">
+                        <h6 class="card-title ">Employee Table</h6>
+                        <div class=" ">
+                           </div>
+                    </div>
+                    
+                    <div >
+                       
+                            <table class="table  table-striped col-md-7 compact-table"   *ngIf="filteredEmployees.length || employees.length ">
+
+                               <div> <thead>
+                                    <tr>
+                                        
+                                        <th>First Name</th>
+                                        <th>Middle Name</th>
+                                        <th>Last Name</th>
+                                        <th>Sex</th>
+                                        <th>ECXID</th>
+                                        <th>Pension Id</th>
+                             
+                            
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let employee of filteredEmployees || employees  " >
+                                        <td>{{employee.firstName}}</td>
+                                        <td>{{employee.middleName}}</td>
+                                        <td>{{employee.lastName}}</td>
+                                        <td>{{employee.sex}}</td>
+                                        <td>{{employee.ecxId}}</td>
+                                        <td>{{employee.pensionNo}}</td>
+                                     
+                                 
+                                    <td><button class="btn btn-sm btnedit" (click)="openEmployeeDetailsModal(employee.empId)">
+                                            <mat-icon class="small">info</mat-icon> 
+                                          </button></td>    
+                                  <td><button class="btn btn-sm btnedit" (click)="editEmployee(employee)" >
+                                    <mat-icon class="small">edit</mat-icon></button></td>
+
+                                  <td> <button  class="btn btn-sm btndanger" (click)="deleteEmployee(employee.empId)" >
+                                    <mat-icon class="small">delete</mat-icon></button>
+                        </td> 
+                                   
+                                         
+                                    
+                                    </tr>
+                                        </tbody>
+                            </div>
+                            </table>
+                            <p *ngIf="!(filteredEmployees.length || employees.length)">No employees found</p>
+
+                   </div></div>
+                    </div>
+ 
+        </div>
+    </div>
+  </div>
+  

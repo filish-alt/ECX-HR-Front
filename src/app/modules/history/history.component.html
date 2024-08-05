@@ -1,0 +1,79 @@
+
+<app-shared-nav  [buttons]="buttons"></app-shared-nav>
+  <div class="main-content">
+    <div class="container-fluid">
+        <input  class="search" type="search" placeholder="Search..." [(ngModel)]="searchTerm" (input)="onSearch()">
+        <div class="row">
+            <div class="col-md-11 ml-2">
+                <div class="card" >
+             
+                       
+                     
+                   
+                    <div class="card-header cardhead">
+                        <h4 class="card-title ">Employee History Table</h4>
+                        <div class=" ">
+                           </div>
+                    </div>
+                    
+                    <div >
+                        <div class="col-md-12" >
+                            <table class="table  table-striped col-md-8 compact-table"  >
+
+                               <div> <thead>
+                                    <tr>
+                                          <th>ECXID</th>
+                                        <th>First Name</th>
+                                        <th>Middle Name</th>
+                                        <th>Last Name</th>
+                                        <th>Sex</th>
+                                        <th>joined Date</th>
+                                      
+                                        <th>Pension Id</th>
+                                                 
+                                        <th>Martial Status</th>
+                                                 
+                                      
+                                        <th>Place Of Birth</th>
+                                        <th>Date of Birth </th>
+                                   <th>Crime Description </th>
+                             
+                            
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let employee of filteredEmployees " >
+                                              <td>{{employee.ecxId}}</td>
+                                              <td>{{employee.firstName}}</td>
+                                        <td>{{employee.middleName}}</td>
+                                        <td>{{employee.lastName}}</td>
+                                        <td>{{employee.sex}}</td>
+                                        <td>{{employee.joinDate}}</td>
+                                        <td>{{employee.pensionNo}}</td>
+                                        <td>{{employee.martialStatus}}</td>
+                                   
+                                        <td>{{employee.placeOfBith}}</td>
+                                        <td>{{employee.dateOfBityh}}</td>
+                                        <td>{{employee.crimeDescription}}</td>
+
+                                    
+                                     
+                                 
+                                    
+                                                
+                                         
+                                    
+                                    </tr>
+                                        </tbody>
+                            </div>
+                            </table>
+                            <p *ngIf="!(filteredEmployees.length || employees.length)">No employees found</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  

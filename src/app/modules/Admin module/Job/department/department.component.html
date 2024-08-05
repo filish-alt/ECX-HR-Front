@@ -1,0 +1,69 @@
+
+<app-shared-nav [buttons]="buttons"></app-shared-nav> 
+
+    <div class="col-md-8 ml-5">
+        <div class="card " >
+<form (ngSubmit)="addDepartment()">   
+    <div class="row mt-3 ml-4">
+        <h6 class="card-title ml-3">Department</h6>
+    <div class="col-md-7 ml-3 mt-3"> 
+    <div class="form-field "> 
+    
+      <input type="text" id="departmentName" placeholder=" " [(ngModel)]="addDepartmentRequest.description" name="addDepartmentRequest.description" required> 
+     <label for="department">Department Level Name</label>  
+    </div> 
+ </div>
+
+
+</div>
+
+    <button type="submit" class="btn  btn-sm btnsave ml-3 mt-3">
+    <mat-icon>add</mat-icon>Save </button>
+
+<div *ngIf="departmentSaved" class="btndanger btn-sm pull-right ">
+        Successfully Added!
+      </div> 
+    
+  </form>
+  
+
+ <div>
+<input  class="search ml-2 mt-3" type="search" placeholder="Search By DepartmentName..." [(ngModel)]="searchTerm" (input)="onSearch()">
+</div>
+  
+ 
+    <h6 class="mb-3 mt-3 ml-2"> 
+        List Of Department 
+    </h6> 
+ 
+ 
+     
+<table id="example1" class="table table-bordered table-striped compact-table  "  *ngIf="departments && departments.length>0"> 
+    <thead> 
+        <tr> 
+          
+            <th>Department Name</th> 
+       
+    </tr> 
+    </thead> 
+    <tbody> 
+        <tr *ngFor="let department of filteredDepartment || departments"> 
+           
+            <td>{{department.description}}</td> 
+         
+          
+            <td>   
+                <button  class="btn btn-sm btndanger" (click)="deleteDepartment(department.departmentId)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
+                    <mat-icon>delete</mat-icon></button>
+            </td> 
+          
+            <!-- <td> <a [routerLink]="['/department','edit',department.id]">  
+                View 
+                </a> 
+            </td> --> 
+        </tr> 
+    </tbody> 
+</table> 
+<p *ngIf="!departments || departments.length <= 0">no departments found</p>
+</div>
+</div> 

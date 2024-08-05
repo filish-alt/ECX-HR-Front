@@ -1,0 +1,376 @@
+<app-shared-nav class="sharednav"[buttons]="buttons"></app-shared-nav>
+
+<div class="container ml-5 ">
+
+      
+      <div class=" col-md-8  card  ml-5 ml-5">
+ <div class="">
+
+    <div class="card-header  ">
+      <button class="card-title btn btndanger" (click)="toggleEmployeeForm()"><mat-icon>add</mat-icon>Profile Information</button>
+      <p class="card-category " >Complete your profile</p>
+    </div>
+    
+
+
+    <div class="card-body mt-2" *ngIf="showEmployeeForm">
+      <form [formGroup]="ContractemployeeForm">
+        <div class="row">
+            <div class="col-md-4 form-field">
+              <div class="form-field">
+                <input type="text"  name="firstname" formControlName="firstName" required>
+                <label>First Name</label>
+                    <mat-error *ngIf="ContractemployeeForm.get('firstName').invalid && ContractemployeeForm.get('firstName').touched">
+            Middle Name is required
+              </mat-error>
+</div>
+
+            </div>
+
+        <div class="col-md-4 form-field">
+          <div class="form-field">
+            <input type="text"  name="middlename" formControlName="middleName" required>
+            <label>Middle Name</label>
+                <mat-error *ngIf="ContractemployeeForm.get('middleName').invalid && ContractemployeeForm.get('middleName').touched">
+        Middle Name is required
+          </mat-error>
+</div>
+
+        </div>
+
+        <div class="col-md-4 form-field">
+          <div class="form-field">
+            <input type="text"  name="lastname" formControlName="lastName" required>
+            <label>Last Name</label>
+          </div>
+                <mat-error *ngIf="ContractemployeeForm.get('lastName').invalid && ContractemployeeForm.get('lastName').touched">
+            Last Name is required
+          </mat-error>
+        </div>
+      </div>
+ 
+     
+      <div class="row">
+          <div class="col-md-4 form-field">
+            <mat-select class="select"  placeholder="Salutation" name="salutation" formControlName="salutation" required>
+              <mat-option value="mr">Mr.</mat-option>
+              <mat-option value="mrs">Mrs.</mat-option>
+              <mat-option value="miss">Miss</mat-option>
+              <mat-option value="dr">Dr.</mat-option>
+            </mat-select>
+            <mat-error *ngIf="ContractemployeeForm.get('salutation').invalid && ContractemployeeForm.get('salutation').touched">
+              Salutation is required
+            </mat-error>
+          </div>
+          <div class="col-md-4 form-field">
+            <div class="form-field">
+              <input type="text" name="nationality" formControlName="nationality" required>
+              <label>Nationality</label>
+            </div>
+            <mat-error *ngIf="ContractemployeeForm.get('nationality').invalid && ContractemployeeForm.get('nationality').touched">
+              Nationality is required
+            </mat-error>
+          </div>
+          <div class="col-md-4 form-field">
+            <div class="form-field">
+              <input type="text" required name="placeOfBith" formControlName="placeOfBith">
+              <label>Place of Birth</label>
+            </div>
+            <mat-error *ngIf="ContractemployeeForm.get('placeOfBith').invalid && ContractemployeeForm.get('placeOfBith').touched">
+              Place of Birth is required
+            </mat-error>
+          </div>
+         
+        </div>
+      
+    
+    
+   
+    <div class="row">
+        <div class="col-md-4">  
+           <mat-error *ngIf="ContractemployeeForm.get('sex').invalid && ContractemployeeForm.get('sex').touched">
+            Gender is required
+          </mat-error>
+          <mat-radio-group name="sex" formControlName="sex" required>
+            <p>
+             
+         <mat-label>Gender</mat-label>
+              
+            </p>
+            <mat-radio-button value="male" class="radio-option">Male</mat-radio-button>
+            <mat-radio-button value="female" class="radio-option">Female</mat-radio-button>
+          </mat-radio-group>
+         
+        </div>
+        
+      
+        <div class="col-md-4 form-field">
+          <mat-select class="select" style="height: 40px; width:180px; padding:right 10%" placeholder="Marital Status" name="martialStatus" formControlName="martialStatus"  required>
+            <mat-option value="married">Married</mat-option>
+            <mat-option value="single">Single</mat-option>
+            <mat-option value="divorce">Divorced</mat-option>
+            <mat-option value="divorce">Widowed</mat-option>
+            <mat-option value="divorce">Other</mat-option>
+          </mat-select>
+          <mat-error *ngIf="ContractemployeeForm.get('martialStatus').invalid && ContractemployeeForm.get('martialStatus').touched">
+            Marital Status is required
+          </mat-error>
+        </div>
+        </div>
+       
+  <div class="row mt-5">
+            <div class="col-md-6">         <mat-error *ngIf="ContractemployeeForm.get('joinDate').hasError('invalidJoinDate')" class="text-danger">
+                  Join date must be equal to or earlier than the current date.
+                </mat-error>
+              <mat-form-field style="height: 65px; width:150px">
+       
+                <mat-label>Joined Date</mat-label>
+                <input matInput [matDatepicker]="jdpicker" name="joinDate" required formControlName="joinDate">
+                <mat-datepicker-toggle matSuffix [for]="jdpicker"></mat-datepicker-toggle>
+                <mat-datepicker #jdpicker></mat-datepicker>
+              </mat-form-field>
+         
+          </div>
+          
+    
+        <div class="col-md-6">
+          <mat-form-field style="height: 65px; width:160px" > <mat-error *ngIf="ContractemployeeForm.get('dateOfBityh').invalid && ContractemployeeForm.get('dateOfBityh').touched">
+              Date of Birth is required
+            </mat-error>
+            <mat-label>Date of Birth</mat-label>
+            <input matInput [matDatepicker]="dobPicker" required name="dateOfBityh" formControlName="dateOfBityh">
+            <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
+            <mat-datepicker #dobPicker></mat-datepicker>
+            </mat-form-field>
+           
+         </div>
+        </div>
+        
+            <div class="row mt-4">
+              <div class="col-md-5 form-field">
+                <div class="form-field">
+                  <input type="text" required name="pensionNo" formControlName="pensionNo">
+                  <label>Pension Number</label>
+                </div>
+                <mat-error *ngIf="ContractemployeeForm.get('pensionNo').invalid && ContractemployeeForm.get('pensionNo').touched">
+              Pension Number is required
+            </mat-error>
+              </div>
+       
+             
+               
+        <div class="col-md-2 form-field">
+                <mat-slide-toggle name="crimeStatus" formControlName="crime">Crime</mat-slide-toggle>
+              </div>
+              <div class="col-md-5 form-field">
+           
+                  <div class="form-field">
+                    <input type="text" required name="pensionNo" formControlName="pensionNo">
+                    <label>Crime Description</label>
+                  </div>
+              </div>
+            </div>
+
+       
+        <div class="clearfix"></div>
+   </form>
+    </div>
+ 
+    <div class="card-header ">
+        <button class="card-title btn btndanger" (click)="togglePostionForm()"><mat-icon>add</mat-icon>Job Description</button>
+        <p class="card-category" >Complete Position</p>
+      </div>
+      <div class="card-body mt-2" *ngIf="showPostionForm">
+        <form [formGroup]="ContractemployeeForm">  
+                <div class="row">
+               
+               
+                <div class="col-md-4">
+                         <mat-error *ngIf="ContractemployeeForm.get('position').invalid && ContractemployeeForm.get('position').touched">
+                        position is required
+                      </mat-error>
+                  <label>Position</label>
+                    <mat-select class="form-field select" placeholder="Select Position" required name="position" formControlName="position" (ngModelChange)="onPositionSelected()">
+                      <!-- Replace the options below with your actual division options -->
+                      <mat-option *ngFor="let position of positions" [value]="position.positionId">
+                        {{position.name}}
+                      </mat-option>
+                  
+                    </mat-select>
+              
+                </div>
+                <div class="col-md-4 mt-2">      <mat-error *ngIf="ContractemployeeForm.get('divisionId').invalid && ContractemployeeForm.get('divisionId').touched">
+                    division is required
+                  </mat-error>  
+                  <label> Position Division </label><br>
+                  <input class="form-field select2" placeholder="Division" name="divisionId"
+                  required formControlName="divisionId" [(ngModel)]="divisiondesc"  [disabled]="true">
+                        </div>
+<!--               
+              <div class="col-md-4">
+                <label>Department</label><br>
+                <input class="form-field select2" placeholder="Department" name="department"
+                required formControlName="department" [(ngModel)]="department"  [disabled]="true">
+              </div> -->
+   
+              </div>
+           
+           
+            <div class="row">
+                  <div class="col-md-4">
+                        <mat-error *ngIf="ContractemployeeForm.get('stepId').invalid && ContractemployeeForm.get('stepId').touched">
+                              step is required
+                            </mat-error>    
+                    <label>Step</label>
+                          <mat-select class="form-field select" placeholder="Select Step" name="stepId" required 
+                          formControlName="stepId"
+                          (ngModelChange)="onStepSelected()">
+                            <!-- Replace the options below with your actual division options -->
+                            <mat-option *ngFor="let step of steps" [value]="step.id">
+                              {{step.description}}
+                            </mat-option>
+                           
+                         
+                          </mat-select>
+                        
+                      </div>
+<!-- 
+                      <div class="col-md-4">
+                      <label>Grade Level</label><br>
+                        <input class="form-field select2" placeholder="Level" name="level"
+                        required formControlName="level" [(ngModel)]="selectedLevel" [disabled]="true">
+                      </div> -->
+                      <div class="col-md-4 ">
+                         <mat-error *ngIf="ContractemployeeForm.get('branchId').invalid && ContractemployeeForm.get('branchId').touched">
+                          branch is required
+                        </mat-error>    <label>Branch</label>
+                    
+                          <mat-select class="form-field select" placeholder="Select Branch" name="branchId" required formControlName="branchId" >
+                            <!-- Replace the options below with your actual division options -->
+                            <mat-option *ngFor="let branch of branches" [value]="branch.id">
+                              {{branch.name}}
+                            </mat-option>
+                         
+                       
+                          </mat-select>
+                   
+                      </div>
+               </div>       
+             
+<div class="col-md-6 pt-3">
+<mat-form-field class="select2">
+  <mat-label>Start Date</mat-label>
+  <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="startDate" required name="startDate"  >
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+
+</div>
+</form>
+</div> 
+ 
+<div class="card-header "> 
+    <button class="card-title btn btndanger" (click)="toggleDepositForm()"><mat-icon>add</mat-icon>Deposite Authentication Information</button>
+    <p class="card-category" >Complete your profile</p>
+  </div>
+  <div class="card-body mt-2" *ngIf="showDepositForm">
+
+    <form [formGroup]="ContractemployeeForm">
+                            <div class="row">
+                              <div class="col-md-4">
+                            <mat-error *ngIf="ContractemployeeForm.get('bankId').invalid && ContractemployeeForm.get('bankId').touched">
+                                    bank is required
+                                  </mat-error> 
+                                  <mat-select class="form-field select" placeholder="Select Bank" required name="bankId" formControlName="bankId" >
+                                    <!-- Replace the options below with your actual division options -->
+                                    <mat-option *ngFor="let bank of Banks" [value]="bank.id" >
+                                      {{bank.bankName}}
+                                    </mat-option>
+                                   
+                                  </mat-select>
+                           
+                              </div>
+
+                        
+                              <div class="col-md-4 form-field">
+                          
+                                <input  placeholder="" type="text" name="bankBranch" required formControlName="bankBranch">
+                                <label>Bank Branch</label>
+                                    <mat-error *ngIf="ContractemployeeForm.get('bankBranch').invalid && ContractemployeeForm.get('bankBranch').touched">
+                                  Bank Branch is required
+                                </mat-error> </div>  
+                            </div>
+                     
+                
+                            <div class="row">
+                              <div class="col-md-4 form-field">
+                                
+                                <input placeholder="" type="text" name="tinNumber" required formControlName="tinNumber">
+                                <label>Tin Number</label>
+                                <mat-error *ngIf="ContractemployeeForm.get('tinNumber').invalid && ContractemployeeForm.get('tinNumber').touched">
+                                  TinNumber is required
+                                </mat-error> 
+                              </div>
+                              <div class="col-md-4 form-field">
+                           
+                                <input  placeholder=" " name="bankAccount" required formControlName="bankAccount" type="text" required>
+                                <label>Bank Account</label>  
+                                   <mat-error *ngIf="ContractemployeeForm.get('bankAccount').invalid && ContractemployeeForm.get('bankAccount').touched">
+                                  Bank Account is required
+                                </mat-error> 
+                              </div>
+                            </div>
+                
+                        
+            </form>
+</div>
+
+<div><button type="button" class="btn btn-sm btnsave" (click)="addEmployee()" >
+  <mat-icon>add</mat-icon>Add</button>
+<div *ngIf="employeeSaved" class="alert btndanger btn-sm pull-right" style="  width: 25%;
+height:5%;">
+  Successfully Added!
+</div>
+
+<button  *ngIf="edit==true" class="btn btn-sm pull-left btnsave" (click)="updateEmployee()">  <mat-icon>add</mat-icon>update</button>
+<div *ngIf="employeeUpdated" class="alert btndanger btn-sm pull-right">
+  Successfully Updated!
+</div></div>
+  <h6 class="yellow">Profile info </h6>
+  <table   class="table table-bordered table-striped compact-table">
+    <thead>
+          <tr>
+              
+              <th>First Name</th> 
+              <th>Middle Name</th>
+              <th>Last Name</th>
+              <th>Sex</th>
+              <th>ECXID</th>
+              <th>Pension Id</th>
+            
+          </tr>
+      </thead>
+
+      <tbody>
+       
+        <tr *ngFor="let contractemploye of contractemployees">
+       
+          <td>{{ contractemploye.firstName }}</td>
+          <td>{{ contractemploye.middleName }}</td>
+          <td>{{ contractemploye.lastName }}</td>
+           <td>{{ contractemploye.sex }}</td>
+          <td>{{ contractemploye.ecxId }}</td>
+          <td>{{ contractemploye.pensionNo }}</td>
+     
+          <td>
+          <button class="btn btn-sm btnedit" (click)="editEmployee(contractemploye)">
+            <mat-icon class="small">edit</mat-icon></button></td>
+
+    <td> <button  class="btn btn-sm btndanger" (click)="deleteEmployee(contractemploye.empId)">
+      <mat-icon class="small">delete</mat-icon></button>
+        </tr>
+      </tbody>
+  </table>
+</div>
+
+</div>

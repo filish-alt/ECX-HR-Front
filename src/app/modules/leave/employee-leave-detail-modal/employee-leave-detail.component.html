@@ -1,0 +1,170 @@
+
+
+<div class="custom-modal">
+  <div class="logo">
+    <a href="#" class="simple-text">
+        <div>
+            <img  class="logo-img"src="/assets/img/ECXLogo.png"/>
+        </div>
+   
+          
+    </a>
+    <h5>    ETHIOPIAN COMMODITY EXCHANGE</h5>
+    <P>Tel.+251 554 7010, Fax +251 554 7010, P.O.Box 17341 Alsam Chelelek Tower 2, Addis Ababa,Ethiopia www.ecx.com.et</P>
+
+</div>
+      <div class="employee-details" *ngIf="leaveData ">
+        <div class="col-md-6  "> 
+          <p class="card-head">Employee</p>
+          <!-- Table for addresses -->
+          <div class="table-responsive ">
+            <table *ngIf="leaveData.employee" class="table table-border table-striped col-md-6 compact-table">
+              <thead>
+                <tr>
+                  <th>First Name</th>
+                  <th>Sex</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngIf="leaveData.employee">
+                  <td>{{ leaveData.employee.firstName }}  {{ leaveData.employee.middleName }}  {{ leaveData.employee.lastName }}</td>
+                  <td>{{ leaveData.employee.sex }}</td>
+
+             
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+<div class="col-md-6 mt-4">
+    <p class="card-head">Annual Leave</p>
+    <!-- Table for annual leave -->
+    <div class="">
+      <table *ngIf="leaveData.annualLeaveBalances" class="table table-border table-striped compact-table">
+        <thead>
+          <tr>
+            <th>Annual Start Date</th>
+            <th>Annual End Date</th>
+            <th>Annual Default</th>
+            <th>Annual Remaining</th>
+            <th>Previous Annual</th>
+            <th>Previous Two Year</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let leaveBalance of leaveData.annualLeaveBalances">
+            <td>{{ leaveBalance.startDate | date:'yyyy-MM-dd' }}</td>
+            <td>{{ leaveBalance.endDate | date:'yyyy-MM-dd' }}</td>
+            <td>{{ leaveBalance.annualDefaultBalance }}</td>
+            <td>{{ leaveBalance.annualRemainingBalance }}</td>
+            <td>{{ leaveBalance.previousYearAnnualBalance }}</td>
+            <td>{{ leaveBalance.previousTwoYear }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <div class="col-md-6 mt-4">
+    <p class="card-head">Other Leaves</p>
+    <!-- Table for other leaves -->
+    <div class="">
+      <table *ngIf="leaveData.otherLeaveBalances" class="table table-border compact-table">
+        <thead>
+          <tr>
+
+
+
+<th scope="col">Sick Leave Remainig</th>
+<th scope="col">Sick LeaveStart Date</th>
+<th scope="col">Sick Leave End Date</th> 
+
+<th scope="col">Marraige Leave Remainig</th>
+
+<th scope="col">Paternity Leave Remainig</th>
+
+<th scope="col">Maternity Leave Remainig</th>
+
+<th scope="col">compasionate Leave Remainig</th>
+
+<th scope="col">Education Leave Remainig</th>
+
+<th scope="col">LeaveWithOutPay Remainig</th>
+
+<th scope="col">Court Leave  Remainig</th>
+
+<th scope="col">Abortion Leave  Remainig</th>
+</tr>
+       
+        </thead>
+        <tbody>
+          <tr *ngFor="let otherLeaveBalance of leaveData.otherLeaveBalances">
+           
+         
+            <td>{{ otherLeaveBalance.sickRemainingBalance }}</td>
+            <td>{{ otherLeaveBalance.startDate| date:'yyyy-MM-dd' }}</td>
+            <td>{{ otherLeaveBalance.endDate| date:'yyyy-MM-dd' }}</td>
+   
+      
+            <td>{{ otherLeaveBalance.marriageRemainingBalance}}</td>
+    
+            <td>{{ otherLeaveBalance.paternityRemainingBalance}}</td>
+        
+        
+       
+                <td>{{ otherLeaveBalance.maternityRemainingBalance}}</td>
+        
+  
+                <td>{{ otherLeaveBalance.compassinateRemainingBalance}}</td>
+             
+                <td>{{ otherLeaveBalance.educationRemainingBalance}}</td>
+              
+                <td>{{ otherLeaveBalance.leaveWotPayRemainingBalance}}</td>
+               
+                <td>{{ otherLeaveBalance.courtLeaveRemainingBalance}}</td>
+               
+                <td>{{ otherLeaveBalance.abortionLeaveRemainingBalance}}</td>
+             
+           <!-- Add similar data cells for other leave types -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <div class="col-md-6 mt-4">
+    <p class="card-head">Leave Request</p>
+    <!-- Table for leave requests -->
+    <div class="">
+      <table *ngIf="leaveData.leaveRequests" class="table table-border  table-striped  compact-table">
+        <thead>
+          <tr>
+            <th>Leave Type</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Status</th>
+            <th>Approved By</th>
+            <th>Approved Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let leaveRequest of leaveData.leaveRequests">
+            <td>{{  getLeaveTypeName(leaveRequest.leaveTypeId) }}</td>
+            <td>{{ leaveRequest.startDate | date:'yyyy-MM-dd' }}</td>
+            <td>{{ leaveRequest.endDate | date:'yyyy-MM-dd' }}</td>
+            <td>{{ leaveRequest.leaveStatus }}</td>
+            <td>{{ getPositionName(leaveRequest.approvedBy)}}</td>
+            <td>{{ leaveRequest.approveDate | date:'yyyy-MM-dd' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="ml-4">
+<button (click)="printEmployeeDetails()">Print</button>
+<button (click)="onCancelClick()">Cancel</button>
+</div>
+</div>

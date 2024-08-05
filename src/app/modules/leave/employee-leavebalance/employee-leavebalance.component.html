@@ -1,0 +1,94 @@
+<app-shared-nav [buttons]="buttons"></app-shared-nav>
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-md-11 ml-5">
+        <div class="card mb-5">
+          <div class="">
+            <div class="card-header ">
+              <h4 class="card-title">Annual Leave Balance</h4>
+            </div>
+          
+                  <div class="mt-4">
+                    <p >Annual Leave Balance</p>
+                    <table class="table table-responsive table-bordered table-striped table-sm compact-table">
+                      <thead>
+                        <tr>
+                          <th>Employee</th>
+                          <th>Annual Start Date</th>
+                          <th>Annual End Date</th>
+                          <th>Annual Default</th>
+                          <th>Annual Remaining</th>
+                          <th>Previous Annual</th>
+                          <th>Previous Two Year</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let leavebalance of leaveBalance" >
+                          <td>{{ employee.firstName + ' ' + employee.middleName + ' ' + employee.lastName }}</td>
+                          <td>{{ leavebalance.startDate | date: 'yyyy-MM-dd' }}</td>
+                          <td>{{ leavebalance.endDate | date: 'yyyy-MM-dd' }}</td>
+                          <td>{{ leavebalance.annualDefaultBalance }}</td>
+                          <td>{{ leavebalance.annualRemainingBalance }}</td>
+                          <td>{{ leavebalance.previousYearAnnualBalance }}</td>
+                          <td>{{ leavebalance.previousTwoYear }}</td>
+                         
+                        </tr>
+                        <tr *ngIf="!(employee && leaveBalance)">
+                          <td colspan="7">No Leave Balance found</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="mt-4">
+                    <p>Other Leave Balance</p>
+                    <table class="table  table-striped table-hover table-responsive table-bordered align-middle table-sm compact-table">
+                      <thead light>
+                        <tr>
+                          <th>Employee</th>
+                          <th>Sick </th>
+                          <th>Sick StartDate</th>
+                          <th >Sick EndDate</th> 
+                          <th scope="col">Marraige</th>
+                          <th scope="col">Paternity</th>
+                          <th scope="col">Maternity</th>
+                          <th scope="col">Compasionate</th>
+                          <th scope="col">Education </th>
+                          <th scope="col">LeaveWithOutPay </th>
+                          <th scope="col">Court</th>
+                          <th scope="col">Abortion </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <!-- Check if 'employee' and 'otherleaveBalance' are defined -->
+                        <tr  *ngFor="let otherleavebalance of otherleaveBalance">
+                          <td>{{ employee.firstName + ' ' + employee.middleName + ' ' + employee.lastName }}</td>
+                          <td>{{ otherleavebalance.sickRemainingBalance }}</td>
+                          <td>{{ otherleavebalance.startDate| date:'yyyy-MM-dd'}}</td>
+                          <td>{{ otherleavebalance.endDate| date:'yyyy-MM-dd' }}</td>
+                          <td>{{ otherleavebalance.marriageRemainingBalance}}</td>
+                          <td>{{ otherleavebalance.paternityRemainingBalance}}</td>
+                     
+                              <td>{{ otherleavebalance.maternityRemainingBalance}}</td>
+                
+                              <td>{{ otherleavebalance.compassinateRemainingBalance}}</td>
+                              <td>{{ otherleavebalance.educationRemainingBalance}}</td>
+                              <td>{{ otherleavebalance.leaveWotPayRemainingBalance}}</td>
+                              <td>{{ otherleavebalance.courtLeaveRemainingBalance}}</td>
+                              <td>{{ otherleavebalance.abortionLeaveRemainingBalance}}</td>
+                        </tr>
+                        <tr *ngIf="!(employee && otherleaveBalance)">
+                          <td colspan="3">No Leave Balance found</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+ 

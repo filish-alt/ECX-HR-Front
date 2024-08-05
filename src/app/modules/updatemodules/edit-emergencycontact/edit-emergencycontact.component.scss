@@ -1,0 +1,50 @@
+
+  .form-field {
+    position: relative;
+  }
+  
+  .form-field input:not(:placeholder-shown) + label,
+  .form-field input:focus + label {
+    transform: translateY(-120%) scale(0.8);
+  color: #007bff;
+  }
+  
+  .form-field input {
+    border: none;
+    border-bottom: 1px solid #ccc;
+    outline: none;
+    font-size: 16px;
+    padding: 5px 0;
+    width: 100%;
+  }
+  
+  .form-field label {
+    position: absolute;
+    pointer-events: none;
+    left: 0;
+    top: 5px;
+    transition: 0.2s ease all;
+    font-size: 14px;
+  color: #696666;
+  }
+  .cardhead{
+    background-color: rgb(224, 224, 217);
+  }
+  
+  
+  .compact-table th {
+    font-size: 13px;
+    color: black;
+    font-weight: bold; /* Adjust the font size as needed */
+  }
+  .compact-table tr {
+    font-size: 13px; /* Adjust the font size as needed */
+  }
+  
+  .compact-table th, .compact-table td {
+    padding: 4px 8px; 
+  }
+  td ,th{
+    white-space: nowrap; /* Prevent text wrapping */
+  }
+  

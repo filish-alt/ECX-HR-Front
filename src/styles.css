@@ -1,0 +1,110 @@
+
+snack-bar-container.mat-snack-bar-container {
+  color: #155724 !important;
+  background-color: #d4edda !important;
+  border-color: #c3e6cb !important;
+}
+.edit{
+  color:#76a53b;
+}
+.card-title{
+  color:#76a53b;
+ font-weight: 400;
+}
+::ng-deep .mat-snack-bar-container{
+  color: #155724 !important;
+  background-color: #d4edda !important;
+  border-color: #c3e6cb !important;
+}
+::ng-deep .mat-simple-snackbar-action {
+  color: red;
+}
+div.mat-simple-snackbar-action {
+  color: red !important;
+}
+.btnsave  { 
+  background-color: #76a53b;
+  box-shadow: 0 0 3px 0 #bbb;
+  border-color: #76a53b;
+  color:aliceblue
+} 
+.btncancel{
+  background-color: white;
+  color:#76a53b;
+}
+.btnheader { 
+  background-color:radial-gradient( circle, #76a53b,rgb(243, 160, 5)) ;
+ 
+  text-shadow: 0 0 3px 0 #fcc034;
+  border-color:#fcc034;
+  outline: none;
+
+} 
+.yellowColor{
+  color:rgb(243, 160, 5);
+  font-size:400px;
+  text-shadow: 0 0 3px 0 #fcc034;
+border-color:#fcc034;
+outline: none;
+ }
+.btnupdate { 
+  background-color: #76a53b; 
+} 
+.btnedit{ 
+  background-color: #76a53b;; 
+  color:rgb(255, 254, 254); 
+  box-shadow: 0 0 3px 0 #bbb;
+  border-color: #76a53b;
+  outline: none;
+border-style:groove; 
+font-size:small;
+padding: 4px 19px;
+border-radius: 10%; 
+}  
+
+.small{
+  padding: -50px;
+  margin: -50px;
+}
+.btndanger{ 
+color: rgb(33, 31, 31); 
+font-weight:normal; 
+font-size :small; 
+width:min-content;
+border-color: #fcc034; 
+outline: none;
+  border-radius: 8% 8% ; 
+  background-color:#fcc034 ; 
+   
+  }
+  .btndanger:focus {
+    text-shadow: 0 0 3px 0 #fcc034;
+    background-color:#fcc034 ; 
+    color: rgb(3, 3, 3); 
+    border-color:#fcc034;
+    outline: none;
+    }
+    .btndanger:hover {
+      box-shadow: 0 0 3px 0 #fcc034;
+      background-color:#fcc034 ; 
+      color: rgb(3, 3, 3); 
+      border-color:#fcc034;
+      outline: none;
+      }
+      .btndanger:active {
+        box-shadow: 0 0 3px 0 #fcc034;
+        background-color:#fcc034 ; 
+        color: rgb(3, 3, 3); 
+        border-color:#fcc034;
+        outline: none;
+        }
+        .btndanger:checked {
+          box-shadow: 0 0 3px 0 #fcc034;
+          background-color:#fcc034 ; 
+          color: rgb(3, 3, 3); 
+          border-color:#fcc034;
+          outline: none;
+          }
+      
+          
+        

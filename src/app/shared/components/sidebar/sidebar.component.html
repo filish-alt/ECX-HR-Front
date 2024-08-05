@@ -1,0 +1,65 @@
+
+
+<div  class="sidebar ">
+    <div class="container-fluid">
+        <div class="logo">
+            <a href="#" class="simple-text">
+                <div>
+                    <img  class="logo-img"src="/assets/img/ECXLogo.png"/>
+                </div>
+           
+                  
+            </a>
+        </div>
+        <div class="sidebar-wrapper">
+        
+            <ul class="nav">
+                <li routerLinkActive="actives" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
+                    <a class="nav-link "[routerLink]="[menuItem.path]">
+                        <i class="material-icons " routerLinkActive="itm" >{{menuItem.icon}}</i>
+                        
+                        <p routerLinkActive="itm">{{menuItem.title}}</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<!-- <mat-nav-list>
+    <div class="profile-card">
+        <div class="header">
+            <h2>ECX_HRS</h2>
+    
+        </div>
+         </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="sidebar-wrapper">
+        
+        <ul class="sidebar-nav">
+            <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
+                <a class="nav-link" [routerLink]="[menuItem.path]">
+                    <i class="material-icons">{{menuItem.icon}}</i>
+                    <p>{{menuItem.title}}</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <mat-divider></mat-divider>
+
+    <h2 matSubheader>Tools</h2>
+
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/contacts">
+        <mat-icon>import_contacts</mat-icon>
+        Contacts
+    </a>
+
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/contacts">
+        <mat-icon>contact_phone</mat-icon>
+        Leads
+    </a>
+
+</mat-nav-list> -->

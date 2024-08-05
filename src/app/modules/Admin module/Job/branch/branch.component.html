@@ -1,0 +1,59 @@
+
+
+
+      <app-shared-nav [buttons]="buttons"></app-shared-nav> 
+      <div class="col-md-8 ml-2">
+        <div class="card " >
+      <form (ngSubmit)="addBranch()"> 
+        <div class="row ml-4" > 
+          <h6 class="card-title mt-3">Branch</h6>
+          <div class="col-4 mt-3"> 
+            <div class="form-field"> 
+              
+          
+          <input type="text"  id="branchName" required placeholder=" "  [(ngModel)]="addBranchRequest.name"name="name" required> 
+            <label for="branchName">Branch Name</label> </div> 
+            </div> 
+          <div class="col-4 mt-3"> 
+            <div class="form-field"> 
+       
+              <input id="branchCity" rows="1" required placeholder=" " [(ngModel)]="addBranchRequest.city" name="city" required>
+                  <label for="branchCity">Branch City</label>  </div> 
+          </div> 
+        </div> <div class="col-md-3 mt-2"> <button type="submit" class="btn btn-sm btnsave"><mat-icon>add</mat-icon>Save</button>
+           </div><div *ngIf="branchSaved" class=" btndanger btn-sm pull-right">
+            Successfully Added!
+          </div>
+           
+        </form> 
+       
+        <h6 class="mb-2 ml-3 mt-3"> 
+         Branch 
+        </h6> 
+        <!-- <div class="d-flex justify-content-end">    
+        <button class="btn btn-success" routerLink="position/add">Add Position</button> 
+        </div> --> 
+    <table id="example1" class="table table-bordered table-striped compact-table " *ngIf="branchs&& branchs.length>0"> 
+        <thead> 
+            <tr> 
+              <th>Description</th>
+              <th>City</th>
+     
+            </tr> 
+        </thead> 
+        <tbody> 
+            <tr *ngFor="let branch of branchs"> 
+    
+            
+                <td>{{branch.name}}</td> 
+                <td>{{branch.city}}</td> 
+                <td>   
+                  <button  class="btn btn-sm btndanger" (click)="deleteBranch(branch.id)"  [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
+                    <mat-icon>delete</mat-icon></button>
+              </td> 
+            </tr> 
+        </tbody> 
+    </table> 
+    <p *ngIf="!branchs || branchs.length <= 0">no branchs found</p>
+    </div>
+    </div>

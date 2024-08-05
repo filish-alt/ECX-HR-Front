@@ -1,0 +1,135 @@
+<app-shared-nav  [buttons]="buttons"></app-shared-nav><div class="main-content  ">
+    <div class="container-fluid ">
+  <div class="row  ">
+    <div class="col-md-2 ml-3 mr-5  pt-4 ">
+      <app-min-nav></app-min-nav>
+    </div>
+    <div class="col-md-9">
+      <div class="card  mb-5">
+        <div class="">
+          <div class="card-header ">
+            <h4 class="card-title">Education</h4>
+            <p class="card-category">Complete your Education</p>
+          </div>
+          <div class="card-body">
+          
+            <form (ngSubmit)="addEducation()">
+              
+              <div class="card-body">
+                <div>
+                  
+                </div>
+                <div class="row">
+                  <div class="col-md-4 form-field">
+                    <input  placeholder=" " type="text" name="nameOfInstitute" [(ngModel)]="education.nameOfInstitute" required>
+                    <label>Institution Name</label>
+                  </div>
+                  <div class="col-md-4 form-field">
+                    <input  placeholder=" " type="text" name="fieldOfStudy" [(ngModel)]="education.fieldOfStudy">
+                    <label>Field Of Study</label>
+                  </div>
+                  <div class="col-md-4 form-field">
+                    <mat-select placeholder="Select education level" name="selectedEducationLevel" required [(ngModel)]="selectedEducationLevel">
+                      <mat-option *ngFor="let educationlevel of educationlevels" [value]="educationlevel.id">
+                        {{educationlevel.educationName}}
+                      </mat-option>
+                    </mat-select>
+                    
+                  </div>
+                </div>
+              </div>          <div class="card-body">
+                <div class="row">
+                  <div class="col-md-6">
+                    <mat-form-field style="height: 65px; width:160px"  class="example-full-width">
+                      <input matInput [matDatepicker]="fromPicker" placeholder="Start Date" name="from" [(ngModel)]="education.from">
+                      <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+                      <mat-datepicker #fromPicker></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6">
+                    <mat-form-field style="height: 65px; width:160px" class="example-full-width">
+                      <input matInput [matDatepicker]="toPicker" placeholder="End Date" name="to" [(ngModel)]="education.to">
+                      <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+                      <mat-datepicker #toPicker></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-4 mt-3 ">
+                    <label for="name" >Supporting File</label>
+                    <input placeholder=" " name="file" class="form-control" type="file" id="file"  (change)="onFileSelected($event)" #fileInput>
+                    <!-- <mat-error *ngIf="IsPdf" class=" pull-right">Selected file is not a PDF</mat-error>
+                    <mat-error  *ngIf="IsBig" class="  pull-right">File size exceeds 200MB</mat-error >
+           -->
+                  </div>
+                  </div>
+                </div> 
+                <div>
+                  <button type="button" class="btn btn-sm btnsave"  *ngIf="education.id!=undefined"  (click)="updateEducation()">Update</button>
+                      
+               
+               <!-- <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save Education</button>
+                  -->
+                  <div *ngIf="educationUpdated" class=" btndanger btn-sm pull-right">
+                    Updated successfully!
+                  </div>
+                   
+                  <button type="button" class="btn btn-sm btnsave" *ngIf="education.id===undefined" (click)="addEducation()">Add</button>
+                         
+                  <div *ngIf="educationSaved" class="btndanger btn-sm pull-right">
+            Added successfully!
+                </div></div>
+                </form>
+      </div>
+  
+  <div class="container">
+    
+  
+  
+    <!-- Education Table -->
+    <h6>Education History</h6>
+    <table   *ngIf="education" class="table table-bordered table-striped compact-table">
+      <thead>
+        <tr>
+          <th>Education Level</th>
+          <th>Name of Institute</th>
+          <th>Field of Study</th>
+          <th>From</th>
+          <th>To</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Use *ngFor to loop through the educations array and display each education record -->
+        <tr *ngFor="let education of educations" >
+          <td>{{ getEducationName(education.eductionName)}}</td>
+          <td>{{ education.nameOfInstitute }}</td>
+          <td>{{ education.fieldOfStudy }}</td>
+          <td>{{ education.from | date:'yyyy-MM-dd' }}</td>
+          <td>{{ education.to | date:'yyyy-MM-dd' }}</td>
+          <td>  <button class="btn btn-sm " (click)="fetchAndDisplayPDF(education)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"
+            style="background-color: rgb(224, 224, 217); color: #0c0c0c; border: none;  cursor: pointer; border-radius: 5px;"  download="filename.pdf" >
+            <mat-icon>get_app</mat-icon></button>
+            <mat-error  *ngIf="FileNull && id == education.id"
+            class="  pull-right">No File</mat-error >
+            
+
+        </td>
+          <td>
+            <button class="btn btn-sm btnedit" (click)="editEducation(education)">
+              <mat-icon>edit</mat-icon>Edit</button>
+            <button class="btn btn-sm btndanger" (click)="deleteEducation(education)">
+              <mat-icon>delete</mat-icon>Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Add Work Experience Form -->
+   
+    <!-- Work Experience Table -->
+   
+  
+  </div>
+  
+      </div>
+    </div>
+  </div>
+  

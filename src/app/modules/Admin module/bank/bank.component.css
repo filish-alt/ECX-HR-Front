@@ -1,0 +1,96 @@
+.margin{
+    margin-left: 25%;
+  }.formcontainer {
+      max-width: 1000px; /* Adjust this value to change the form width */
+      margin-left: 100px;
+      margin-top: 40px;
+      form-field {
+        position: relative;
+        margin-bottom: 20px;
+      }
+      
+      .form-field input {
+        border: none;
+        border-bottom: 1px solid #ccc;
+        outline: none;
+        padding: 5px;
+        font-size: 16px;
+      }
+      
+      .form-field label {
+        position: absolute;
+        top: 0;
+        left: 5px;
+        font-size: 14px;
+        color: #747070;
+        pointer-events: none;
+        transition: 0.2s ease all;
+    
+      }
+      
+      .form-field input:focus ~ label,
+      .form-field input:not(:placeholder-shown) ~ label {
+        top: -20px;
+        left: 5px;
+        font-size: 14px;
+        color: #9f9fa3;
+        background-color: #fff;
+        padding: 0 5px;
+      }
+    }
+    .btnsave{
+      background-color: #76a53b;
+    }
+    form-field {
+      position: relative;
+      margin-bottom: 20px;
+    }
+    
+    .form-field input {
+      border: none;
+      border-bottom: 1px solid #ccc;
+      outline: none;
+      padding: 5px;
+      font-size: 16px;
+    }
+    
+    .form-field label {
+      position: absolute;
+      top: 0px;
+      left: 5px;
+      font-size: 14px;
+      color: #747070;
+      pointer-events: none;
+      transition: 0.2s ease all;
+  
+    }
+    
+    .form-field input:focus ~ label,
+    .form-field input:not(:placeholder-shown) ~ label {
+      top: -20px;
+      left: 5px;
+      font-size: 14px;
+      color: #9f9fa3;
+      background-color: #fff;
+      padding: 0 5px;
+    }
+  
+    .compact-table th {
+      font-size: 13px;
+      color: black;
+      font-weight: bold; /* Adjust the font size as needed */
+    }
+    .compact-table tr {
+      font-size: 13px; /* Adjust the font size as needed */
+    }
+    
+    .compact-table th, .compact-table td {
+      padding: 4px 8px; 
+    }
+    td ,th{
+      white-space: nowrap; /* Prevent text wrapping */
+    }
+  .custom-snackbar{
+      background-color: #76a53b;
+      color:aqua;
+    }

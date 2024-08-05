@@ -1,0 +1,62 @@
+.cardhead{
+    background-color: rgb(224, 224, 217);
+}
+
+.custom-mat-select {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px;
+}
+.compact-table th {
+  font-size: 13px;
+  color: black;
+  font-weight:650; /* Adjust the font size as needed */
+}
+.compact-table tr {
+  font-size: 13px; /* Adjust the font size as needed */
+}
+
+.compact-table th, .compact-table td {
+  padding: 4px 8px; 
+}
+td ,th{
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+  /* For the form fields inside .form-field */
+/* CSS for form fields and labels */
+/* CSS for form fields and labels */
+/* YourComponent.css (or styles.css if it's your main global CSS file) */
+
+/* Style for the form field label */
+.form-field {
+  position: relative;
+}
+
+.form-field input:not(:placeholder-shown) + label,
+.form-field input:focus + label {
+  transform: translateY(-120%) scale(0.8);
+  color: #3e4142;
+}
+
+.form-field input {
+  border: none;
+  border-bottom: 1px solid #ccc;
+  outline: none;
+  font-size: 16px;
+  padding: 5px 0;
+  width: 100%;
+  color: #333335;
+  background-color: #fff;
+}
+
+.form-field label {
+  position: absolute;
+  pointer-events: none;
+  left: 0;
+  top: 5px;
+  transition: 0.2s ease all;
+  font-size: 14px;
+  color: #747070;
+}
+

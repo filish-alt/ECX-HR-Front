@@ -1,0 +1,126 @@
+<app-shared-nav class="sharednav"[buttons]="buttons"></app-shared-nav>
+<!-- First Column -->
+<div class="col-md-11 ml-5">
+  <div class="card mb-5">
+    <div class="card-body " >
+      <div class="card-header ">
+        <h4 class="card-title ">Allowance </h4>
+
+      </div>
+    
+      <div class="container mt-3">
+        <button class="btn btndanger" (click)="toggleAllowanceForm()"><mat-icon>add</mat-icon>Fill Allowance Request</button>
+          </div> 
+          <div class="mt-4">
+              <form *ngIf="showAllowanceForm" >
+      <h6 class="mb-3">Allowance Form</h6>
+            <div class="card-body">
+          <div class="row">
+            <div class="col-md-5 form-group">
+              <mat-select class="select" placeholder="Select Position" name="selectedPosition" required [(ngModel)]="selectedPosition" (ngModelChange)="onPositionselected()">
+                <mat-option *ngFor="let position of Positions" [value]="position.positionId">
+                  {{ position.name}}
+                </mat-option>
+              </mat-select>
+            </div>
+
+            <div class="col-md-5 ml-5">
+                             
+                <label>Department</label><br>
+                <input class="form-field select2" placeholder=" " name="selectedPositionDepartment"
+                required [(ngModel)]="selectedPositionDepartment" [disabled]="true">
+                  <!-- Use *ngFor on mat-option to loop through departments -->
+                
+                  
+             
+            </div>
+            </div>
+            <div class="row">
+            <div class="col-md-5 form-group">
+                <mat-select class="select" placeholder="Select Grade" name="selectedGrade" required [(ngModel)]="selectedGrade" (ngModelChange)="onGradeselected()">
+                  <mat-option *ngFor="let grade of grades" [value]="grade.levelId">
+                    {{ grade.description}}
+                  </mat-option>
+                </mat-select>
+              </div>
+              <div class="col-md-5 form-group">
+                <mat-select class="select" placeholder="Select Step" name="selectedStep" required [(ngModel)]="selectedStep" >
+                  <mat-option *ngFor="let step of steps" [value]="step.id">
+                    {{ step.description}}
+                  </mat-option>
+                </mat-select>
+              </div>
+       </div>
+       <div class="row">
+            <div class="col-md-5 form-group">
+              <mat-select class="select"  placeholder="Select Allowance Type" name="selectedAllowanceType" required [(ngModel)]="selectedAllowanceType" (ngModelChange)="onAllowanceselected()">
+                <mat-option *ngFor="let AllowanceType of AllowanceTypes" [value]="AllowanceType.id">
+                  {{ AllowanceType.name }}
+                </mat-option>
+              </mat-select>
+            </div>
+        
+            
+          
+         
+            <div *ngIf="selectedAllowanceTypeName ==='Transport' ||
+            selectedAllowanceTypeName ==='OtherTax' 
+            ||  selectedAllowanceTypeName ==='TaxExcemptedT'
+             ||  selectedAllowanceTypeName ==='Telephone'" class="col-md-4  form-field mt-4 ">
+              <input  placeholder=" " type="text" name="workingDays" [(ngModel)]="Allowance.amount">
+              <label >Amount</label>
+            </div>
+            <div  *ngIf="selectedAllowanceTypeName ==='Living' ||
+            selectedAllowanceTypeName ==='Housing' 
+            ||  selectedAllowanceTypeName ==='HardShip'" class="col-md-4  form-field mt-4">
+           
+              <input placeholder=" " type="text" name="reason" [(ngModel)]="Allowance.ratePercent">
+                 <label>Percent</label>
+            </div>
+          
+          </div>
+      
+          
+      </div>
+
+      <div class="mt-3">
+        <button type="button" class="btn btnsave btn-sm" *ngIf="!Allowance.id" (click)="addAllowance()"><mat-icon>add</mat-icon>Add</button>
+        <div *ngIf="AllowanceSaved" class=" btndanger btn-sm pull-right">Added successfully!</div>
+        <button type="button" class="btn btnsave btn-sm" *ngIf="Allowance.id" (click)="updateAllowance()"><mat-icon>add</mat-icon>Update</button>
+        <div *ngIf="AllowanceUpdated" class=" btndanger btn-sm pull-right">Updated successfully!</div>
+      </div></form>
+            </div></div>
+        
+         <div><input  class="ml-5 search inputserach mt-3" type="search" placeholder="Search By Name" [(ngModel)]="searchTerm" (input)="onSearch()">
+            </div> 
+            <h6 class="ml-3 mt-5 yellow">Allowance Records</h6>
+           
+            <table class="table table-bordered table-striped compact-table ">
+              <thead>
+                <tr>
+                  <th>Type of Allowance</th>
+                  <th>Postion</th>
+                  <th>Grade</th>
+                  <th>Step</th>
+                  <th>Amount</th>
+                  <th>Percent</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Use *ngFor to loop through the Allowances array and display each Allowance record -->
+                <tr *ngFor="let Allowance of filteredAllowance">
+                  <td>{{ capitalizeFirstLetter(getAllowanceTypeName(Allowance.allowanceType)) }}</td>
+                  <td>{{ getPositionName(Allowance.position) }}</td>
+                  <td>{{ getGradeName(Allowance.grade)}}</td>
+                  <td>{{ getStepName(Allowance.step)}}</td>
+                  <td>{{ Allowance.amount }}</td>
+                  <td>{{ Allowance.ratePercent}}</td>
+                  <td> <button class="btn btn-sm btnedit" (click)="editAllowance(Allowance)">
+                    <mat-icon class="small">edit</mat-icon></button>
+                    <button class="btn btn-sm btndanger" (click)="deleteAllowance(Allowance)">
+                      <mat-icon class="small">delete</mat-icon></button>
+                 </td>
+                </tr>
+              </tbody>
+            </table>
+          </div></div>

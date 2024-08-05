@@ -1,0 +1,74 @@
+
+
+<app-shared-nav [buttons]="buttons"></app-shared-nav> 
+<div class="row" > 
+    <div class="col-md-6 ml-5">
+      <div class="card " >
+
+
+<form (ngSubmit)="addholiday()">   
+    <div class="row ml-4">
+      <h6 class="card-title mt-3">Holiday</h6>
+     
+    <div class="col-md-5 mt-3 "> 
+    <div class="form-field"> 
+      <input type="text" id="holidayName" placeholder=" " [(ngModel)]="addholidayRequest.description" name="name" required> 
+     <label for="holiday">Holiday Name</label> 
+     </div> </div>
+     <div class="col-md-3 mt-3"> 
+         <div class="form-field"> 
+      <input type="text" id="maximum" placeholder=" " [(ngModel)]="addholidayRequest.year" name="maximum" required> 
+     <label for="maximum">Year</label>  
+    
+    </div> 
+      </div>
+      <div class="col-md-6 mt-4">
+        <mat-form-field style="height: 65px; width:160px" class="example-full-width">
+          <input matInput [matDatepicker]="toPicker" placeholder="Date" name="to" [(ngModel)]="addholidayRequest.date">
+          <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+          <mat-datepicker #toPicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+ <div  class="col-md-8 mt-3"><button type="submit" class="btn  btn-sm btnsave ml-3"><mat-icon>add</mat-icon>Save </button> </div>
+   
+ </div>   <div *ngIf="holidaySaved" class="alert  btndanger btn-sm pull-right">
+        Successfully Added!
+      </div> 
+  </form> 
+
+
+  <h6 class="mb-3 ml-3 mt-2"> 
+List Of Holidays
+</h6> 
+
+
+ 
+<table id="example1" class="table table-bordered table-striped compact-table"  *ngIf="holidays && holidays.length>0"> 
+<thead> 
+    <tr> 
+        <th> Holiday</th> 
+        <th>Year</th> 
+
+      <th>Date</th> 
+        
+
+    </tr> 
+</thead> 
+<tbody> 
+    <tr *ngFor="let holiday of holidays"> 
+       
+        <td>{{holiday.description}}</td> 
+      <td>{{holiday.year}}</td> 
+      <td>{{holiday.date| date:'yyyy-MM-dd'}}</td> 
+        <td>   
+            <button  class="btn btn-sm btndanger" (click)="deleteholiday(holiday.id)"  [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
+                <mat-icon>delete</mat-icon></button>
+        </td> 
+
+    </tr> 
+</tbody> 
+</table> 
+<p *ngIf="!holidays || holidays.length <= 0">no holidays found</p>
+</div>
+</div>
+</div>

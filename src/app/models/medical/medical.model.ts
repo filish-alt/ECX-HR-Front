@@ -1,0 +1,45 @@
+
+export interface MedicalRequests{
+    medicalRequestId: string,
+    empId: string,
+    institutionName: string,
+    address: string,
+    remark: string,
+    approvalStatus: string,
+    medicalExamination: number,
+    laboratory: number,
+    medicine: number,
+    hospitalBed: number,
+    otherRelated: number,
+    total: number,
+    file: string,
+    receiptFile:string,
+    date: string,
+    pId:number,
+    status:Number,
+    createdBy?: string, 
+    createdDate?: string, 
+    updatedDate: string, 
+    updatedBy: string,
+    supervisor:string,
+    spouseId?: string,
+    totalFund:number
+  
+}
+
+export interface MedicalBalance{
+    empId: string,
+    medicalRequestId: string,
+    spouseId?: string,
+    selfBalance: number,
+    familyBalance: number,
+    startDate: string,
+    endDate: string,
+    status:Number,
+    pId:number,
+    id: string,
+  createdBy?: string, 
+    createdDate?: string, 
+    updatedDate: string, 
+    updatedBy: string,
+}

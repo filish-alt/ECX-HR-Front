@@ -1,0 +1,159 @@
+<app-shared-nav class="sharednav"[buttons]="buttons"></app-shared-nav>
+<!-- First Column -->
+<div class="col-md-11 ml-5">
+  <div class="card mb-5">
+    <div class="card-body " >
+      <div class="card-header ">
+        <h4 class="card-title ">Deduction </h4>
+
+      </div>
+    
+      <div class="container mt-3">
+        <button class="btn btndanger" (click)="toggleDeductionForm()" ><mat-icon>add</mat-icon>Fill Deduction Request</button>
+          </div> 
+          <div class="mt-4">
+            <form  *ngIf="showDeductionForm" >
+         <h6 class="mb-3">Deduction Form</h6>
+           <div class="card-body ">
+          <div class="row">
+            <div class="col-md-4 form-group">
+              <mat-select class="select" placeholder="Select Employee" name="selectedEmployee" required [(ngModel)]="selectedEmployee" (ngModelChange)="onemployeeselected()">
+                <mat-option *ngFor="let employee of Employees" [value]="employee.empId">
+                  {{ employee.firstName + ' ' + employee.middleName + ' ' + employee.lastName }}
+                </mat-option>
+              </mat-select>
+            </div>
+       
+            <div class="col-md-4 ml-5 form-group">
+              <mat-select class="select"  placeholder="Select Deduction Type" name="selectedDeductionType" required [(ngModel)]="selectedDeductionType" (ngModelChange)="onDeductionselected()" >
+                <mat-option *ngFor="let DeductionType of DeductionTypes" [value]="DeductionType.id">
+                  {{ DeductionType.name }}
+                </mat-option>
+              </mat-select>
+            </div>
+           </div>
+          
+            <div class="row mt-4">
+            <div class="col-md-4 ">
+                             
+              <label> Employee Position</label><br>
+              <input class="form-field select2" placeholder=" " name="selectedPosition"
+              required [(ngModel)]="selectedPosition" [disabled]="true">
+                <!-- Use *ngFor on mat-option to loop through departments -->
+              
+                
+           
+          </div>
+      
+          <div class="col-md-4  ml-5 ">
+                             
+            <label>Department</label><br>
+            <input class="form-field select2" placeholder=" " name="selectedEmployeeDepartment"
+            required [(ngModel)]="selectedEmployeeDepartment" [disabled]="true">
+              <!-- Use *ngFor on mat-option to loop through departments -->
+            
+              
+         
+        </div>
+      </div>
+            
+          
+          <div class="row mt-4">
+            <div class="col-md-4  form-field mt-4">
+              <input  placeholder=" " type="text" name="amount" [(ngModel)]="Deduction.amount">
+              <label >Amount</label>
+            </div>
+            <div  *ngIf="selectedDeductionTypeName ==='SalaryAdvance'" class="col-md-4  form-field mt-4">
+              <input  placeholder=" " type="text" name="length" [(ngModel)]="Deduction.length">
+              <label >Length</label>
+            </div>
+            <div class="col-md-4  ml-5  form-field mt-4">
+           
+              <input placeholder=" " type="text" name="remark" [(ngModel)]="Deduction.remark">
+                 <label>Remark</label>
+            </div>
+          
+          </div>
+          
+            <form [formGroup]="DeductionForm">
+             
+                 <div class="row "> 
+                  <div class="col-md-4 mt-4">
+                <!-- Start Date -->
+                <mat-form-field style="height: 65px; width: 160px; font-size: 15px;" class="example-full-width">
+                  <input matInput [matDatepicker]="fromPicker" placeholder="Start Date" name="startDate"  formControlName="startDate">
+                  <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+                  <mat-datepicker #fromPicker></mat-datepicker>
+                </mat-form-field>
+              </div>   
+            
+              <div class="col-md-4 mt-4">
+                <!-- End Date -->
+                <mat-form-field style="height: 65px; width: 160px; font-size: 15px;" class="example-full-width">
+                  <input matInput [matDatepicker]="toPicker" placeholder="End Date" name="endDate"  formControlName="endDate">
+                  <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+                  <mat-datepicker #toPicker></mat-datepicker>
+                </mat-form-field>
+              </div>
+              
+             <div class="col-md-4 mt-2">
+              <label for="name" >Supporting File</label>
+              <input placeholder=" " name="file" class="form-control" type="file" id="file"  (change)="onFileSelected($event)" #fileInput>
+              <mat-error *ngIf="IsPdf" class=" pull-right">Selected file is not a PDF</mat-error>
+              <mat-error  *ngIf="IsBig" class="  pull-right">File size exceeds 200MB</mat-error >
+    
+            </div>
+             </div> 
+            
+            </form></div>
+          
+            <div class="mt-3">
+              <button type="button" class="btn btnsave btn-sm" *ngIf="!Deduction.id" (click)="addDeduction()"><mat-icon>add</mat-icon>Add</button>
+              <div *ngIf="deductionSaved" class=" btndanger btn-sm pull-right">Added successfully!</div>
+              <button type="button" class="btn btnsave btn-sm" *ngIf="Deduction.id" (click)="updateDeduction()"><mat-icon>add</mat-icon>Update</button>
+              <div *ngIf="deductionUpdated" class=" btndanger btn-sm pull-right">Updated successfully!</div>
+            </div>  </form>
+            </div></div>
+          
+              <div><input  class="ml-5 search inputserach mt-3" type="search" placeholder="Search By Name" [(ngModel)]="searchTerm" (input)="onSearch()">
+            </div>
+            <h6 class="ml-3 mt-5 yellow">Deduction Records</h6>
+        
+              
+            <table class="table table-bordered table-striped compact-table ">
+              <thead>
+                <tr>
+                  <th>Employee</th>
+                  <th>Deduction Type</th>
+                  <th>Amount</th>
+                  <th>Start Date</th>
+                  <th>End Date</th>
+                  
+                  <th>Remark</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Use *ngFor to loop through the Deduction array and display each Deduction record -->
+                <tr *ngFor="let Deduction of filteredDeductions">
+                  <td>{{ capitalizeFirstLetter(getEmployeeName(Deduction.empId)) }}</td>
+                  <td>{{ getDeductionTypeName(Deduction.deductionType) }}</td>
+                  <td>{{ Deduction.amount}}</td>
+                  <td>{{ Deduction.startDate | date:'yyyy-MM-dd'}}</td>
+                  <td>{{ Deduction.endDate | date:'yyyy-MM-dd'}}</td>
+                  <td>{{ Deduction.remark}}</td>
+                  <td>  <button class="btn btn-sm " (click)="fetchAndDisplayPDF(Deduction)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"
+                    style="background-color: rgb(224, 224, 217); color: #0c0c0c; border: none;  cursor: pointer; border-radius: 5px;"  download="filename.pdf" >
+                    <mat-icon>get_app</mat-icon></button>
+                    <mat-error  *ngIf="FileNull && id == Deduction.id"
+                    class="  pull-right">No File</mat-error >
+                    
+  
+                </td>
+                  <td> <button class="btn btn-sm btnedit" (click)="editDeduction(Deduction)">
+                    <mat-icon class="small">edit</mat-icon></button>
+                    <button class="btn btn-sm btndanger" (click)="deleteDeduction(Deduction)">
+                      <mat-icon class="small">delete</mat-icon></button>
+                 </td>
+                </tr>
+              </tbody>
+            </table></div></div>

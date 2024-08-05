@@ -1,0 +1,67 @@
+
+<app-shared-nav class="sharednav"[buttons]="buttons"></app-shared-nav>
+<app-employee-details-modal *ngIf="employeeDetailsModalService.isOpen$ | async"></app-employee-details-modal>
+    <div class="card col-md-11 mb-5 ml-5">
+      <div class="">
+        <div class="card-header  ">
+          <h4 class="card-title  ">Medical Approval</h4>
+          <p class="card-category ">Medicals on pendding  </p>
+           
+        </div>
+     <!--  -->
+    
+          
+
+   
+     <!--  --><button *ngIf="medicalApproved"class="alert  btndanger btn-sm pull-right">  Approved
+            </button>
+            <button *ngIf="medicalRejected"class="alert  btndanger btn-sm pull-right">  Rejected
+            </button>
+
+                <table   *ngIf="medicalPenddings" class="table table-bordered table-striped compact-table">
+                  <thead>
+                    <tr>
+                      <th>Employee</th>
+                      <th>Hospital Bed</th>
+                      <th>laboratory</th>
+                      <th>Medical Examination</th>
+                      <th>Medicine</th>
+                      <th>Other Related</th>
+                      <th>Total</th>
+                   
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Use *ngFor to loop through the medicalPendings array and display each medicalPending record -->
+                    <tr *ngFor="let medicalRequest of medicalPenddings" >
+                      <td>{{ capitalizeFirstLetter(getEmployeeName(medicalRequest.empId)) }}</td>
+                      <td>{{ medicalRequest.hospitalBed }}</td>
+                      <td>{{ medicalRequest.laboratory }}</td>
+                       <td>{{ medicalRequest.medicalExamination}}</td>
+                      <td>{{ medicalRequest.medicine  }}</td>
+                      <td>{{ medicalRequest.otherRelated }}</td>
+                      <td>{{ medicalRequest.total }}</td>
+                      <td>  <button class="btn btn-sm " (click)="fetchAndDisplayPDF(medicalRequest)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"
+                        style="background-color: rgb(224, 224, 217); color: #0c0c0c; border: none;  cursor: pointer; border-radius: 5px;"  download="filename.pdf" >
+                        <mat-icon>get_app</mat-icon></button>
+                        <mat-error  *ngIf="FileNull && id == medicalRequest.medicalRequestId"
+                        class="  pull-right">No File</mat-error >
+      </td>
+                      <td>
+                        <!-- medical-approval.component.html -->
+                     
+
+                        <button class="btn btn-sm btnedit" (click)="approvemedicalPendding(medicalRequest)">
+                          <mat-icon class="small">how_to_reg</mat-icon></button>
+                          <button class="btn btn-sm btndanger" (click)="rejectmedicalPendding(medicalRequest)">
+                            <mat-icon class="small">cancel</mat-icon></button>
+                         
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                </div>
+              </div>
+              
+       
+ 

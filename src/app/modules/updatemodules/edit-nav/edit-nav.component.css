@@ -1,0 +1,37 @@
+.cardnav {
+    background-color: white ;
+  }
+  
+  .btn-gray {
+    background-color:#fdfdfd;
+  }
+  
+  /* Adjust the sidebar layout for smaller screens */
+  @media (max-width: 767px) {
+    .sidebar2 {
+      position: static;
+      height: auto;
+      padding-top: 15px;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+  
+    .card-profile {
+      margin-bottom: 15px;
+    }
+  }
+  
+  /* Add media query for medium-sized screens (e.g., tablets) */
+  @media (min-width: 768px) and (max-width: 991px) {
+    .sidebar2 {
+      padding-top: 30px;
+    }
+  }
+  
+  /* Add media query for large screens (e.g., laptops/desktops) */
+  @media (min-width: 992px) {
+    .sidebar2 {
+      height: 100vh;
+    }
+  }
+  

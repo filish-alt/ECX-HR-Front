@@ -1,0 +1,251 @@
+
+<app-shared-nav class="sharednav"[buttons]="buttons"></app-shared-nav>
+<div class="container ">
+  <div class="row">
+    <div class="col-md-2 ml-3 mr-5 ">
+      <div class="form-group ">
+        <div class="form-group">
+          <img class="img" [src]="employeeForm.get('imageData').value ? employeeForm.get('imageData').value : './assets/img/profile.jpg'" (click)="openImageDialog()" style="cursor: pointer;" />
+          <input type="file" id="image" name="image" (change)="onImageSelected($event)" accept="image/*" style="display: none;">
+
+      <app-min-nav>
+        
+      </app-min-nav> 
+    </div> 
+    </div>
+    </div>
+   
+    <div class="col-md-9 "> 
+      
+      <div class="card mb-5">
+    
+          <div class="card-header ">
+            <h4 class="card-title">Profile Information</h4>
+            <p class="card-category">Complete your profile</p>
+          </div>
+          <div class="card-body mt-2">
+            <form [formGroup]="employeeForm">
+              <div class="row">
+                  <div class="col-md-4 form-field">
+                    <div class="form-field">
+                      <input type="text"  name="firstname" formControlName="firstName" required>
+                      <label>First Name</label>
+                          <mat-error *ngIf="employeeForm.get('firstName').invalid && employeeForm.get('firstName').touched">
+                  Middle Name is required
+                    </mat-error>
+    </div>
+    
+                  </div>
+
+              <div class="col-md-4 form-field">
+                <div class="form-field">
+                  <input type="text"  name="middlename" formControlName="middleName" required>
+                  <label>Middle Name</label>
+                      <mat-error *ngIf="employeeForm.get('middleName').invalid && employeeForm.get('middleName').touched">
+              Middle Name is required
+                </mat-error>
+</div>
+
+              </div>
+
+              <div class="col-md-4 form-field">
+                <div class="form-field">
+                  <input type="text"  name="lastname" formControlName="lastName" required>
+                  <label>Last Name</label>
+                </div>
+                      <mat-error *ngIf="employeeForm.get('lastName').invalid && employeeForm.get('lastName').touched">
+                  Last Name is required
+                </mat-error>
+              </div>
+            </div>
+       
+           
+            <div class="row">
+                <div class="col-md-4 form-field">
+                  <mat-select class="select"  placeholder="Salutation" name="salutation" formControlName="salutation" required>
+                    <mat-option value="mr">Mr.</mat-option>
+                    <mat-option value="mrs">Mrs.</mat-option>
+                    <mat-option value="miss">Miss</mat-option>
+                    <mat-option value="dr">Dr.</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="employeeForm.get('salutation').invalid && employeeForm.get('salutation').touched">
+                    Salutation is required
+                  </mat-error>
+                </div>
+                <div class="col-md-4 form-field">
+                  <div class="form-field">
+                    <input type="text" name="nationality" formControlName="nationality" required>
+                    <label>Nationality</label>
+                  </div>
+                  <mat-error *ngIf="employeeForm.get('nationality').invalid && employeeForm.get('nationality').touched">
+                    Nationality is required
+                  </mat-error>
+                </div>
+                <div class="col-md-4 form-field">
+                  <div class="form-field">
+                    <input type="text" required name="placeOfBith" formControlName="placeOfBith">
+                    <label>Place of Birth</label>
+                  </div>
+                  <mat-error *ngIf="employeeForm.get('placeOfBith').invalid && employeeForm.get('placeOfBith').touched">
+                    Place of Birth is required
+                  </mat-error>
+                </div>
+               
+              </div>
+            
+          
+          
+         
+          <div class="row">
+              <div class="col-md-4">  
+                 <mat-error *ngIf="employeeForm.get('sex').invalid && employeeForm.get('sex').touched">
+                  Gender is required
+                </mat-error>
+                <mat-radio-group name="sex" formControlName="sex" required>
+                  <p>
+                   
+               <mat-label>Gender</mat-label>
+                    
+                  </p>
+                  <mat-radio-button value="male" class="radio-option">Male</mat-radio-button>
+                  <mat-radio-button value="female" class="radio-option">Female</mat-radio-button>
+                </mat-radio-group>
+               
+              </div>
+              
+            
+              <div class="col-md-4 form-field">
+                <mat-select class="select" style="height: 40px; width:180px; padding:right 10%" placeholder="Marital Status" name="martialStatus" formControlName="martialStatus"  required>
+                  <mat-option value="married">Married</mat-option>
+                  <mat-option value="single">Single</mat-option>
+                  <mat-option value="divorce">Divorced</mat-option>
+                  <mat-option value="divorce">Widowed</mat-option>
+                  <mat-option value="divorce">Other</mat-option>
+                </mat-select>
+                <mat-error *ngIf="employeeForm.get('martialStatus').invalid && employeeForm.get('martialStatus').touched">
+                  Marital Status is required
+                </mat-error>
+              </div>
+              </div>
+             
+
+                 
+        <div class="row mt-5">
+                  <div class="col-md-6">         <mat-error *ngIf="employeeForm.get('joinDate').hasError('invalidJoinDate')" class="text-danger">
+                        Join date must be equal to or earlier than the current date.
+                      </mat-error>
+                    <mat-form-field style="height: 65px; width:150px">
+             
+                      <mat-label>Joined Date</mat-label>
+                      <input matInput [matDatepicker]="jdpicker" name="joinDate" required formControlName="joinDate">
+                      <mat-datepicker-toggle matSuffix [for]="jdpicker"></mat-datepicker-toggle>
+                      <mat-datepicker #jdpicker></mat-datepicker>
+                    </mat-form-field>
+               
+                </div>
+                
+          
+              <div class="col-md-6">
+                <mat-form-field style="height: 65px; width:160px" > <mat-error *ngIf="employeeForm.get('dateOfBityh').invalid && employeeForm.get('dateOfBityh').touched">
+                    Date of Birth is required
+                  </mat-error>
+                  <mat-label>Date of Birth</mat-label>
+                  <input matInput [matDatepicker]="dobPicker" required name="dateOfBityh" formControlName="dateOfBityh">
+                  <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
+                  <mat-datepicker #dobPicker></mat-datepicker>
+                  </mat-form-field>
+                 
+               </div>
+              </div>
+              
+          
+
+              
+                  <div class="row mt-4">
+                    <div class="col-md-5 form-field">
+                      <div class="form-field">
+                        <input type="text" required name="pensionNo" formControlName="pensionNo">
+                        <label>Pension Number</label>
+                      </div>
+                      <mat-error *ngIf="employeeForm.get('pensionNo').invalid && employeeForm.get('pensionNo').touched">
+                    Pension Number is required
+                  </mat-error>
+                    </div>
+             
+                   
+                     
+              <div class="col-md-2 form-field">
+                      <mat-slide-toggle name="crimeStatus" formControlName="crime">Crime</mat-slide-toggle>
+                    </div>
+                    <div class="col-md-5 form-field">
+                 
+                        <div class="form-field">
+                          <input type="text" required name="pensionNo" formControlName="pensionNo">
+                          <label>Crime Description</label>
+                        </div>
+                    </div>
+                  </div>
+  
+              <button type="button" class="btn btn-sm btnsave" *ngIf="employees.length === 0" (click)="addEmployee()" >
+                <mat-icon>add</mat-icon>Add</button>
+              <div *ngIf="employeeSaved" class="alert btndanger btn-sm pull-right" style="  width: 25%;
+              height:5%;">
+                Successfully Added!
+              </div>
+
+              <button  *ngIf="edit==true" class="btn btn-sm pull-left btnsave" (click)="updateEmployee()">  <mat-icon>add</mat-icon>update</button>
+              <div *ngIf="employeeUpdated" class="alert btndanger btn-sm pull-right">
+                Successfully Updated!
+              </div>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+       
+
+
+ 
+       
+        <!-- contact.component.html -->
+        <h6>Profile info </h6>
+        <table   class="table table-bordered table-striped compact-table">
+          <thead>
+                <tr>
+                    
+                    <th>First Name</th> 
+                    <th>Middle Name</th>
+                    <th>Last Name</th>
+                    <th>Sex</th>
+                    <th>ECXID</th>
+                    <th>Pension Id</th>
+                  
+                </tr>
+            </thead>
+     
+            <tbody>
+             
+              <tr *ngIf="employee.empId!=undefined">
+             
+                <td>{{ employee.firstName }}</td>
+                <td>{{ employee.middleName }}</td>
+                <td>{{ employee.lastName }}</td>
+                 <td>{{ employee.sex }}</td>
+                <td>{{ employee.ecxId }}</td>
+                <td>{{ employee.pensionNo }}</td>
+           
+                <td>
+                <button class="btn btn-sm btnedit" (click)="editEmployee(employee)">
+                  <mat-icon>edit</mat-icon>Edit</button></td>
+
+          <td> <button  class="btn btn-sm btndanger" (click)="deleteEmployee(employee.empId)">
+            <mat-icon>delete</mat-icon>Delete</button>
+              </tr>
+            </tbody>
+        </table>
+    
+
+</div>
+</div></div> </div>
+
+
+
+  

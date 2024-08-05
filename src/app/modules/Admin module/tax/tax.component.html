@@ -1,0 +1,96 @@
+
+<app-shared-nav [buttons]="buttons"></app-shared-nav> 
+<div class="row" > 
+    <div class="col-md-6 ml-5">
+      <div class="card " >
+
+
+<form (ngSubmit)="addTax()">   
+    <div class="row ml-4 mt-3">
+        <h6 class="card-title ml-3">Tax</h6>
+        <div class="row">
+    <div class="col-md-5 mt-3 "> 
+    <div class="form-field"> 
+    
+      <input type="text" id="TaxName" placeholder=" " [(ngModel)]="addTaxRequest.name" name="name" required> 
+     <label for="TaxName">Tax Name</label>  
+    </div> </div>
+
+    <div class="col-md-5 mt-3 ml-3"> 
+        <div class="form-field"> 
+            <input type="text" id="taxrate" placeholder="" [(ngModel)]="addTaxRequest.taxRate" name="taxrate" required> 
+           <label for="taxrate">Tax Rate</label>  
+          
+          </div>
+         </div> 
+         </div>
+     <div class="row ">
+  
+     <div class="col-md-5 mt-5"> 
+         <div class="form-field"> 
+      <input type="text" id="from" placeholder=" " [(ngModel)]="addTaxRequest.salaryStart" name="start" required> 
+     <label for="from">Range From</label>  
+    </div>
+    </div>  
+    <div class="col-md-5 mt-5 ml-3"> 
+    <div class="form-field"> 
+        <input type="text" id="to" placeholder=" " [(ngModel)]="addTaxRequest.salaryEnd" name="end" required> 
+       <label for="to">Range To</label>  
+      
+      </div>  
+    </div></div>
+   
+     <div class="col-md-6 mt-4"> 
+     
+      </div>
+ <div  class="col-md-8 mt-3"><button type="submit" class="btn  btn-sm btnsave "><mat-icon>add</mat-icon>Save </button> </div>
+   
+ </div>   <div *ngIf="TaxSaved" class="alert  btndanger btn-sm pull-right">
+        Successfully Added!
+      </div> 
+  </form> 
+
+
+
+  
+  <h6 class="mb-3 ml-3 mt-2"> 
+List Of Tax 
+</h6> 
+
+
+ 
+<table id="example1" class="table table-bordered table-striped compact-table"  *ngIf="Taxs && Taxs.length>0"> 
+<thead> 
+    <tr> 
+        <th> Tax Name</th> 
+        <th>Range Start</th> 
+        <th>Range End</th> 
+        <th>Tax Rate</th> 
+        <th>Deduction Amount</th> 
+   
+        
+
+    </tr> 
+</thead> 
+<tbody> 
+    <tr *ngFor="let Tax of Taxs"> 
+       
+        <td>{{Tax.name}}</td> 
+      <td>{{Tax.salaryStart}}</td> 
+      <td>{{Tax.salaryEnd}}</td> 
+      <td>{{Tax.taxRate}}</td> 
+      <td>{{Tax.deductionAmount}}</td> 
+     
+
+        <td>   
+            <button  class="btn btn-sm btndanger" (click)="deleteTax(Tax.id)"  [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
+                <mat-icon>delete</mat-icon></button>
+        </td> 
+
+    </tr> 
+</tbody> 
+</table> 
+<p *ngIf="!Taxs || Taxs.length <= 0">no Taxs found</p>
+</div>
+</div>
+</div>

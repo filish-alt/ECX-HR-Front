@@ -1,0 +1,66 @@
+
+<app-shared-nav [buttons]="buttons"></app-shared-nav> 
+<div class="row" > 
+    <div class="col-md-6 ml-5">
+      <div class="card " >
+
+
+<form (ngSubmit)="addLeaveType()">   
+    <div class="row ml-4 mt-3">
+      <h6 class="card-title ml-3">Leave Type</h6>
+    <div class="col-md-5 mt-3 "> 
+    <div class="form-field"> 
+    
+      <input type="text" id="LeaveTypeName" placeholder=" " [(ngModel)]="addLeaveTypeRequest.leaveTypeName" name="name" required> 
+     <label for="LeaveType">Leave Type Name</label>  </div> </div>
+     <div class="col-md-3 mt-3"> 
+         <div class="form-field"> 
+      <input type="text" id="maximum" placeholder=" " [(ngModel)]="addLeaveTypeRequest.maximum" name="maximum" required> 
+     <label for="maximum">Maximum</label>  
+    
+    </div> 
+      </div>
+ <div  class="col-md-8 mt-3"><button type="submit" class="btn  btn-sm btnsave ml-3"><mat-icon>add</mat-icon>Save </button> </div>
+   
+ </div>   <div *ngIf="leaveTypeSaved" class="alert  btndanger btn-sm pull-right">
+        Successfully Added!
+      </div> 
+  </form> 
+
+
+
+  
+  <h6 class="mb-3 ml-3 mt-2"> 
+List Of Leave Type
+</h6> 
+
+
+ 
+<table id="example1" class="table table-bordered table-striped compact-table"  *ngIf="leaveTypes && leaveTypes.length>0"> 
+<thead> 
+    <tr> 
+        <th> Leave Type Name</th> 
+        <th>Maximum Day</th> 
+   
+        
+
+    </tr> 
+</thead> 
+<tbody> 
+    <tr *ngFor="let leaveType of leaveTypes"> 
+       
+        <td>{{leaveType.leaveTypeName}}</td> 
+      <td>{{leaveType.maximum}}</td> 
+      
+        <td>   
+            <button  class="btn btn-sm btndanger" (click)="deleteLeaveType(leaveType.leaveTypeId)"  [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
+                <mat-icon>delete</mat-icon></button>
+        </td> 
+
+    </tr> 
+</tbody> 
+</table> 
+<p *ngIf="!leaveTypes || leaveTypes.length <= 0">no leaveTypes found</p>
+</div>
+</div>
+</div>

@@ -1,0 +1,108 @@
+<app-shared-nav  [buttons]="buttons"></app-shared-nav><div class="main-content  ">
+  <div class="container-fluid ">
+<div class="row  ">
+  <div class="col-md-2 ml-3 mr-5  ml-3 mr-5  pt-4 ">
+    <app-min-nav></app-min-nav>
+  </div>
+
+  <div class="col-md-9">
+    <div class="card mb-5">
+      <div class="">
+        <div class="card-header ">
+          <h4 class="card-title">Training</h4>
+          <p class="card-category">Complete your Qualification</p>
+        </div>
+        <div class="card-body">
+        
+          <form >
+            
+            <div class="row"> 
+              <div class="card-body">
+                <div class="col-md-4 form-field">
+                  <input  placeholder="" type="text" name="typeOfTraining" [(ngModel)]="training.typeOfTraining">
+                  <label>Description</label>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-6 ">
+                    <mat-form-field style="height: 65px; width:160px" class="example-full-width">
+                      <mat-label>Start Date</mat-label> <input matInput [matDatepicker]="fromPicker" placeholder=" " name="from" [(ngModel)]="training.from">
+                     
+                      <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+                      <mat-datepicker #fromPicker></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6 ">
+                    <mat-form-field style="height: 65px; width:160px" class="example-full-width">
+                         <mat-label>End Date</mat-label>  <input matInput [matDatepicker]="toPicker" placeholder=" " name="to" [(ngModel)]="training.to">
+                 
+                      <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+                      <mat-datepicker #toPicker></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-4 mt-3 ">
+                    <label for="name" >Supporting File</label>
+                    <input placeholder=" " name="file" class="form-control" type="file" id="file"  (change)="onFileSelected($event)" #fileInput>
+                    <!-- <mat-error *ngIf="IsPdf" class=" pull-right">Selected file is not a PDF</mat-error>
+                    <mat-error  *ngIf="IsBig" class="  pull-right">File size exceeds 200MB</mat-error >
+           -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div><button type="button" class="btn btn-sm btnsave" *ngIf="training.id===undefined" (click)="addTraining()">
+              <mat-icon>add</mat-icon>Add</button>
+       </div>
+                 <!-- <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save Training</button>
+             -->
+            <div *ngIf="trainingSaved" class=" btndanger btn-sm pull-right">
+              Added successfully!
+            </div>
+
+
+            <button type="button" class="btn btn-sm btnsave" *ngIf="training.id!=undefined"(click)="updateTraining()">Update</button>
+       
+          <!-- <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save Training</button> -->
+
+        <div *ngIf="trainingUpdated" class=" btndanger btn-sm pull-right">
+          Updated successfully!
+        </div>
+      </form>
+        </div>
+      </div>
+      <h6>Training Records</h6>
+      <table  *ngIf="training.empId!=undefined" class="table table-bordered table-striped compact-table">
+        <thead>
+          <tr>
+            <th>Type of Training</th>
+            <th>From</th>
+            <th>To</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Use *ngFor to loop through the trainings array and display each training record -->
+          <tr *ngFor="let training of trainings">
+            <td>{{ training.typeOfTraining }}</td>
+            <td>{{ training.from | date:'yyyy-MM-dd'}}</td>
+            <td>{{ training.to | date:'yyyy-MM-dd'}}</td>
+            <td>  <button class="btn btn-sm " (click)="fetchAndDisplayPDF(training)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"
+              style="background-color: rgb(224, 224, 217); color: #0c0c0c; border: none;  cursor: pointer; border-radius: 5px;"  download="filename.pdf" >
+              <mat-icon>get_app</mat-icon></button>
+              <mat-error  *ngIf="FileNull && id == training.id"
+              class="  pull-right">No File</mat-error >
+              
+  
+          </td>
+            <td> <button class="btn btn-sm btnedit" (click)="editTraining(training)">
+              <mat-icon>edit</mat-icon>Edit</button>
+              <button class="btn btn-sm btndanger" (click)="deleteTraining(training)">
+                <mat-icon>delete</mat-icon>Delete</button>
+           </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

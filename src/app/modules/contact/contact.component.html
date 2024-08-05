@@ -1,0 +1,160 @@
+<app-shared-nav  [buttons]="buttons"></app-shared-nav><div class="main-content  ">
+  <div class="container-fluid ">
+<div class="row  ">
+  <div class="col-md-2 ml-3 mr-5  pt-4">
+    <app-min-nav></app-min-nav>
+  </div>
+
+          <div class="col-md-9">
+            <div class="card mb-5">
+                <div class="">
+                    <div class="card-header ">
+                        <h4 class="card-title">Contacts</h4>
+                        <p class="card-category">Complete your contacts</p>
+                    </div>
+                    <div class="card-body">
+                        <form >
+                          <div class="card-body">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <div class="form-field">
+                                  <input  id="region" placeholder=" " name="region" [(ngModel)]="contact.region" type="text" required>
+                                  <label for="region">Region</label>
+                            
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-field">
+                                  <input id="town" placeholder=" " type="text" name="town" [(ngModel)]="contact.town">
+                                  <label for="town">Town</label>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <div class="card-body">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <div class="form-field">
+                                  <input  id="subcity" placeholder=" " type="text" name="subcity" [(ngModel)]="contact.subCity">
+                                  <label for="subcity">Subcity</label>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-field">
+                                  <input  id="woreda" placeholder=" " type="text" name="woreda" [(ngModel)]="contact.woreda">
+                                  <label for="woreda">Woreda</label>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <div class="card-body">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <div class="form-field">
+                                  <input id="kebele" placeholder=" " type="text" name="kebele" [(ngModel)]="contact.Kebele">
+                                  <label for="kebele">Kebele</label>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-field">
+                                  <input id="houseNumber" placeholder=" " type="text" name="houseNumber" [(ngModel)]="contact.houseNo">
+                                  <label for="houseNumber">House Number</label>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+          
+                  
+                 
+                    <div class="clearfix"></div>
+
+                          
+                          <div class="card-body">
+                            <div class="row">
+                              <div class="col-md-4">
+                                <div class="form-field">
+                                  <input id="postNumber" placeholder=" " type="text" name="postNumber" [(ngModel)]="contact.postCode">
+                                  <label for="postNumber">P.O.Box</label>
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-field">
+                                  <input id="email" placeholder=" " type="text" name="email" [(ngModel)]="contact.email">
+                                  <label for="email">Email</label>
+                                </div>
+                              </div>
+                            
+
+
+                              <div class="col-md-4">
+                                <div class="form-field">
+                                  <input type="text" placeholder=" " name="phoneNumber" [(ngModel)]="contact.phoneNumber">
+                                  <label>Phone Number</label>
+                                </div>
+                                <mat-error *ngIf="!contact.phoneNumber && contactForm.get('phoneNumber').touched">
+                                  Phone Number is required
+                                </mat-error>
+                              </div>
+                            </div>
+                          </div>       <div> <button mat-raised-button  class="btn btn-sm btnsave"(click)="updateContact()" *ngIf="contact.id!=undefined"  style="background-color:#76a53b;"><mat-icon>add</mat-icon>Update  </button>
+                  
+                             <div *ngIf="contactUpdate" class=" btndanger btn-sm pull-right">
+                               Successfully Updated!
+                             </div></div>
+                          <div>
+                     
+
+                    
+           
+                             <button   class="btn btn-sm btnsave" type="submit"(click)="addContact()" *ngIf="contacts.length === 0">
+                            
+                            <mat-icon>add</mat-icon>Add</button>
+                            <div *ngIf="contactSaved" class="alert btndanger btn-sm pull-right">
+                        Added successfully!
+                             </div> </div> 
+                           
+
+                </form>
+            </div>
+        </div>
+        <!-- contact.component.html -->
+<h6>contact info </h6>
+<table  class="table table-bordered table-striped compact-table">
+  <thead>
+    <tr>
+
+      <th>Region</th>
+      <th>Town</th>
+      <th>Phone Number</th>
+      <th>Email</th>
+      <th>Post Code</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Use *ngFor to loop through the contacts and display each contact's information -->
+    <tr  *ngFor="let contact of contacts">
+   
+      <td>{{ contact.region }}</td>
+      <td>{{ contact.town }}</td>
+      <td>{{ contact.phoneNumber }}</td>
+      <td>{{ contact.email }}</td>
+      <td>{{ contact.postCode }}</td>
+      <td >
+        <button class="btn btn-sm btnedit" (click)="editContact(contact)">
+          <mat-icon>edit</mat-icon>Edit</button>
+        <button class="btn btn-sm btndanger" (click)="deleteContact(contact)"> 
+          <mat-icon>delete</mat-icon>
+          Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+    </div>
+   </div>
+  </div>
+</div>
+</div>
+

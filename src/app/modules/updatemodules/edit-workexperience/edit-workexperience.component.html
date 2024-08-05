@@ -1,0 +1,137 @@
+<app-shared-nav  [buttons]="buttons"></app-shared-nav><div class="main-content  ">
+    <div class="container-fluid ">
+  <div class="row  ">
+    <div class="col-md-2 ml-3 mr-5  pt-5 ">
+      <app-edit-nav></app-edit-nav>
+    </div>
+    <div class="col-md-8">
+      <div class="card  mb-5">
+        <div class="">
+          <div class="card-header ">
+            <h4 class="card-title">Work Experience</h4>
+            <p class="card-category">Edit  your Work Experience</p>
+            <div *ngIf="workExperienceUpdated" class="alert alert-success mt-3">
+              Work Experience added successfully!
+            </div>
+          </div>
+            <!-- Work Experience Form -->
+            <div class="card-body">
+            <form (ngSubmit)="updateWorkExperience()">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-4 form-field">
+                    <input  placeholder=" " type="text" name="companyName" [(ngModel)]="workExperience.companyName">
+                    <label>Company Name</label>
+                  </div>
+                  <div class="col-md-4 form-field">
+                    <input  placeholder=" " type="text" name="postionHeld" [(ngModel)]="workExperience.postionHeld">
+                    <label>Position Held</label>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  
+                  <div class="col-md-4 form-field">
+                    <input  placeholder=" " type="text" name="salary" [(ngModel)]="workExperience.salary">
+                    <label>Salary Amount</label>
+                  </div>
+                  <div class="col-md-4 form-field">
+                    <input  placeholder=" " type="text" name="reasonTermination" [(ngModel)]="workExperience.reasonTermination">
+                    <label>Reason for Termination</label>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-6">
+                    <mat-form-field style="height: 65px; width:160px" class="example-full-width">
+                      <input matInput [matDatepicker]="fromPicker" placeholder=" " name="from" [(ngModel)]="workExperience.from">
+                      <mat-label>Start Date</mat-label>
+                      <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+                      <mat-datepicker #fromPicker></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6">
+                    <mat-form-field style="height: 65px; width:160px" class="example-full-width">
+                      <input matInput [matDatepicker]="toPicker" placeholder=" " name="to" [(ngModel)]="workExperience.to">
+                      <mat-label>End Date</mat-label>
+                      <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+                      <mat-datepicker #toPicker></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-4 mt-3 ">
+                    <label for="name" >Supporting File</label>
+                    <input placeholder=" " name="file" class="form-control" type="file" id="file"  (change)="onFileSelected($event)" #fileInput>
+                    <!-- <mat-error *ngIf="IsPdf" class=" pull-right">Selected file is not a PDF</mat-error>
+                    <mat-error  *ngIf="IsBig" class="  pull-right">File size exceeds 200MB</mat-error >
+           -->
+                  </div>
+                </div>
+              </div>
+                <!-- Add more work experience form fields here... -->
+             
+              
+              <button type="button" class="btn btn-sm btnsave"  *ngIf="workExperience.id!=undefined" (click)="updateWorkExperience()">Update</button>
+              <!-- <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save Work Experience</button>
+               -->
+              <div *ngIf="workExperienceUpdated" class=" btndanger btn-sm pull-right">
+                Updated successfully!
+              </div>
+              <button type="button" class="btn btn-sm btnsave"  *ngIf="workExperience.id===undefined" (click)="addWorkExperience()">Add</button>
+                     
+              <div *ngIf="workExperienceSaved" class=" btndanger btn-sm pull-right">
+          Added successfully!
+            </div>
+          </form>
+          </div>
+        </div>
+        <!-- qualification.component.html -->
+  
+  <div class="container">
+    
+  
+  
+    <h6>Work Experience History</h6>
+    <table class="table table-bordered table-striped compact-table">
+      <thead>
+        <tr>
+          <th>Company Name</th>
+          <th>Position Held</th>
+          <th>From</th>
+          <th>To</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Use *ngFor to loop through the workExperiences array and display each work experience record -->
+        <tr *ngFor="let workExperience of workExperiences" >
+          <td>{{ workExperience.companyName }}</td>
+          <td>{{ workExperience.postionHeld }}</td>
+          <td>{{ workExperience.from | date:'yyyy-MM-dd'}}</td>
+          <td>{{ workExperience.to | date:'yyyy-MM-dd'}}</td>
+          <td>  <button class="btn btn-sm " (click)="fetchAndDisplayPDF(workExperience)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"
+            style="background-color: rgb(224, 224, 217); color: #0c0c0c; border: none;  cursor: pointer; border-radius: 5px;"  download="filename.pdf" >
+            <mat-icon>get_app</mat-icon></button>
+            <mat-error  *ngIf="FileNull && id == workExperience.id"
+            class="  pull-right">No File</mat-error >
+            
+
+        </td>
+          <td>
+            <button class="btn btn-sm btnedit" (click)="editWorkExperience(workExperience)"[ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"> 
+              <mat-icon>edit</mat-icon></button>
+            <button class="btn btn-sm btndanger" (click)="deleteWorkExperience(workExperience)"[ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"> 
+              <mat-icon>delete</mat-icon></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+   
+  
+  
+  </div>
+  
+      </div>
+    </div>
+  </div>
+  

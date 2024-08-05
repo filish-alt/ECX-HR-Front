@@ -1,0 +1,43 @@
+<div class="modal">
+<div class="modal-content">
+    <h2>Edit Leave Balance</h2>
+
+
+    <form (ngSubmit)="saveEditedData(leaveBalance.empId,leaveBalance)"  *ngFor="let leaveBalance of selectedEmployeeLeaveBalance">
+      <!-- Display editable fields for the leave balance data -->
+     
+      <div class="form-group">
+        <label for="annualLeaveBalance">Annual Leave Balance</label>
+        <input type="" id="annualLeaveBalance" name="annualLeaveBalance"    disabled   value="{{leaveBalance.annualDefaultBalance}}" [(ngModel)]="leaveBalance.annualDefaultBalance" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label>Annual Remaining </label>
+        <input type="text" id="annualRemainingBalance" name="annualRemainingBalance"   disabled  value="{{leaveBalance.annualRemainingBalance}}"[(ngModel)]="leaveBalance.annualRemainingBalance" class="form-control">
+      </div>
+  
+  
+
+
+      <div class="form-group">
+        <label for="endDate">Unused Days</label>
+        <input type="number" id="endDate" name="UnusedDays"  [(ngModel)]="leaveBalance.unusedDays" class="form-control">
+      </div>
+      <!-- Add more fields as needed for editing other properties -->
+     
+      <div class="form-group">
+
+        <div *ngIf="successMessage" class="alert btndanger btn-sm pull-right">
+          {{ successMessage }}
+        </div> 
+      
+        <div *ngIf="successMessage" class="success-message">
+          {{ successMessage }}
+        </div>
+        <button type="submit" class="btn btnedit">Save</button>
+        <button type="button" class="btn btn-secondary" (click)="onCancelClick()">Cancel</button>
+       
+           
+      </div>
+    </form>
+  </div>
+</div>

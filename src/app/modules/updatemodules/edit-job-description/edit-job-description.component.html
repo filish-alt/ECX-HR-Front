@@ -1,0 +1,181 @@
+<app-shared-nav  [buttons]="buttons"></app-shared-nav><div class="main-content  ">
+    <div class="container-fluid ">
+  <div class="row  ">
+    <div class="col-md-2 ml-3 mr-5 pt-5 ">
+      <app-edit-nav></app-edit-nav>
+    </div>
+            <div class="col-md-8 ">
+              <div class="card  mb-5">
+              <div class="">
+                  <div class="card-header ">
+                      <h4 class="card-title">Job Detail</h4>
+                      <p class="card-category">Edit your Job Description</p>
+                  </div>
+                  <div class="card-body">
+                      <form >
+                          
+                      
+                              <div class="card-body">
+                              <div class="row">
+                            
+                              
+                                <div class="col-md-4">
+                              
+                                  <label>Position</label>
+                                    <mat-select class="form-field select" placeholder="Select Position" required name="selectedPosition" [(ngModel)]="selectedPosition" (ngModelChange)="onPositionSelected()">
+                                      <!-- Replace the options below with your actual division options -->
+                                      <mat-option *ngFor="let position of positions" [value]="position.positionId">
+                                        {{position.name}}
+                                      </mat-option>
+                                     
+                                    </mat-select>
+                                 
+                                </div>
+                                <div class="col-md-4">
+                                 
+                                  <label>Division</label>
+                                  <input class="form-field select2" placeholder="Division" name="division"
+                                  required [(ngModel)]="division" [disabled]="true">
+                                    <!-- Use *ngFor on mat-option to loop through departments -->
+                                  
+                                    
+                               
+                              </div>
+                              
+                              <div class="col-md-4">
+                                <label>Department</label>
+                                <input class="form-field select2" placeholder="Department" name="department"
+                                required [(ngModel)]="department" [disabled]="true">
+                              </div>
+                              <div class="card-body ">
+                                <div class="row ">
+                                  
+                              <div class="col-md-4 ">
+                                <label>First Supervisor</label>
+                                <input class="form-field select2" placeholder="" name="selectedFirstSupervisor"
+                                required [(ngModel)]="selectedFirstSupervisor" [disabled]="true">
+                            </div>
+                            <div class="col-md-4 " *ngIf="selectedSecondSupervisor !== null">
+                              <label>Second Supervisor</label>
+                              <input class="form-field select2" placeholder="" name="selectedSecondSupervisor"
+                              required [(ngModel)]="selectedSecondSupervisor" [disabled]="true">
+                          </div>
+                         
+                          <div class="col-md-4 " *ngIf="selectedThirdSupervisor !== ''">
+                            <label>Third Supervisor</label>
+                            <input class="form-field select2" placeholder="" name="selectedThirdSupervisor"
+                            required [(ngModel)]="selectedThirdSupervisor" [disabled]="true">
+                        </div>
+                        <div class="col-md-4 " *ngIf="selectedFourthSupervisor !== ''">
+                          <label>FourthSupervisor</label>
+                          <input class="form-field select2" placeholder="" name="selectedFourthSupervisor"
+                          required [(ngModel)]="selectedFourthSupervisor" [disabled]="true">
+                      </div>
+                     
+                      <div class="col-md-4 " *ngIf="selectedFifthSupervisor !== ''">
+                        <label>Fifth Supervisor</label>
+                        <input class="form-field select2" placeholder=" " name="selectedFifthSupervisor"
+                        required [(ngModel)]="selectedFifthSupervisor" [disabled]="true">
+                    </div></div></div>
+                              </div>
+                           
+                           
+                            <div class="row">
+                                  <div class="col-md-4">
+                                        
+                                    <label>Step</label>
+                                          <mat-select class="form-field select" placeholder="Select Step" name="selectedStep" required [(ngModel)]="selectedStep" 
+                                          (ngModelChange)="onStepSelected()">
+                                            <!-- Replace the options below with your actual division options -->
+                                            <mat-option *ngFor="let step of steps" [value]="step.id">
+                                              {{step.description}}
+                                            </mat-option>
+                                           
+                                       
+                                          </mat-select>
+                                       
+                                      </div>
+               
+                                      <div class="col-md-4">
+                                      <label>Grade Level</label>
+                                        <input class="form-field select2" placeholder="Level" name="selectedLevel"
+                                        required [(ngModel)]="selectedLevel" [disabled]="true">
+                                      </div>
+                                      <div class="col-md-4 ">
+                                        <label>Branch</label>
+                                          <mat-select class="form-field select" placeholder="Select Branch" name="selectedBranch" required [(ngModel)]="selectedBranch" >
+                                            <!-- Replace the options below with your actual division options -->
+                                            <mat-option *ngFor="let branch of branches" [value]="branch.id">
+                                              {{branch.name}}
+                                            </mat-option>
+                                           
+                                       
+                                          </mat-select>
+                                      
+                                      </div>
+                               </div>       
+                              </div> 
+             <div class="col-md-6">
+              <mat-form-field>
+                <mat-label>Joined Date</mat-label>
+                <input matInput [matDatepicker]="picker" placeholder="Choose a date" required name="joinedDate" [(ngModel)]="employeePosition.startDate" >
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+              
+            </div>
+                          
+                          <button  mat-raised-button *ngIf="employeePosition.id!=undefined" (click)="updateEmployeePosition()" class="btn btn-sm btnedit">Update</button>
+                          <div class="clearfix"></div>
+                          <div *ngIf="employeePositionUpdated" class=" btndanger btn-sm pull-right">
+                            Updated successfully!
+                          </div>
+                          <button type="button" class="btn btn-sm btnsave"*ngIf="employeePositions.length === 0" (click)="addEmployeePosition()">Add</button>
+                     
+              <div *ngIf="employeePositionSaved" class="btndanger btn-sm pull-right">
+       Added successfully!
+            </div>
+                      </form>
+                  </div>
+              </div>
+              <!-- jobdescription.component.html -->
+  
+  <div class="container">
+    <h6>Job Descriptions</h6>
+    <table class="table table-bordered table-striped compact-table">
+      <thead>
+        <tr>
+      
+          <th>Division</th>
+          <th>Position</th>
+          <th>Step</th>
+          <th>Branch</th>
+     
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Use *ngFor to loop through the employeepositions array and display each employee position -->
+        <tr *ngFor=" let employeePosition of employeePositions">
+        
+          <td>{{ getDivisionName(employeePosition.divisionId) }}</td>
+          <td>{{ getPositionName(employeePosition.position) }}</td>
+          <td>{{ getStepName(employeePosition.stepId) }}</td>
+          <td>{{ getBranchName(employeePosition.branchId) }}</td>
+      
+          <td>
+            <button class="btn btn-sm btnedit" (click)="editEmployeePosition(employeePosition)"[ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"> 
+              <mat-icon>edit</mat-icon></button>
+            <button class="btn btn-sm btndanger" (click)="deleteEmployeePosition(employeePosition)"[ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"> 
+              <mat-icon>delete</mat-icon></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+          </div>
+         
+      </div>
+  </div>
+  
+  

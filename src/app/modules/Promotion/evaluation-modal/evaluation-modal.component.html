@@ -1,0 +1,18 @@
+<p>evaluation-modal </p>
+<div class="modal">
+    <div class="modal-content">
+<div class="ml-4">
+    <form (ngSubmit)="saveEditedData(selectedPromotion.empId,selectedPromotion)"  >
+       
+    <div class="form-group">
+          <label>Total Evaluation Grade</label>
+        <input type="text" id="evaluation" name="evaluation"  value="{{selectedPromotion.evaluation}}" [(ngModel)]="selectedPromotion.evaluation" class="form-control">
+      </div> 
+      <div *ngIf="successMessage" class="success-message">
+        {{ successMessage }}
+      </div>
+      <button type="submit" class="btn btnedit">Save</button>
+      <button type="button" class="btn btn-secondary" (click)="onCancelClick()">Cancel</button>
+      </form>
+ </div></div>
+    </div>

@@ -1,0 +1,26 @@
+<p>evaluation-modal </p>
+<div class="modal">
+    <div class="modal-content">
+<div class="ml-4">
+    <div class="form-group" >
+        <p class="card-text"><strong>Position:  </strong> {{getPosition( selectedvacancyId) }} </p>
+        <p class="card-text"><strong>Grade:  </strong>{{ getGrade(selectedvacancyId )}} </p>
+        <p class="card-text"><strong>Branch:  </strong>{{  getBranch(selectedvacancyId) }} </p>
+    <form (ngSubmit)="saveEditedData(selectedpromotion.empId,selectedpromotion)"  *ngFor="let selectedpromotion of selectedPromotion">
+       
+        <div class="form-group">
+            <label>Name</label>
+          <input type="text" id="name" name="name" disabled value="{{getEmployeeName(selectedpromotion.empId)}}"class="form-control">
+        </div> 
+    <div class="form-group">
+          <label>Total Evaluation Grade</label>
+        <input type="text" id="evaluation" name="evaluation"  disabled value="{{selectedpromotion.evaluation}}" [(ngModel)]="selectedpromotion.evaluation" class="form-control">
+      </div> 
+      <div *ngIf="successMessage" class="success-message">
+        {{ successMessage }}
+      </div>
+    
+       </form>  <button type="button" class="btn btn-secondary" (click)="onCancelClick()">Cancel</button>
+     
+ </div></div>
+    </div>

@@ -1,0 +1,105 @@
+.cardhead{
+    background-color: rgb(224, 224, 217);
+  }
+  .insufficient-balance{
+    color:red;
+  }
+
+
+
+
+  .compact-table th {
+    font-size: 13px;
+    color: black;
+    font-weight: bold; /* Adjust the font size as needed */
+  }
+  .compact-table tr {
+    font-size: 13px; /* Adjust the font size as needed */
+  }
+  
+  .compact-table th, .compact-table td {
+    padding: 4px 8px; 
+  }
+  td ,th{
+    white-space: nowrap; /* Prevent text wrapping */
+  }
+  
+  .main-body{
+    padding-left: 10%;
+    
+  }
+
+    .form-field {
+      position: relative;
+    }
+    
+    .form-field input:not(:placeholder-shown) + label,
+    .form-field input:focus + label,
+    .form-field mat-form-field input {
+      transform: translateY(-120%) scale(0.8);
+      color: #343536;
+    }
+    
+    .form-field input,
+    .form-field mat-form-field {
+      border: none;
+      border-bottom: 1px solid #ccc;
+      outline: none;
+      font-size: 16px;
+      padding: 5px 0;
+      width: 100%;
+    }
+    
+    .form-field mat-select {
+      border: none;
+      border-bottom: 1px solid #ccc;
+      outline: none;
+      font-size: 16px;
+      width: 100%;
+    }
+    
+    .form-field label {
+      position: absolute;
+      pointer-events: none;
+      left: 0;
+      top: 7px;
+      transition: 0.2s ease all;
+      font-size: 15px;
+      color: #747070;
+    }
+    .file{
+      color:#fcc034;
+    font-weight: 400;
+    }
+    
+
+
+  .cardhead{
+      background-color: rgb(224, 224, 217);
+  }
+  
+    .select{
+      border-bottom: 1px solid #ced4da;
+      font-size: 14px;
+    }
+    .select2{
+      border: none;
+      border-bottom:1px solid #ced4da;
+      width:60%
+    }
+    .compact-table th {
+      font-size: 13px;
+      color: black;
+      font-weight:650; /* Adjust the font size as needed */
+    }
+    .compact-table tr {
+      font-size: 13px; /* Adjust the font size as needed */
+    }
+    
+    .compact-table th, .compact-table td {
+      padding: 4px 8px; 
+    }
+    td ,th{
+      white-space: nowrap; /* Prevent text wrapping */
+    }
+    

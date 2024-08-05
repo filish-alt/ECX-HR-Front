@@ -1,0 +1,65 @@
+<app-shared-nav class="sharednav"[buttons]="buttons"></app-shared-nav>
+    <div class="card col-md-12 mb-5 ">
+      <div class="">
+        <div class="card-header  ">
+              <h4 class="card-title">Medical Balance</h4>
+            </div>
+            <div class="container">
+   
+    <p *ngIf="!(selectedEmployee.length || selectedEmployee.length)"> ! No Unregistered medical Balance found</p>
+            </div>
+          </div>
+        
+   
+  <div class="card-body ">
+            <input class="search" type="search" placeholder="Search Employee..." [(ngModel)]="searchTerm" (input)="onSearch()">
+          </div>
+      <!-- Second Column -->
+    
+      <div class="mt-3 card-header">
+        <h6>Annual medical Balance</h6></div>
+    <table class="pl-5" *ngIf="medicalBalance"  class="table-responsive table table-bordered table-striped table-sm compact-table" >
+      <thead>
+        <tr>
+        
+          <th>Employee</th>
+          <th>Spouse Name</th>
+          <th>Medical Balance Start Date</th>
+          <th>Medical Balance End Date</th> 
+          <th>Self Balance</th>
+          <th>Family Balance</th>
+       
+          <th>Spouse</th>
+
+
+         
+  
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Use *ngFor to loop through the medicalBalances array and display each employee position -->
+        <tr *ngFor="let medicalBalance of filteredmedicalBalances"  >
+            <td>{{ capitalizeFirstLetter(getEmployeeName( medicalBalance.empId)) }}</td> 
+             <td>{{ capitalizeFirstLetter(getSpouseName(medicalBalance.spouseId))}}</td>
+           <td>{{ medicalBalance.startDate| date:'yyyy-MM-dd' }}</td>
+          <td>{{ medicalBalance.endDate| date:'yyyy-MM-dd' }}</td>
+          <td>{{ medicalBalance.selfBalance }}</td>
+          <td>{{ medicalBalance.familyBalance }}</td>
+         
+
+          <td>          </td>
+      
+         
+        </tr>
+      </tbody>
+    </table>
+    <p *ngIf="!(filteredmedicalBalances.length || medicalBalances.length)">No medical Balance found</p>
+
+
+
+  
+          </div>
+
+       
+
+  

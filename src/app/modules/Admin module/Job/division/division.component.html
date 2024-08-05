@@ -1,0 +1,79 @@
+
+
+
+
+<app-shared-nav [buttons]="buttons"></app-shared-nav> 
+<div class="col-md-8 ml-5">
+  <div class="card " >
+<form (ngSubmit)="addDivision()"> 
+<div class="row ml-4 mt-3" > 
+  <h6 class="card-title ml-3">Division</h6>
+<div class="col-3  mt-2"> 
+  <div class="form-field"> 
+
+    <mat-form-field  style="width: 180px;height: 65px;"> 
+      <mat-label>Select Department 
+
+      </mat-label> 
+      <mat-select placeholder="Select Department" name="selectedDepartment" required [(ngModel)]="selectedDepartment"> 
+        <mat-option *ngFor="let department of departments" [value]="department.departmentId"> 
+          {{ department.description }} 
+        </mat-option> 
+      </mat-select> 
+    </mat-form-field> 
+  </div> 
+  </div> 
+
+<div class="col-3 ml-5 mt-3"> 
+  <div class="form-field"> 
+   
+    <input  id="DivisionDescription" rows="1" placeholder=" " required [(ngModel)]="addDivisionRequest.description" name="description" required> 
+  <label for="DivisionDescription">Division </label>  </div> 
+</div> 
+</div>
+
+<button type="submit" class="btn btn-sm btnsave ml-3"><mat-icon>add</mat-icon>Save</button>
+
+<div *ngIf="divisionSaved" class=" btndanger btn-sm pull-right">
+  Successfully Added!
+
+</div>
+</form> 
+
+<h6 class="mb-2 ml-3 mt-2"> 
+  List Of Division
+  </h6> 
+<div class="mt-3">
+<input  class="search" type="search" placeholder="Search By Division Name..." [(ngModel)]="searchTerm" (input)="onSearch()">
+<table class="table mt-2 table-striped col-md-4 compact-table " > 
+<thead> 
+<tr> 
+  <th>Department </th>
+
+  <th>Division</th>
+</tr> 
+</thead> 
+<tbody> 
+    <tr *ngFor="let division of filteredDivision || divisions"> 
+      <td>{{ getDepartmentName(division.departmentId) }}</td>
+
+      <td>{{division.description}}</td>
+   
+      
+      <td>   
+        <button  class="btn btn-sm btndanger" (click)="deleteDivision(division.divisionId)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
+       
+          <mat-icon>delete</mat-icon></button>
+    </td>
+
+      
+        <!-- <td> <a [routerLink]="['/Division','edit',Division.id]">  
+            View 
+            </a> 
+        </td> --> 
+    </tr> 
+</tbody> 
+</table>
+</div>
+</div>
+</div>

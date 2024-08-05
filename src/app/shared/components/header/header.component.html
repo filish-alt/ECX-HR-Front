@@ -1,0 +1,61 @@
+<div  class="fixed-header" >
+    <nav class="navbar navbar-expand-lg p-1 navbar-absolute " style="background: linear-gradient(to right, #76a53b, #76a53b); border-radius: 1%; overflow: hidden;padding-left: 10;">
+    <div class="container-fluid">
+    
+        <button class="white" mat-icon-button (click)="toggleSideBar()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <div class=" navbar-collapse justify-content-end" id="navigation">
+            
+            <ul class="navbar-nav">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0)">
+                        <i class="material-icons white ">person</i>
+                        <p>
+                            <span class="d-lg-none d-md-block white">Account</span>
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    </nav>
+</div>
+<!-- <mat-toolbar style="background: linear-gradient(to right, rgb(233, 200, 12), rgb(255, 102, 0))">
+
+    <mat-toolbar-row>
+        <button mat-icon-button (click)="toggleSideBar()">
+            <mat-icon>menu</mat-icon>
+        </button>
+
+        <span> APP LOGO </span>
+
+        <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
+            <ul fxLayout="row" fxLayoutGap="20px">
+                <li>
+                    <button mat-icon-button>
+                        <mat-icon>settings</mat-icon>
+                    </button>
+                </li>
+                <li>
+                    <button mat-icon-button>
+                        <mat-icon>help_outline</mat-icon>
+                    </button>
+                </li>
+                <li>
+                    <button mat-button [matMenuTriggerFor]="menu">
+                        <mat-icon>person_outline</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item>
+                            <mat-icon>exit_to_app</mat-icon>
+                            Sign out
+                        </button>
+                    </mat-menu>
+
+                </li>
+            </ul>
+        </div>
+    </mat-toolbar-row>
+</mat-toolbar> -->

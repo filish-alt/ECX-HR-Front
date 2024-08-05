@@ -1,0 +1,66 @@
+
+<app-shared-nav class="sharednav"[buttons]="buttons"></app-shared-nav>
+<div class="col-md-11 main-body">
+ 
+    <div class="card card-body">
+<div class="container mt-5 ">
+    <div class="card-header ">
+    <h5 class="text-center card-title ">Open Vacancies </h5>
+</div>
+  <div  class="container mt-5 ">
+
+    <div class="row">
+      <div class="col-md-6" *ngFor="let vacancy of vacancies">
+        <div class="card mb-4">
+          <div class="card-body head " >
+            <div #printableCard>
+            <p class="card-text"><strong>Position:  </strong> {{getPositionName( vacancy.positionId) }} </p>
+            <p class="card-text"><strong>Grade:  </strong>{{ getGradeName( vacancy.levelId) }} </p>
+            <p class="card-text"><strong>Branch:  </strong>{{  getBranchName (vacancy.branchId) }} </p>
+            <p class="card-text"><strong>Avaliabliy:  </strong>{{ vacancy.availability }} </p>
+            <p class="card-text"><strong>Deadline:  </strong> {{ vacancy.deadline| date:'yyyy-MM-dd' }}</p>
+            <p class="card-text"><strong>Release Date:  </strong> {{ vacancy.releaseDate| date:'yyyy-MM-dd' }}</p>
+           
+            <div *ngIf="id==vacancy.vacancyId && showVacancyForm" class="mt-4">
+              <p class="card-text"><strong>Job Purpose:  </strong> {{ vacancy.purpose.split('\n')[0]  }}</p>
+              <ul>
+                <p *ngFor="let ss of vacancy.purpose.split('\n').slice(1)">{{ss}}</p>
+               </ul>
+               
+              <p class="card-text"><strong>SUMMARY OF MAJOR DUTIES AND RESPONSIBILITIES </strong> {{ vacancy.responsibility.split('\n')[0]  }}</p>
+
+              <ul>
+                <p *ngFor="let ss of vacancy.responsibility.split('\n').slice(1)">{{ss}}</p>
+               </ul>
+<p class="card-text"><strong>
+  REQUIRED QUALIFICATIONS AND EXPERIENCE :  </strong> {{ vacancy.requirement.split('\n')[0] }}</p>
+               <ul>
+                <p *ngFor="let ss of vacancy.requirement.split('\n').slice(1)">{{ss}}</p>
+               </ul>
+             <button (click)="printCard()" class="btn btnedit">Print</button> </div>
+         
+    
+            </div>
+            <button class="btn btnedit" (click)="toggleVacancyForm(vacancy)">  <mat-icon>info</mat-icon> Detail</button>
+
+            <div class="row">
+            <div class="col-md-6">
+      
+              <input placeholder=" " name="file" class="form-control" type="file" id="file"  (change)="onFileSelected($event)" #fileInput>
+              <!-- <mat-error *ngIf="IsPdf" class=" pull-right">Selected file is not a PDF</mat-error>
+              <mat-error  *ngIf="IsBig" class="  pull-right">File size exceeds 200MB</mat-error >
+     -->  
+            </div>
+            <div class="col-md-6">
+            <button class="btn btn-sm btnedit" *ngIf="shouldDisplayApplyButton(vacancy.vacancyId)" (click)="apply(vacancy)">
+              <mat-icon>thumb_up</mat-icon>Apply</button>
+              <button class="btn btn-sm btnedit"  [disabled]    *ngIf="!shouldDisplayApplyButton(vacancy.vacancyId)" >
+              Applied</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>

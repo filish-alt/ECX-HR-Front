@@ -1,0 +1,64 @@
+
+<app-shared-nav class="sharednav"[buttons]="buttons"></app-shared-nav>
+<!-- First Column -->
+<div class="col-md-11 ml-5">
+
+<div class="card col-md-11 mb-5 ml-5">
+  <div class="">
+    <div class="card-header  ">
+      <h4 class="card-title  ">Approve Payment</h4>
+       
+    </div>
+ <!--  -->
+
+
+ <div *ngIf="medicalApproved" class=" btndanger btn-sm pull-right">Payed!</div>
+            <table   class="table table-bordered table-striped compact-table">
+              <thead>
+                <tr>
+                  <th>Employee</th>
+                  <th>Hospital Bed</th>
+                  <th>laboratory</th>
+                  <th>Medical Examination</th>
+                  <th>Medicine</th>
+                  <th>Other Related</th>
+                  <th>Total</th>
+               
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Use *ngFor to loop through the medicalPendings array and display each medicalPending record -->
+                <tr *ngFor="let medicalRequest of medicalRequests" >
+                  <td>{{ capitalizeFirstLetter(getEmployeeName(medicalRequest.empId)) }}</td>
+                  <td>{{ medicalRequest.hospitalBed }}</td>
+                  <td>{{ medicalRequest.laboratory }}</td>
+                   <td>{{ medicalRequest.medicalExamination}}</td>
+                  <td>{{ medicalRequest.medicine  }}</td>
+                  <td>{{ medicalRequest.otherRelated }}</td>
+                  <td>{{ medicalRequest.total }}</td>
+                  
+                  <td>  
+   <label for="name" >Supporting File</label>
+  <input placeholder=" " name="file" class="form-control" type="file" id="file"  (change)="onFileSelected($event)" #fileInput>
+  <!-- <mat-error class=" pull-right">Selected file is not a PDF</mat-error>
+  <mat-error class="  pull-right">File size exceeds 200MB</mat-error > -->
+
+  </td> 
+                    <!-- medical-approval.component.html -->
+                 
+
+                    <td><button class="btn btn-sm btnedit" (click)="paidmedicalFunds(medicalRequest)">
+                      <mat-icon class="small">how_to_reg</mat-icon></button>
+                      
+                     
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+          </div>
+     
+                
+       
+ 
+

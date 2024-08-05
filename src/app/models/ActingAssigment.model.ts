@@ -1,0 +1,20 @@
+
+export interface ActingAssigment{
+    RequesterId : string,
+    ActingId :string,
+    Position: string,
+    Grade : string,
+    Duration : string,
+    FirstSupervisorStatus : string,
+    SecondSupervisorStatus : string,
+    ThirdSupervisorStatus : string,
+    StartDate : string,
+    EndDate: string,
+    status:Number,
+    pId:number,
+    id: string,
+  createdBy?: String, 
+    createdDate?: String, 
+    updatedDate: String, 
+    updatedBy: String,
+}

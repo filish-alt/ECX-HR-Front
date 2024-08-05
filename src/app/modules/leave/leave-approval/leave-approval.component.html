@@ -1,0 +1,68 @@
+
+<app-shared-nav class="sharednav"[buttons]="buttons"></app-shared-nav>
+<app-employee-details-modal *ngIf="employeeDetailsModalService.isOpen$ | async"></app-employee-details-modal>
+    <div class="card col-md-11 mb-5 ml-5">
+      <div class="">
+        <div class="card-header  ">
+          <h4 class="card-title  ">Leave Approval</h4>
+          <p class="card-category ">Leaves on pendding  </p>
+           
+        </div>
+     <!--  -->
+    
+          
+
+   
+     <!--  --><button *ngIf="leaveApproved"class="alert  btndanger btn-sm pull-right">  Approved
+            </button>
+            <button *ngIf="leaveRejected"class="alert  btndanger btn-sm pull-right">  Rejected
+            </button>
+
+                <table   *ngIf="leavePenddings" class="table table-bordered table-striped compact-table">
+                  <thead>
+                    <tr>
+                      <th>Employee</th>
+                      <th>Leave Type</th>
+                      <th>Start Date</th>
+                      <th>End Date</th>
+                      <th>Status</th>
+                      <th>Position</th> 
+                      <th>Department</th> 
+                   
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Use *ngFor to loop through the leavePendings array and display each leavePending record -->
+                    <tr *ngFor="let Pend of leavePenddings" >
+                      <td>{{ getEmployeeName(Pend.empId)}}</td>
+                    
+                        <td>{{ getLeaveTypeName(Pend.leaveTypeId) }}</td>
+                      <td>{{ Pend.startDate| date:'yyyy-MM-dd' }}</td>
+                      <td>{{ Pend.endDate| date:'yyyy-MM-dd' }}</td> 
+                      <td>{{ Pend.leaveStatus }}</td>
+                       <td >{{getPositionName(Pend.employeePositionId)}}</td>
+                       <td >{{getDepartmentName(Pend.departmentId)}}</td>
+                      <td>  <button class="btn btn-sm " (click)="fetchAndDisplayPDF(Pend)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"
+                        style="background-color: rgb(224, 224, 217); color: #0c0c0c; border: none;  cursor: pointer; border-radius: 5px;"  download="filename.pdf" >
+                        <mat-icon>get_app</mat-icon></button>
+                        <mat-error  *ngIf="FileNull && id == Pend.leaveRequestId"
+                        class="  pull-right">No File</mat-error >
+      </td>
+                      <td>
+                        <!-- leave-approval.component.html -->
+                     
+
+                        <button class="btn btn-sm btnedit" (click)="approveleavePendding(Pend)">
+                          <mat-icon>how_to_reg</mat-icon></button>
+                          <button class="btn btn-sm btndanger" (click)="rejectleavePendding(Pend)">
+                            <mat-icon>cancel</mat-icon></button>
+                         
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                </div>
+              </div>
+              
+       
+ 

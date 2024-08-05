@@ -1,0 +1,61 @@
+
+<app-shared-nav class="sharednav"[buttons]="buttons"></app-shared-nav>
+
+    <div class="card col-md-11 mb-5 ml-5">
+      <div class="">
+        <div class="card-header  ">
+          <h4 class="card-title  "> Approve Leaves</h4>
+        
+          
+        </div>
+
+        <button *ngIf="leaveRejected"class="alert  btndanger btn-sm pull-right">  Rejected
+        </button>
+        <button *ngIf="leaveApproved"class="alert  btndanger btn-sm pull-right">  Approved
+        </button>
+                <table   *ngIf="leavePenddings" class="table table-bordered table-striped compact-table">
+                  <thead>
+                    <tr>
+                      <th>Employee</th>
+                      <th>Leave Type</th>
+                      <th>Start Date</th>
+                      <th>End Date</th>
+                      <th>Status</th>
+                      <th>Position</th> 
+                      <th>Department</th> 
+                  
+                   
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Use *ngFor to loop through the leavePendings array and display each leavePending record -->
+                    <tr *ngFor="let leavePending of leavePenddings" >
+                      <td>{{ capitalizeFirstLetter(getEmployeeName(leavePending.empId))}}</td>
+                      <td>{{ getLeaveTypeName(leavePending.leaveTypeId) }}</td>
+                      <td>{{ leavePending.startDate| date:'yyyy-MM-dd' }}</td>
+                      <td>{{ leavePending.endDate| date:'yyyy-MM-dd' }}</td>
+                      <td>{{ leavePending.leaveStatus }}</td>
+                      <td >{{getPositionName(leavePending.employeePositionId)}}</td>
+                      <td >{{getDepartmentName(leavePending.departmentId)}}</td>
+                      <td>  <button class="btn btn-sm " (click)="fetchAndDisplayPDF(leavePending)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"
+                        style="background-color: rgb(224, 224, 217); color: #0c0c0c; border: none;  cursor: pointer; border-radius: 5px;"  download="filename.pdf" >
+                        <mat-icon>get_app</mat-icon></button>
+                        <mat-error  *ngIf="FileNull && id == leavePending.leaveRequestId"
+                        class="  pull-right">No File</mat-error ></td>
+                    
+                      <td>
+                        <button class="btn btn-sm btnedit" (click)="approveleavePendding(leavePending)">
+                          <mat-icon>how_to_reg</mat-icon></button>
+                        <!-- leave-approval.component.html -->
+                        <button class="btn btn-sm btndanger" (click)="rejectleavePendding(leavePending)">
+                          <mat-icon>cancel</mat-icon></button>
+                     
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                </div>
+              </div>
+              
+       
+ 

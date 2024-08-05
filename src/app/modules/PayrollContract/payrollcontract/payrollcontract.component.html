@@ -1,0 +1,139 @@
+
+<app-shared-nav  [buttons]="buttons"></app-shared-nav><div class="main-content  ">
+    <div class="container-fluid ">
+
+
+  
+            <div class="col-md-12">
+              <div class=" mb-5 ">
+                  <div class="card ">
+                       <div class="card-header ">
+                        
+                          <h4 class="card-title ">Contract PayRolls</h4>
+                          <button  class="btn mt-5 ml-3 btn-sm btndanger" (click)="addContractPayroll()">
+                            <mat-icon>perm_data_setting</mat-icon> Calculate </button>
+                            <div class="mt-3 ml-3">  <mat-error  *ngIf="!generate" class="  pull-right">OOOPS NOT YET</mat-error >
+                            </div>
+                            <div><mat-error *ngIf="errormessage" class=" "> {{capitalizeFirstLetter(getEmployeeName(incompleteEmployee))}} Information Not Completed!</mat-error>
+           </div>
+                            
+                            <div *ngIf="PayRollContractSaved" class=" btndanger btn-sm pull-right"> successfull!</div>
+           
+                            <h6 class=" mt-5 ml-5 yellow">Contract PayRoll info </h6>    
+                             </div>  
+              
+                  
+                      <div [ngClass]="{'blur-background':isLoading}">
+                  <div class="row  " >
+                       
+              
+
+  
+
+     
+</div>
+<div class="row  " >
+           
+  <div class="col-md-4 ml-5 form-field">
+    <mat-select class="select"  placeholder="Select Month" name="selectedMonth" [(ngModel)]="selectedMonth" required>
+      <mat-option value="September">September</mat-option>
+      <mat-option value="October">October</mat-option>
+      <mat-option value="November">November</mat-option>
+      <mat-option value="December">December</mat-option>
+      <mat-option value="January">January</mat-option>
+      <mat-option value="February">February</mat-option>
+      <mat-option value="March">March</mat-option>
+      <mat-option value="April">April</mat-option>
+      <mat-option value="May">May</mat-option>
+      <mat-option value="June">June</mat-option>
+      <mat-option value="July">July</mat-option>
+      <mat-option value="August">August</mat-option>
+    </mat-select>
+    
+  </div>   
+
+  <div class="col-md-3 ml-3 form-field">
+    <mat-select class="select"  placeholder="Select Year" name="selectedYear" [(ngModel)]="selectedYear">
+        <mat-option value="{{year}}" *ngFor="let year of years">
+{{year}}
+    </mat-option>
+</mat-select>
+   
+    </div>
+     <div class="col-md-3 ">  <button (click)="filterByMonth()"  class="btn btn-sm "><mat-icon>search</mat-icon>
+      Search</button>  
+  </div>       
+      
+     
+</div>
+<mat-error class="ml-5 " *ngIf="PayRollContract">Not Found</mat-error>
+<div><input  class="ml-5 search inputserach mt-3" type="search" placeholder="Search By Name" [(ngModel)]="searchTerm" (input)="onSearch()">
+ </div>
+   
+      
+  </div>  
+
+
+  <table  class="table table table-responsive table-bordered table-striped  table-sm compact-table mt-3">
+    <thead>  <p class="card ml-3 mt-3">{{selectedMonthStatus || end}}</p>
+      <tr>
+  
+        <th>Employee Name</th>
+        <th>Ecx Id </th>
+        <th>Employment Date</th>
+        <th>Position</th>
+        <th>Department</th>
+        <th>Branch Table</th>
+         <th>Step</th>
+        <th>Grade</th>
+        <th>Basic Salary</th>
+          <th>GrossEarning</th>
+        <th>TaxableAmount</th>
+         <th>IncomeTax</th>
+        <th>Pension7%</th>
+        <th>Pension11%</th>
+          <th>NetPay</th>
+         
+      
+    
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Use *ngFor to loop through thepayendances and display eachpayendance's information -->
+  
+      
+      <div class="loading-overlay" *ngIf="isLoading; else loadedData ">
+         <p>Loading......</p>
+      </div>
+
+
+      <ng-template #loadedData>
+      <tr *ngFor="let at of filteredPayRollContracts" >
+      
+        <td>{{capitalizeFirstLetter( getEmployeeName(at.empId)) }}</td>
+        <td>{{ at.ecxId}}</td>
+        <td>{{ at.dateOfEmployeement| date:'yyyy-MM-dd'}}</td>
+        <td>{{ getPositionName(at.positionID) }}</td>
+        <td>{{ getDepartmentName(at.departmentID) }}</td>
+        <td>{{ getBranchName(at.branchID)}}</td>
+        <td>{{ getStepName(at.stepID) }}</td>
+        <td>{{ getGradeName(at.gradeID)}}</td>
+        <td>{{ at.basicSalary}}</td>
+        <td>{{ at.grossEarnings }}</td>
+        <td>{{ at.taxableAmount }}</td>
+        <td>{{ at.incomeTax }}</td>
+        <td>{{ at.pensionContribution7 }}</td>
+        <td>{{ at.pensionContribution11 }}</td>
+        <td>{{ at.netPay }}</td>
+      
+      </tr>
+      </ng-template>
+    </tbody>
+  </table>   </div>
+  </div></div>
+</div>
+   
+
+
+  
+

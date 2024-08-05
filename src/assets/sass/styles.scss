@@ -1,0 +1,95 @@
+/*!
+
+=========================================================
+* Material Dashboard Angular - v2.8.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/material-dashboard-angular2
+* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://github.com/creativetimofficial/material-dashboard-angular2/blob/master/LICENSE.md)
+
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+*/
+/* Add custom styles for floating label */
+.floating-label-group {
+    position: relative;
+  }
+  
+  .floating-label-group input {
+    border: none;
+    border-bottom: 1px solid #ccc;
+    outline: none;
+    padding: 10px 0;
+    font-size: 16px;
+    background-color: transparent;
+    transition: all 0.3s;
+    width: 100%;
+  }
+  
+  .floating-label-group input:focus {
+    border-bottom: 2px solid #007bff;
+  }
+  
+  .floating-label-group label {
+    position: absolute;
+    pointer-events: none;
+    top: 15px;
+    left: 0;
+    font-size: 16px;
+    color: #888;
+    transition: all 0.3s;
+  }
+  
+  .floating-label-group input:focus ~ label,
+  .floating-label-group input:not(:placeholder-shown) ~ label {
+    top: -5px;
+    font-size: 12px;
+    color: #007bff;
+  }
+  
+
+ @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+ @import "bootstrap/scss/bootstrap";
+
+
+ // Core Components
+ @import "core/buttons";
+ @import "core/checkboxes";
+ @import "core/radios";
+ @import "core/forms";
+ @import "core/input-group";
+ @import "core/images";
+ @import "core/navbar";
+ @import "core/alerts";
+ @import "core/type";
+ @import "core/tabs";
+ @import "core/tooltip";
+ @import "core/popover";
+ @import "core/dropdown";
+ @import "core/togglebutton";
+ @import "core/ripples";
+ @import "core/footers";
+ @import "core/sidebar-and-main-panel";
+ @import "core/fixed-plugin";
+ @import "core/tables";
+ @import "core/misc";
+
+@import "core/cards";
+@import "core/cards/card-stats";
+@import "core/cards/card-profile";
+@import "core/cards/card-plain";
+
+ //plugin scss
+ @import "core/plugins/animate";
+ @import "core/plugins/chartist";
+ @import "core/plugins/perfect-scrollbar";
+
+ @import "core/responsive";
+
+@import "core/angular-modal.scss";

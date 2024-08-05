@@ -1,0 +1,156 @@
+<app-shared-nav class="sharednav"[buttons]="buttons"></app-shared-nav>
+<div class="col-md-11 main-body">
+ 
+    <div class="card card-body">
+<div class="container mt-5 ">
+    <div class="card-header ">
+    <h5 class="text-center card-title ">Vacancy Management</h5>
+</div>
+    <button class="btn btndanger" (click)="toggleVacancyForm()"><mat-icon>add</mat-icon>Add Vacancy</button>
+  
+    <!-- Vacancy Form (Initially Hidden) -->
+    <div *ngIf="showVacancyForm" class="mt-4">
+      <h6 class="mb-3">Add Vacancy</h6>
+      <form (submit)="addVacancy()">
+       
+            <div class="card-body"> <div class="row"> 
+             
+                <div class="col-md-4 "> 
+      
+                <mat-form-field  style="width: 190px;height: 65px;"> 
+                  <mat-label>Select Position</mat-label> 
+                  <mat-select placeholder="Select Position" name="selectedPosition" required [(ngModel)]="selectedPosition"> 
+                    <mat-option *ngFor="let position of positions" [value]="position.positionId"> 
+                      {{ position.name }} 
+                    </mat-option> 
+                  </mat-select> 
+                </mat-form-field> 
+              </div> 
+              <div class="col-md-4 "> 
+      
+                <mat-form-field  style="width: 190px;height: 65px;"> 
+                  <mat-label>Select Branch</mat-label> 
+                  <mat-select placeholder="Select Branch" name="selectedBranch" required [(ngModel)]="selectedBranch"> 
+                    <mat-option *ngFor="let branch of branches" [value]="branch.id"> 
+                      {{ branch.name }} 
+                    </mat-option> 
+                  </mat-select> 
+                </mat-form-field> 
+              </div> 
+              <div class="col-md-4 "> 
+                <mat-form-field style="height: 65px; width:190px"  > 
+                  <mat-label>Select Grade</mat-label> 
+                  <mat-select placeholder="Select Grade Level" name="selectedGrade" required [(ngModel)]="selectedGrade"> 
+                    <mat-option *ngFor="let grade of grades" [value]="grade.levelId"> 
+                      {{ grade.description }} 
+                    </mat-option> 
+                  </mat-select> 
+                </mat-form-field> 
+              </div> 
+              <div class="card-body">
+                 <div class="row"> 
+                <div class="col-md-6 form-field ">
+                <textarea  placeholder="" type="text" name="requirement" [(ngModel)]="vacancy.requirement"></textarea>
+                <label>Requirements for the position</label>
+              </div>
+            
+              <div class="col-md-6 form-field ">
+                <textarea  placeholder="" type="text" name="availability" [(ngModel)]="vacancy.availability"></textarea>
+                <label>Availability</label>
+              </div>
+              </div>
+              <div class="row mt-4"> 
+               <div class="col-md-6 form-field ">
+                <textarea  placeholder="" type="text" name="Purpose" [(ngModel)]="vacancy.purpose"></textarea>
+                <label>Purpose</label>
+              </div>
+              <div class="col-md-6 form-field ">
+                <textarea  placeholder="" type="text" name="Responsibility" [(ngModel)]="vacancy.responsibility"></textarea>
+                <label>Responsibility</label>
+              </div>
+            </div>
+          </div>
+
+              
+          
+            
+            <div class="card-body">
+              <div class="row">
+                
+                
+                <div class="col-md-4 ">
+                  <mat-form-field style="height: 65px; width:160px" class="example-full-width">
+                    <mat-label>Release Date</mat-label> <input matInput [matDatepicker]="fromPicker" placeholder=" " name="from" [(ngModel)]="vacancy.releaseDate">
+                   
+                    <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #fromPicker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4 ">
+                    <mat-form-field style="height: 65px; width:160px" class="example-full-width">
+                         <mat-label>Deadline</mat-label>  <input matInput [matDatepicker]="toPicker" placeholder=" " name="to" [(ngModel)]="vacancy.deadline">
+                 
+                      <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+                      <mat-datepicker #toPicker></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+              </div>
+            </div>
+          </div>
+          
+          <div><button  type="submit"class="btn btn-sm btnsave" *ngIf="vacancy.vacancyId ==undefined" >
+            <mat-icon>add</mat-icon>Add</button>
+     </div>
+               <!-- <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save vacancy</button>
+           -->
+          <div *ngIf="vacancySaved" class=" btndanger btn-sm pull-right">
+            Added successfully!
+          </div>
+
+
+          <button type="button" class="btn btn-sm btnsave" *ngIf="vacancy.vacancyId !=undefined"(click)="updatevacancy()"><mat-icon>add</mat-icon>
+            Update</button>
+     
+        <!-- <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save vacancy</button> -->
+
+      <div *ngIf="vacancyUpdated" class=" btndanger btn-sm pull-right">
+        Updated successfully!
+      </div>
+      </div>
+      </form>
+    </div>
+  
+    <!-- Vacancy Table -->
+    <h6 class="mt-4 yellow">Vacancies</h6>
+    <table class="table table-bordered table-striped compact-table">
+      <thead>
+        <tr>
+          
+   
+       <th>Position</th>
+       <th>Branch</th>
+          <th>Grade</th>
+          <th>Deadline</th>
+          <th>Release Date</th>
+   
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let vacancy of vacancies">
+           
+        
+            <td>{{ getPositionName(vacancy.positionId)}}</td>
+            <td>{{ getBranchName(vacancy.branchId)}}</td>
+            <td>{{ getGradeName(vacancy.levelId)}}</td>
+            <td>{{ vacancy.deadline| date:'yyyy-MM-dd' }}</td>
+            <td>{{ vacancy.releaseDate| date:'yyyy-MM-dd' }}</td>
+         
+        <td>        <button class="btn btn-sm btnedit"  (click)="editVacancy(vacancy)" >
+  <mat-icon class="small">edit</mat-icon>
+     </button></td>
+        </tr>
+    
+      </tbody>
+    </table>
+  </div>
+ </div></div> 

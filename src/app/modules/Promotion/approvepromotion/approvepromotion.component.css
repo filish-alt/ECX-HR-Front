@@ -1,0 +1,100 @@
+.cardhead{
+    background-color: rgb(224, 224, 217);
+  }
+  
+  .form-field {
+    position: relative;
+  }
+  
+  .form-field input:not(:placeholder-shown) + label,
+  .form-field input:focus + label {
+    transform: translateY(-100%) scale(0.8);
+    color: #353636;
+  }
+  
+  .form-field input,
+  .form-field mat-form-field {
+    border: none;
+    border-bottom: 1px solid #ccc;
+    outline: none;
+    font-size: 16px;
+    padding: 5px 0;
+    width: 100%;
+  }
+  
+  .form-field label {
+    position: absolute;
+    top: 0;
+    left: 5px;
+    font-size: 14px;
+    color: #747070;
+    pointer-events: none;
+    transition: 0.2s ease all;
+  
+  }
+  
+  
+  ::ng-deep .mat-datepicker-content .mat-calendar {
+    width: 229px!important;
+    height: 300px!important;
+  }
+  .custom-mat-select {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+  }
+  .compact-table th {
+    font-size: 13px;
+    color: black;
+    font-weight:650; /* Adjust the font size as needed */
+  }
+  .compact-table tr {
+    font-size: 13px; /* Adjust the font size as needed */
+  }
+  
+  .compact-table th, .compact-table td {
+    padding: 4px 8px; 
+  }
+  td ,th{
+    white-space: nowrap; /* Prevent text wrapping */
+  }
+  .form-field textarea:not(:placeholder-shown) + label,
+  .form-field textarea:focus + label {
+    transform: translateY(-100%) scale(0.8);
+    color: #353636;
+  }
+  
+  .form-field textarea {
+    border: none;
+    border-bottom: 1px solid #ccc;
+    outline: none;
+    font-size: 16px;
+    padding: 5px 0;
+    width: 100%;
+    resize: vertical; /* Allows vertical resizing of the textarea */
+  }
+  
+  /* You can add more specific styling for the label if needed */
+  .form-field textarea + label {
+    position: absolute;
+    top: 0;
+    left: 5px;
+    font-size: 14px;
+    color: #747070;
+    pointer-events: none;
+    transition: 0.2s ease all;
+  }
+  
+  /* Additional styles for when the textarea is in focus (if desired) */
+  .form-field textarea:focus {
+    border-color: #353636;
+  }
+  .head{
+    background-color:#fcc034 ; 
+  }
+  
+  
+  
+  
+  
+  

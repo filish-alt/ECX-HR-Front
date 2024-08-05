@@ -1,0 +1,199 @@
+<app-shared-nav  [buttons]="buttons"></app-shared-nav><div class="main-content  ">
+    <div class="container-fluid ">
+  <div class="row  ">
+    <div class="col-md-2 ml-3 mr-5  pt-5 ">
+      <app-min-nav></app-min-nav>
+    </div>
+    <div class="col-md-8">
+      <div class="card  mb-5">
+        <div class="">
+          <div class="card-header ">
+            <h4 class="card-title">Qualification</h4>
+            <p class="card-category">Complete your Qualification</p>
+          </div>
+          <div class="card-body">
+            <!-- Education Form -->
+            <form (ngSubmit)="updateEducation()">
+              
+              <div class="card-body">
+                <div><p>Education</p></div>
+              <div class="row">
+                <div class="col-md-4">
+                 
+                    <input  class="form-control" placeholder="Institution Name" type="text" name="nameOfInstitute" [(ngModel)]="education.nameOfInstitute" required>
+                
+                </div>
+                <div class="col-md-4">
+                  
+                    <input  class="form-control" placeholder="Field Of Study" type="text" name="fieldOfStudy" [(ngModel)]="education.fieldOfStudy">
+                  
+                </div>
+                <div class="col-md-4">
+                 
+                   
+                    <mat-select  class="form-control" placeholder="Select educationlevel" name="selectedEducationLevel" required [(ngModel)]="selectedEducationLevel" >
+                      <!-- Replace the options below with your actual division options -->
+                      <mat-option *ngFor="let educationlevel of educationlevels" [value]="educationlevel.id">
+                        {{educationlevel.educationName}}
+                      </mat-option></mat-select>
+                      </div>
+                    </div>
+              </div>
+              <div class="card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput [matDatepicker]="fromPicker" placeholder="Start Date" name="from" [(ngModel)]="education.from">
+                    <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #fromPicker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput [matDatepicker]="toPicker" placeholder="End Date" name="to" [(ngModel)]="education.to">
+                    <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #toPicker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                </div>
+              </div>
+              <button type="button" class="btn btn-sm btnsave" (click)="updateEducation()">update Education</button>
+             
+              <!-- <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save Education</button>
+              -->
+              <div *ngIf="educationUpdated" class="alert alert-success mt-3">
+                Education added successfully!
+              </div>
+            </form>
+  </div>
+            <!-- Work Experience Form -->
+            <div class="card-body">
+            <form (ngSubmit)="updateWorkExperience()">
+              <div class="card-body">
+              <div><p>Work Experience</p></div>
+              <div class="row"> 
+            
+                <div class="col-md-4">
+                 
+                    <input  class="form-control" placeholder="Company Name" type="text" name="companyName" [(ngModel)]="workExperience.companyName">
+                  
+                </div>
+                <div class="col-md-4">
+                  
+                    <input  class="form-control" placeholder="Position Held" type="text" name="postionHeld" [(ngModel)]="workExperience.postionHeld">
+                  
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+            <div class="row"> 
+              
+                <div class="col-md-4">
+                  
+                    <input class="form-control" placeholder="Salary Amount" type="text" name="salary" [(ngModel)]="workExperience.salary">
+                  
+                </div>
+                <div class="col-md-4">
+                 
+                    <input class="form-control" placeholder="Reason for termination" type="text" name="reasonTermination" [(ngModel)]="workExperience.reasonTermination">
+                
+                </div>
+                </div>
+              </div>
+              <div class="card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput [matDatepicker]="fromPicker" placeholder="Start Date" name="from" [(ngModel)]="workExperience.from">
+                    <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #fromPicker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput [matDatepicker]="toPicker" placeholder="End Date" name="to" [(ngModel)]="workExperience.to">
+                    <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #toPicker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </div>
+              </div>
+                <!-- Add more work experience form fields here... -->
+             
+              <button type="button" class="btn btn-sm btnsave" (click)="updateWorkExperience()">Update</button>
+              <!-- <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save Work Experience</button>
+               -->
+              <div *ngIf="workExperienceUpdated" class="alert btndanger btn-sm pull-right">
+                Added successfully!
+              </div>
+              <div class="clearfix"></div></form>
+          </div>
+        </div>
+        <!-- qualification.component.html -->
+  
+  <div class="container">
+    
+  
+  
+    <!-- Education Table -->
+    <h6>Education History</h6>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Education Level</th>
+          <th>Name of Institute</th>
+          <th>Field of Study</th>
+          <th>From</th>
+          <th>To</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Use *ngFor to loop through the educations array and display each education record -->
+        <tr *ngFor="let education of educations">
+          <td>{{ education.eductionName }}</td>
+          <td>{{ education.nameOfInstitute }}</td>
+          <td>{{ education.fieldOfStudy }}</td>
+          <td>{{ education.from }}</td>
+          <td>{{ education.to }}</td>
+          <td>
+            <button class="btn btn-sm btnedit" (click)="editEducation(education)">Edit</button>
+            <button class="btn btn-sm btndanger" (click)="deleteEducation(education)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Add Work Experience Form -->
+   
+    <!-- Work Experience Table -->
+    <h6>Work Experience History</h6>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Company Name</th>
+          <th>Position Held</th>
+          <th>From</th>
+          <th>To</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Use *ngFor to loop through the workExperiences array and display each work experience record -->
+        <tr *ngFor="let workExperience of workExperiences">
+          <td>{{ workExperience.companyName }}</td>
+          <td>{{ workExperience.postionHeld }}</td>
+          <td>{{ workExperience.from }}</td>
+          <td>{{ workExperience.to }}</td>
+          <td>
+            <button class="btn btn-sm btnedit" (click)="editWorkExperience(workExperience)">Edit</button>
+            <button class="btn btn-sm btn-danger" (click)="deleteWorkExperience(workExperience)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+  </div>
+  
+      </div>
+    </div>
+  </div>
+  

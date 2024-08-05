@@ -1,0 +1,82 @@
+
+<app-shared-nav class="sharednav"[buttons]="buttons"></app-shared-nav>
+    <div class="card col-md-10 mb-5 ml-5">
+      <div class="">
+        <div class="card-header ">
+         
+          <h4 class="card-title  ">Promotion Approval</h4>
+           
+        </div>
+     <button *ngIf="PromotionApproved"class="alert  btndanger btn-sm pull-right">  Approved
+            </button>
+       <div class="row">
+                <div class="col-md-9" >
+<table class="table table-bordered table-striped compact-table">
+  <thead>
+    <tr>
+      <th>Employee Name</th>
+      <th>Postion</th>
+      <th>Promotion Status</th>
+      <th>Cv</th>
+      <th>Evaluate</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let promotionRelationPending of promotionRelationPenddings">
+      <td>{{ getEmployeeName(promotionRelationPending.empId) }}</td>
+      <td>{{ getTitle(promotionRelationPending.vacancyId) }}</td>
+      <td>{{ promotionRelationPending.promotionStatus }}</td>
+     
+        <!-- "Approve" button -->
+        <td>  <button class="btn btn-sm " (click)="fetchAndDisplayPDF(promotionRelationPending)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"
+          style="background-color: rgb(224, 224, 217); color: #0c0c0c; border: none;  cursor: pointer; border-radius: 5px;"  download="filename.pdf" >
+          <mat-icon>get_app</mat-icon></button>
+          <mat-error  *ngIf="FileNull && id == promotionRelationPending.id"
+          class="  pull-right">No File</mat-error >
+          
+
+      </td>
+      <td >
+        <button class="btn btn-sm btnedit" (click)="openEvaluationModal(promotionRelationPending.empId,promotionRelationPending.vacancyId)"[ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
+          <mat-icon>Evaluate</mat-icon> 
+        </button>
+      </td>
+      <td>
+        <button class="btn btn-sm btnedit" (click)="openEmployeeDetailsModal(promotionRelationPending.empId)"[ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
+          <mat-icon>info</mat-icon> 
+        </button>
+        <button class="btn btn-sm " *ngIf="!getdeadate(promotionRelationPending.vacancyId)">
+          OnProgress
+        </button>
+        <button class="btn btn-sm btnedit" *ngIf="getdeadate(promotionRelationPending.vacancyId)" (click)="togglePromotionForm(promotionRelationPending)" >
+          <mat-icon>how_to_reg</mat-icon>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<!-- Vacancy Form (Initially Hidden) -->
+<div *ngIf="showPromotionForm" class="col-md-3" >
+  <form (submit)="addPromotion()">
+    <div class="form-group">
+      <label for="startDate">Employee Start Date</label>
+      <mat-form-field style="width: 160px">
+        <mat-label>Start Date</mat-label>
+        <input matInput [matDatepicker]="fromPicker" placeholder=" " name="from" [(ngModel)]="selectedDate">
+        <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+        <mat-datepicker #fromPicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <!-- Add other form fields here if needed -->
+    
+    <button type="submit"  class="btn btn-sm btnsave" (click)="approvePromotionPendding()" >
+      <mat-icon>add</mat-icon> Promote
+    </button>
+  </form>
+</div> </div>
+              
+       
+ 

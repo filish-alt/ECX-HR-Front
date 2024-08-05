@@ -1,0 +1,59 @@
+.cardhead{
+    background-color: rgb(224, 224, 217);
+}
+
+  input{
+    width:300px;
+   
+    background: transparent;
+    margin: 0;
+    padding: 7px 8px;
+    font-size: 14px;
+    color: inherit;
+    border: 2px solid transparent;
+    border-radius: 50px;
+    background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E") no-repeat right;
+  }
+  .compact-table th {
+    font-size: 13px;
+    color: black;
+    font-weight: bold; /* Adjust the font size as needed */
+  }
+  .compact-table tr {
+    font-size: 13px; /* Adjust the font size as needed */
+  }
+  
+  .compact-table th, .compact-table td {
+    padding: 4px 8px; 
+  }
+
+  input[type="search"]::placeholder {
+    color: #bbb;
+  }
+
+  button[type="submit"]:focus,
+input[type="search"]:focus {
+  box-shadow: 0 0 3px 0 #fcc034;
+  border-color:#fcc034;
+  outline: none;
+}
+.search{
+  box-shadow: 0 0 3px 0 #bbb;
+  border-color: #76a53b;
+  outline: none;
+}
+.custom-icon{
+  color:#76a53b;
+  font-weight: bold;
+}
+
+td {
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+/* Set a specific width for date columns */
+td:nth-child(4), /* 4th column: Sick Leave Start Date */
+td:nth-child(5) /* 5th column: Sick Leave End Date */
+{
+  min-width: 150px; /* Adjust the width as needed */
+}

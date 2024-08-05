@@ -1,0 +1,154 @@
+<app-shared-nav  [buttons]="buttons"></app-shared-nav><div class="main-content  ">
+    <div class="container-fluid ">
+
+ 
+    <div class="col-md-12 ">
+      <div class="card mb-5">
+     
+          <div class="card-header ">
+            <h4 class="card-title ">Outsource</h4>
+            <p class="card-category">Complete your Outsource</p>
+          </div>
+          <div class="card-body">
+          
+            <form (ngSubmit)="addOutsource()">
+              
+
+                <div class="row ml-2"> 
+                     <div class="col-md-4 form-field">
+                    <input  placeholder=" " type="number" name="amount" [(ngModel)]="Outsource.amount">
+                    <label>Amount</label>
+                  </div>
+                  <div class="col-md-4 form-field">
+                    <input  placeholder=" " type="text" name="remark" [(ngModel)]="Outsource.remark" required>
+                    <label>Remark</label>
+                  </div>
+                
+         
+                </div>
+                       <div class="card-body">
+                <div class="row mt-3">
+                  <div class="col-md-4 mt-3">
+                    <mat-form-field style="height: 65px; width:160px"  class="example-full-width">
+                      <input matInput [matDatepicker]="datePicker" placeholder="Date" name="date" [(ngModel)]="Outsource.date">
+                      <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+                      <mat-datepicker #datePicker></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+              
+                  <div class="col-md-4 ">
+                    <label for="name" >Supporting File</label>
+                    <input placeholder=" " name="file" class="form-control" type="file" id="file"  (change)="onFileSelected($event)" #fileInput>
+                    <!-- <mat-error *ngIf="IsPdf" class=" pull-right">Selected file is not a PDF</mat-error>
+                    <mat-error  *ngIf="IsBig" class="  pull-right">File size exceeds 200MB</mat-error >
+           -->
+                  </div>
+                  </div>
+                </div> 
+                <div>
+                  <button type="button" class="btn btn-sm btnsave"  *ngIf="Outsource.id!=undefined"  (click)="updateOutsource()">Update</button>
+                      
+               
+               <!-- <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save Outsource</button>
+                  -->
+                  <div *ngIf="OutsourceUpdated" class=" btndanger btn-sm pull-right">
+                    Updated successfully!
+                  </div>
+                   
+                  <button type="button" class="btn btn-sm btnsave" *ngIf="Outsource.id===undefined" (click)="addOutsource()">Add</button>
+                         
+                  <div *ngIf="OutsourceSaved" class="btndanger btn-sm pull-right">
+            Added successfully!
+                </div></div>
+                </form>
+      </div>
+  
+  <div class="container">
+    <h6 class="yellow">Outsource History</h6>
+    <div class=" row mt-5 " >
+    <div class="col-md-3 ml-5 form-field">
+        <mat-select class="select"  placeholder="Select Month" name="selectedMonth" [(ngModel)]="selectedMonth" required>
+          <mat-option value="September">September</mat-option>
+          <mat-option value="October">October</mat-option>
+          <mat-option value="November">November</mat-option>
+          <mat-option value="December">December</mat-option>
+          <mat-option value="January">January</mat-option>
+          <mat-option value="February">February</mat-option>
+          <mat-option value="March">March</mat-option>
+          <mat-option value="April">April</mat-option>
+          <mat-option value="May">May</mat-option>
+          <mat-option value="June">June</mat-option>
+          <mat-option value="July">July</mat-option>
+          <mat-option value="August">August</mat-option>
+        </mat-select>
+        
+      </div>   
+      
+      <div class="col-md-3 ml-3 form-field">
+        <mat-select class="select"  placeholder="Select Year" name="selectedYear" [(ngModel)]="selectedYear">
+            <mat-option value="{{year}}" *ngFor="let year of years">
+{{year}}
+        </mat-option>
+    </mat-select>
+       
+        </div>
+         <div class="col-md-3 ">  <button (click)="filterByMonth()"  class="btn btn-sm "><mat-icon>search</mat-icon>
+          Search</button>  
+      </div>   
+ </div>
+    <div class="loading-overlay" *ngIf="isLoading; else loadedData ">
+        <p>Loading......</p>
+     </div>
+
+
+     <ng-template #loadedData>
+  
+    <!-- Outsource Table -->
+  
+    <table   *ngIf="Outsource" class="table table-bordered table-striped compact-table mt-5">
+      <thead>
+        <tr> 
+             <th>Remark</th>
+          <th>Month</th>
+          <th>Year</th>
+          <th>Amount</th>
+          <th>File</th>
+       
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Use *ngFor to loop through the Outsources array and display each Outsource record -->
+        <tr *ngFor="let Outsource of filteredOutsources" >
+            <td>{{ Outsource.remark }}</td>
+          <td>{{ getMonth(Outsource.date)  }}</td>
+          <td>{{ getYear(Outsource.date)  }}</td>
+          <td>{{ Outsource.amount }}</td>
+            <td>  <button class="btn btn-sm " (click)="fetchAndDisplayPDF(Outsource)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"
+            style="background-color: rgb(224, 224, 217); color: #0c0c0c; border: none;  cursor: pointer; border-radius: 5px;"  download="filename.pdf" >
+            <mat-icon>get_app</mat-icon></button>
+            <mat-error  *ngIf="FileNull && id == Outsource.id"
+            class="  pull-right">No File</mat-error >
+            
+
+        </td>
+          <td>
+            <button class="btn btn-sm btnedit" (click)="editOutsource(Outsource)">
+              <mat-icon class="small">edit</mat-icon></button>
+            <button class="btn btn-sm btndanger" (click)="deleteOutsource(Outsource)">
+              <mat-icon class="small">delete</mat-icon></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Add Work Experience Form -->
+   
+    <!-- Work Experience Table -->
+   
+</ng-template>
+  </div>
+  
+      </div>
+    </div>
+  </div>
+  

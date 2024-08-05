@@ -1,0 +1,64 @@
+
+  <app-shared-nav [buttons]="buttons"></app-shared-nav> 
+  <div class="row" > 
+    <div class="col-md-6 ml-5">
+        <div class="card " >
+
+
+<form (ngSubmit)="addEducationLevel()">   
+    <div class="row ml-4">
+        <h6 class="card-title mt-3">Education Level</h6>
+    <div class="col-md-12 ml-4 mt-4"> 
+    <div class="form-field"> 
+    
+      <input type="text" id="educationLevelName" placeholder=" " [(ngModel)]="addEducationLevelRequest.educationName" name="educationName" required> 
+     <label for="educationLevel">Education Level Name</label>  </div> 
+ <div  class="col-md-3"><button type="submit" class="btn  btn-sm btnsave mt-3"><mat-icon>add</mat-icon>Save </button> </div>
+   
+  </div></div>   <div *ngIf="educationLevelSaved" class=" btndanger btn-sm pull-right ">
+        Successfully Added!
+      </div> 
+  </form> 
+   
+
+ 
+ 
+ 
+    <h6 class="mb-2 mt-3 ml-3"> 
+       List Of EducationLevel 
+    </h6> 
+ 
+ 
+     
+<table id="example1" class="table table-bordered table-striped compact-table"  *ngIf="educationLevels && educationLevels.length>0"> 
+    <thead> 
+        <tr> 
+            
+            <th>Education Name</th> 
+            <th>Status</th> 
+            
+ 
+        </tr> 
+    </thead> 
+    <tbody> 
+        <tr *ngFor="let educationlevel of educationLevels"> 
+          
+            <td>{{educationlevel.educationName}}</td> 
+         
+            <td>{{educationlevel.status}}</td> 
+            <td>   
+                <button  class="btn btn-sm btndanger" (click)="deleteEducationLevel(educationlevel.id)"  [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
+                    <mat-icon>delete</mat-icon></button>
+            </td> 
+          
+            <!-- <td> <a [routerLink]="['/educationlevel','edit',educationlevel.id]">  
+                View 
+                </a> 
+            </td> --> 
+        </tr> 
+    </tbody> 
+</table> 
+<p *ngIf="!educationLevels || educationLevels.length <= 0">no educationlevels found</p>
+</div>
+</div>
+</div>

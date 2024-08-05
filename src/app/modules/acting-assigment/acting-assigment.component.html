@@ -1,0 +1,75 @@
+
+<app-shared-nav [buttons]="buttons"></app-shared-nav> 
+<div class="row" > 
+    <div class="col-md-10 ml-5">
+      <div class="card" >
+        <div class="card-header cardhead">
+            <h4 class="card-title">Acting Assign</h4>
+           
+          </div>
+
+<form >   
+    <div class="row ml-4">
+ 
+        <div class="col-md-5" style="margin-left: 10px;"> 
+            <div class="form-group"> 
+            
+              <mat-form-field style="height: 65px; width:200px"  > 
+                <mat-label>Select Employee</mat-label> 
+                <mat-select placeholder="Select position" name="selectedposition" required > 
+                  <mat-option > 
+                    
+                  </mat-option> 
+                </mat-select> 
+              </mat-form-field> 
+            </div> 
+            </div> 
+     <div class="col-md-3 mt-5"> 
+         <div class="form-field"> 
+      <input type="text" id="maximum" placeholder=" " name="maximum" required> 
+     <label for="maximum">Maximum</label>  
+    
+    </div> 
+      </div>
+ <div  class="col-md-8 mt-3"><button type="submit" class="btn  btn-sm btnsave ml-3">Save </button> </div>
+   
+ </div> 
+  </form> 
+
+
+
+  
+  <h6 class="mb-3 ml-3 mt-2"> 
+Leave Type
+</h6> 
+
+
+ 
+<table id="example1" class="table table-bordered table-striped compact-table" > 
+<thead> 
+    <tr> 
+        <th> Leave Type Name</th> 
+        <th>Maximum Day</th> 
+   
+        
+
+    </tr> 
+</thead> 
+<tbody> 
+    <tr > 
+       
+        <td></td> 
+      <td></td> 
+      
+        <td>   
+            <button  class="btn btn-sm btndanger"   [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
+                <mat-icon>delete</mat-icon></button>
+        </td> 
+
+    </tr> 
+</tbody> 
+</table> 
+<p >no leaveTypes found</p>
+</div>
+</div>
+</div>

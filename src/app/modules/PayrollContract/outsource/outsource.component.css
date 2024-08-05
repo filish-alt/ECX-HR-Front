@@ -1,0 +1,99 @@
+.cardhead{
+    background-color: rgb(224, 224, 217);
+  }
+  
+  
+  form-field {
+    position: relative;
+    margin-bottom: 20px;
+  }
+  
+  .form-field input {
+    border: none;
+    border-bottom: 1px solid #ccc;
+    outline: none;
+    padding: 5px;
+    font-size: 16px;
+  }
+  
+  .form-field label {
+    position: absolute;
+    top: 0;
+    left: 5px;
+    font-size: 14px;
+    color: #747070;
+    pointer-events: none;
+    transition: 0.2s ease all;
+  
+  }
+  
+  .form-field input:focus ~ label,
+  .form-field input:not(:placeholder-shown) ~ label {
+    top: -20px;
+    left: 5px;
+    font-size: 14px;
+    color: #9f9fa3;
+    background-color: #fff;
+    padding: 0 5px;
+  }
+  .compact-table th {
+    font-size: 13px;
+    color: black;
+    font-weight:650; /* Adjust the font size as needed */
+  }
+  .compact-table tr {
+    font-size: 13px; /* Adjust the font size as needed */
+  }
+  
+  .compact-table th, .compact-table td {
+    padding: 4px 8px; 
+  }
+  td ,th{
+    white-space: nowrap; /* Prevent text wrapping */
+  }
+  .inputserach{
+    width:300px;
+   
+    background: transparent;
+    margin: 0;
+    padding: 7px 8px;
+    font-size: 14px;
+    color: inherit;
+    border: 2px solid transparent;
+    border-radius: 50px;
+    background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E") no-repeat right;
+  }
+  
+  
+  
+  button[type="submit"]:focus,
+  input[type="search"]:focus {
+  box-shadow: 0 0 3px 0 #fcc034;
+  border-color:#fcc034;
+  outline: none;
+  }
+  
+  .search{
+  box-shadow: 0 0 3px 0 #bbb;
+  border-color: #76a53b;
+  outline: none;
+  }
+  .loading-overlay{
+    position:fixed;
+    top:80%;
+    bottom:80%;
+    left:10;
+    width:80%;
+    height:20%;
+    background-color:rgba(255,255,255,0.8);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    
+  
+  }
+  .blur-background{
+    }
+
+      

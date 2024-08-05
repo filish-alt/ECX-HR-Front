@@ -1,0 +1,83 @@
+
+
+
+<app-shared-nav [buttons]="buttons"></app-shared-nav> 
+ 
+<div class="col-md-8 ml-5">
+  <div class="card " >
+  <form (ngSubmit)="addstep()"> 
+    <div class="row ml-4 mt-3" > 
+      <h6 class="card-title ml-3">Step</h6>
+      
+      <div class="col-md-4 mt-2"> 
+        <div > 
+          <mat-form-field style="height: 65px; width:160px"  > 
+            <mat-label>Select Grade</mat-label> 
+            <mat-select placeholder="Select Grade Level" name="selectedGrade" required [(ngModel)]="selectedGrade"> 
+              <mat-option *ngFor="let grade of grades" [value]="grade.levelId"> 
+                {{ grade.description }} 
+              </mat-option> 
+            </mat-select> 
+          </mat-form-field> 
+        </div> 
+        </div> 
+      <div class="col-md-4 ml-2 mt-3"> 
+        <div class="form-field"> 
+      
+          <input  id="stepDescription" rows="1" required placeholder=" "  name="description" [(ngModel)]="addStepRequest.description" name="description" required>
+            <label for="stepDescription">Step Description</label> </div> 
+      </div> 
+
+      <div class="col-md-4 ml-2 mt-4"> 
+        <div class="form-field"> 
+      
+          <input  id="salary" rows="1" required placeholder=" "  name="salary" [(ngModel)]="addStepRequest.salary" name="salary" required>
+            <label for="salary">Basic Salary</label> </div> 
+      </div> 
+    </div> 
+    <button type="submit" class="btn btn-sm btnsave ml-3 mt-4"><mat-icon>add</mat-icon>Save</button> 
+    <div *ngIf="stepSaved" class=" btndanger btn-sm pull-right">
+      Successfully Added!
+    </div>
+    </form> 
+ 
+    
+    <h6 class="mb-2 ml-3 mt-3"> 
+       List Of Step 
+    </h6> 
+    
+ 
+ 
+   
+<table id="example1" class="table table-bordered table-striped compact-table ml-1"> 
+  <thead> 
+  <tr> 
+    <th>Grade Level</th>
+    <th>Description</th>
+    <th>Basic Salary</th>
+    
+  </tr> 
+  </thead> 
+   <tbody> 
+    <tr *ngFor="let step of steps"> 
+      <td>{{ getGradeName(step.levelId) }} </td>
+      <td>{{step.description}}</td>
+      <td>{{step.salary}}</td>
+    
+ 
+      <td>   
+        <button  class="btn btn-sm btndanger" (click)="deleteStep(step.id)"  [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
+          <mat-icon>delete</mat-icon></button>
+    </td> 
+    
+      <!-- <td> <a [routerLink]="['/step','edit',step.id]">  
+          View 
+          </a> 
+      </td> --> 
+  </tr> 
+    </tbody> 
+</table> 
+ 
+<p *ngIf="!steps || steps.length <= 0">no steps found</p>
+</div>
+</div>

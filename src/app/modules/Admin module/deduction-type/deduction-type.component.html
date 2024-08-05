@@ -1,0 +1,60 @@
+
+<app-shared-nav [buttons]="buttons"></app-shared-nav> 
+<div class="row" > 
+    <div class="col-md-6 ml-5">
+      <div class="card " >
+
+
+<form (ngSubmit)="addDeductionType()">   
+    <div class="row ml-4">
+        <h6 class="card-title mt-3">Deduction Type</h6>
+    <div class="col-md-5 mt-3 "> 
+    <div class="form-field"> 
+    
+      <input type="text" id="deductionTypeName" placeholder=" " [(ngModel)]="addDeductionTypeRequest.name" name="name" Required> 
+     <label for="deductionType">Deduction Type Name</label>  </div> </div>
+  
+ <div  class="col-md-8 mt-3"><button type="submit" class="btn  btn-sm btnsave ml-3"><mat-icon>add</mat-icon>Save </button> </div>
+   
+ </div>   <div *ngIf="DeductionTypeSaved" class="alert  btndanger btn-sm pull-right">
+        Successfully Added!
+      </div> 
+  </form> 
+
+
+
+  
+  <h6 class="mb-3 ml-3 mt-2"> 
+List Of Deduction Type
+</h6> 
+
+
+ 
+<table id="example1" class="table table-bordered table-striped compact-table"  *ngIf="DeductionTypes && DeductionTypes.length>0"> 
+<thead> 
+    <tr> 
+        <th> Deduction Type Name</th> 
+   
+   
+        
+
+    </tr> 
+</thead> 
+<tbody> 
+    <tr *ngFor="let deductionType of DeductionTypes"> 
+       
+        <td>{{deductionType.name}}</td> 
+    
+      
+        <td>   
+            <button  class="btn btn-sm btndanger" (click)="deleteDeductionType(deductionType.id)"  [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
+                <mat-icon>delete</mat-icon></button>
+        </td> 
+
+    </tr> 
+</tbody> 
+</table> 
+<p *ngIf="!DeductionTypes || DeductionTypes.length <= 0">no deductionTypes found</p>
+</div>
+</div>
+</div>

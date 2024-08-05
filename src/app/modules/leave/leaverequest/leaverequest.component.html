@@ -1,0 +1,224 @@
+
+<app-shared-nav class="sharednav"[buttons]="buttons"></app-shared-nav>
+<!-- First Column -->
+<div class="col-md-11 ml-5">
+  <div class="card mb-5">
+    <div class="card-body " >
+      <div class="card-header ">
+        <h4 class="card-title">Leave Request</h4>
+        <p class="card-category">Complete your Leave Request</p>
+      </div>
+      <div [ngClass]="{'blur-background':isLoading}">
+      <div class="container mt-3">
+   
+      <button class="btn btndanger" (click)="toggleLeaveForm()"><mat-icon>add</mat-icon>Fill Leave Request</button>
+        </div> 
+    <!-- Vacancy Form (Initially Hidden) -->
+    <div *ngIf="showLeaveForm"class="mt-4">
+      <h6 class="mb-3">Leave Form</h6>
+      <form   >
+        <div class="card-body ml-2 ">
+          <div class="row">
+            <div class="col-md-4 form-group">
+              <mat-select class="select" placeholder="Select Employee" name="selectedEmployee" required [(ngModel)]="selectedEmployee" (ngModelChange)="onemployeeselected()">
+                <mat-option *ngFor="let employee of supervisorEmployees" [value]="employee.empId">
+                  {{ employee.firstName + ' ' + employee.middleName + ' ' + employee.lastName }}
+                </mat-option>
+              </mat-select>
+            </div>
+       
+            <div class="col-md-4 form-group">
+              <mat-select class="select"  placeholder="Select Leave Type" name="selectedLeaveType" required [(ngModel)]="selectedLeaveType" (ngModelChange)="availableLeaveBalance()">
+                <mat-option *ngFor="let leaveType of leaveTypes" [value]="leaveType.leaveTypeId">
+                  {{ leaveType.leaveTypeName }}
+                </mat-option>
+              </mat-select>
+            </div>
+            <div class="col-md-4">
+              <label *ngIf="selectedLeaveBalance > 0">Available Balance</label>
+              <input class="form-control" *ngIf="selectedLeaveBalance > 0" name="selectedLeaveBalance" required [(ngModel)]="selectedLeaveBalance" [disabled]="true">
+              <div *ngIf="selectedLeaveBalance <= 0 && leaveName && leaveName!='OtherLeave'">
+                <p class="insufficient-balance">Insufficient Balance</p>
+              </div>
+              <label *ngIf="leaveName === 'Annual'">Previous Year Balance</label>
+              <input class="form-control" *ngIf="leaveName === 'Annual'" name="selectedPreviousYear" required [(ngModel)]="selectedPreviousYear" [disabled]="true">
+              <label *ngIf="leaveName === 'Annual' && selectedPreviousYear>0 ">Previous 2 Balance</label>
+              <input *ngIf="leaveName === 'Annual' && selectedPreviousYear>0 " class="form-control"  name="selectedTwoPerviousYear" required [(ngModel)]="selectedTwoPerviousYear" [disabled]="true">
+             
+              <label *ngIf="leaveName === 'Sick'">Sick Full Pay</label>
+              <input class="form-control" *ngIf="leaveName === 'Sick'" name="selectedFullPay" required [(ngModel)]="selectedFullPay" [disabled]="true">
+              <label *ngIf="leaveName === 'Sick' ">Sick Half Pay</label>
+              <input *ngIf="leaveName === 'Sick'  " class="form-control"  name="selectedHalfPay" required [(ngModel)]="selectedHalfPay" [disabled]="true">
+              <label *ngIf="leaveName === 'Sick' ">Sick With out Pay</label>
+              <input *ngIf="leaveName === 'Sick'  " class="form-control"  name="selectedWoPay" required [(ngModel)]="selectedWoPay" [disabled]="true">
+             
+
+            
+            </div></div>
+          
+            <div class="row mt-3">
+            <div class="col-md-4 ">
+                             
+              <label> Employee Position</label><br>
+              <input class="form-field select2" placeholder=" " name="selectedPosition"
+              required [(ngModel)]="selectedPosition" [disabled]="true">
+                <!-- Use *ngFor on mat-option to loop through departments -->
+              
+                
+           
+          </div>
+      
+          <div class="col-md-4">
+                             
+            <label>Department</label><br>
+            <input class="form-field select2" placeholder=" " name="selectedEmployeeDepartment"
+            required [(ngModel)]="selectedEmployeeDepartment" [disabled]="true">
+              <!-- Use *ngFor on mat-option to loop through departments -->
+            
+              
+         
+        </div>
+      </div>
+            
+          
+          <div class="row ">
+            <div class="col-md-4  form-field mt-4 ">
+              <input  placeholder=" " type="text" name="workingDays" [(ngModel)]="leaveRequest.workingDays">
+              <label >Working Days</label>
+              <mat-error *ngIf="leaveRequestForm.get('workingDays').invalid && leaveRequestForm.get('workingDays').touched">
+              Working Days  is required
+            </mat-error>  </div>
+        
+            <div class="col-md-4  form-field mt-4">
+           
+              <input placeholder=" " type="text" name="reason" [(ngModel)]="leaveRequest.reason">
+                 <label>Reason</label>
+            </div>
+            <div class="col-md-4 mt-3 "*ngIf="leaveName!='Annual'">
+              <label for="name" >Supporting File</label>
+              <input placeholder=" " name="file" class="form-control" type="file" id="file"  (change)="onFileSelected($event)" #fileInput>
+              <mat-error *ngIf="IsPdf" class=" pull-right">Selected file is not a PDF</mat-error>
+              <mat-error  *ngIf="IsBig" class="  pull-right">File size exceeds 200MB</mat-error >
+    
+            </div>
+          </div>
+          
+      
+            <form [formGroup]="leaveRequestForm">
+              <div class="card-body ">
+                 <div class="row mt-3 "> <div class="col-md-4">
+                <!-- Start Date -->
+                <mat-form-field style="height: 65px; width: 160px; font-size: 15px;" class="example-full-width">
+                  <input matInput [matDatepicker]="fromPicker" placeholder="Start Date" name="startDate"  formControlName="startDate">
+                  <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+                  <mat-datepicker #fromPicker></mat-datepicker>
+                </mat-form-field><mat-error *ngIf="leaveRequestForm.get('startDate').hasError('required') && leaveRequestForm.get('startDate').touched">
+                Start Date is required.
+              </mat-error>
+              <mat-error *ngIf="leaveRequestForm.get('startDate').hasError('matDatepickerParse') && leaveRequestForm.get('startDate').touched">
+                Invalid Start Date.
+              </mat-error>
+              </div>   
+            
+              <div class="col-md-4">
+                <!-- End Date -->
+                <mat-form-field style="height: 65px; width: 160px; font-size: 15px;" class="example-full-width">
+                  <input matInput [matDatepicker]="toPicker" placeholder="End Date" name="endDate"  formControlName="endDate">
+                  <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+                  <mat-datepicker #toPicker></mat-datepicker>
+                </mat-form-field>
+              
+
+        <mat-error *ngIf="leaveRequestForm.hasError('invalidLeaveBalance') && leaveName!='OtherLeave'">
+          Date difference exceeds selected leave balance
+           </mat-error>
+              <!-- Display validation errors if needed -->
+              <mat-error *ngIf="leaveRequestForm.hasError('invalidDateRange')">
+             EndDate must be greater than Start date
+              </mat-error>
+              <mat-error *ngIf="leaveRequestForm.get('endDate').hasError('required') && leaveRequestForm.get('endDate').touched">
+                End Date is required.
+              </mat-error></div>    </div>   </div>
+          
+            </form>
+            
+   
+          <div class="mt-3">
+            <button type="button" class="btn btnsave btn-sm" *ngIf="!leaveRequest.leaveRequestId" (click)="addleaveRequest()"><mat-icon>add</mat-icon>Add</button>
+            <div *ngIf="leaveRequestSaved" class=" btndanger btn-sm pull-right">Added successfully!</div>
+            <button type="button" class="btn btnsave btn-sm" *ngIf="leaveRequest.leaveRequestId" (click)="updateleaveRequest()"><mat-icon>add</mat-icon>Update</button>
+            <div *ngIf="leaveRequestUpdated" class=" btndanger btn-sm pull-right">Updated successfully!</div>
+          </div>
+        </div>
+      </form>
+      </div>
+</div>
+</div>     <div class="mt-3 card-header"><h6 >Leave Request History</h6></div>
+<div><input  class="ml-5 search inputserach mt-3" type="search" placeholder="Search By Name" [(ngModel)]="searchTerm" (input)="onSearch()">
+</div>
+       
+          
+             
+              <table *ngIf="leaveRequest" class="table table-striped table-bordered compact-table">
+                <thead>
+              
+          
+                  <tr>
+                    <th>Employee</th>
+                    
+                    <th>Leave Type</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Status</th>
+            
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <div class="loading-overlay" *ngIf="isLoading; else loadedData ">
+
+                    <p>Loading......</p>
+                  </div>
+       
+                  <ng-template #loadedData>
+                
+                  <tr *ngFor="let leaveRequest of filteredLeaveRequests">
+                    <td>{{ capitalizeFirstLetter(getEmployeeName(leaveRequest.empId)) }}</td>
+                    
+                    <td>{{ getLeaveTypeName(leaveRequest.leaveTypeId) }}</td>
+                   
+                    <td>{{ leaveRequest.startDate | date:'yyyy-MM-dd' }}</td>
+                    <td>{{ leaveRequest.endDate | date:'yyyy-MM-dd' }}</td>
+                    <td>{{ leaveRequest.leaveStatus }}</td>
+            
+                  <td>  <button class="btn btn-sm btnedit" (click)="openLeaveDetailsModal(leaveRequest.empId)"[ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
+                      <mat-icon>info</mat-icon> 
+                    </button>
+                  
+                     <button class="btn btn-sm " (click)="fetchAndDisplayPDF(leaveRequest)" [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"
+                      style="background-color: rgb(224, 224, 217); color: #0c0c0c; border: none;  cursor: pointer; border-radius: 5px;"  download="filename.pdf" >
+                      <mat-icon>get_app</mat-icon></button>
+                      <mat-error  *ngIf="FileNull && id == leaveRequest.leaveRequestId"
+                      class="  pull-right">No File</mat-error >
+                      
+                      <button class="btn btn-sm btnedit" (click)="editleaveRequest(leaveRequest)"[ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
+                        <mat-icon>edit</mat-icon>
+                      </button>
+                      
+                      <button class="btn btn-sm btndanger" *ngIf="leaveRequest.leaveStatus === 'Pendding'" (click)="deleteleaveRequest(leaveRequest)"
+                      [ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                    </td>
+                  </tr>
+                </ng-template>
+                </tbody>
+              </table>
+
+              </div>
+            
+            </div>
+
+                
+       
+ 

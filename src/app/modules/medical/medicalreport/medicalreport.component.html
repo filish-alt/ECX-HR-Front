@@ -1,0 +1,102 @@
+
+<app-shared-nav  [buttons]="buttons"></app-shared-nav><div class="main-content  ">
+    <div class="container-fluid ">
+  
+  
+  
+            <div class="col-md-12">
+              <div class=" mb-5 ">
+                  <div class="card">
+                       <div class="card-header ">
+                          <h4 class="card-title">Medical Bank Report</h4>
+                   
+         
+                            
+                                 </div>  
+              
+                             <div [ngClass]="{'blur-background':isLoading}">
+                      <div [ngClass]="{'blur-background':isLoading}">
+                  <div class="row  " >
+                       
+              
+  
+  
+        
+      
+          
+  <div class=" mt-3"><input  class="ml-5 search inputserach mt-3" type="search" placeholder="Search By Name" [(ngModel)]="searchTerm" (input)="onSearch()">
+  </div>
+   
+      
+  </div>  
+  <div class="col-md-12  " #printableCard>
+    <div>
+      <div class="ml-3 mt-3 head">{{getBankName(selectedBank)}}</div>
+   
+    </div>
+       <div class="logo" *ngIf="see==true" >
+  
+      <a href="#" class="simple-text">
+          <div>
+              <img  class="logo-img"src="/assets/img/ECXLogo.png"/>
+          </div>
+     
+            
+      </a>
+      <h5>    ETHIOPIAN COMMODITY EXCHANGE</h5>
+      <P>Tel.+251 554 7010, Fax +251 554 7010, P.O.Box 17341 Alsam Chelelek Tower 2, Addis Ababa,Ethiopia www.ecx.com.et</P>
+  
+  </div>
+  <div class="mt-3 ml-3 card head">Medical Fund Report
+  </div>
+  <table  class="table  table-responsive table-bordered table-striped   compact-table mt-3 ml-3">
+    <thead>
+      <tr>
+  
+        <th>Employee Name</th>
+        <th>Bank</th>
+        <th>Bank Branch</th>
+        <th>Bank Account</th>
+        <th>Total Amount Transfer</th>
+   
+      
+    
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Use *ngFor to loop through thepayendances and display eachpayendance's information -->
+  
+      
+      <div class="loading-overlay" *ngIf="isLoading; else loadedData ">
+         <p>Loading......</p>
+      </div>
+  
+  
+      <ng-template #loadedData>
+      <tr *ngFor="let at of filteredMedicals" >
+        
+        <td>{{ capitalizeFirstLetter(getEmployeeName(at.empId)) }}</td>
+               
+        <td>{{ getBankName(at.empId) }}</td>
+      
+        <td>{{ getBankBranch(at.empId) }}</td>
+        
+        <td>{{ getAccountNumber(at.empId) }}</td>
+  
+        <td>{{ at.total }}</td>
+      </tr>
+      </ng-template>
+    </tbody>
+  </table>
+
+
+   </div> 
+   <button (click)="printCard()" class="btn btnedit ml-5">Print</button>
+   </div>
+  </div></div>
+  </div>
+   
+  
+  
+  
+  

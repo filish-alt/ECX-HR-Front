@@ -1,0 +1,140 @@
+<app-shared-nav  [buttons]="buttons">
+</app-shared-nav>
+<div class="main-content  ">
+    <div class="container-fluid ">
+  <div class="row  " >
+
+            <div class="col-md-12">
+
+                  <div class="card">
+                       <div class="card-header ">
+                          <h4 class="ml-2 card-title">Attendances</h4>
+                         
+                          <button class="btn btndanger  mt-4 ml-2" (click)="toggleAttendanceForm()">Register </button>
+                   
+                      </div> 
+                      <div [ngClass]="{'blur-background':isLoading}">
+                
+                        <form class="ml-5" *ngIf="showAttendanceForm">
+                          <div class="card ml-5 col-md-7">
+                          <h6>Add Employee</h6>
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col-md-6 form-group">
+                              <mat-select class="select" placeholder="Select Employee" name="selectedEmployee" required [(ngModel)]="selectedEmployee">
+                                <mat-option *ngFor="let employee of filteredemployees" [value]="employee.empId">
+                                  {{ employee.firstName + ' ' + employee.middleName + ' ' + employee.lastName }}
+                                </mat-option>
+                              </mat-select>
+                            </div>
+                           
+                            <div class="col-md-4 form-group">
+                            <div class="form-field">
+                              <input  id="region" placeholder=" " name="region" [(ngModel)]="selectedAttendanceId" (ngModelChange)="onEmployeeSelected()"type="text" required>
+                              <label for="region">AttendanceId</label>
+                            </div>
+                            </div>
+                  
+                          </div>
+                        </div>
+                       <div> <button   class="btn btn-sm btnsave" type="submit"(click)="updateEmployee()"><mat-icon>add</mat-icon>save</button>
+                       </div> 
+                       <div *ngIf="attendanceUpdate" class="alert btndanger btn-sm pull-right">
+                        Added successfully!
+                             </div> </div>
+                          </form>
+                      <div class="card-body">
+                        <!-- <div>
+                          
+                           <h6>Upload File</h6>
+                            <input type="file" (change)="onFileSelected($event)" />
+                            <button  class="btn btn-sm btnsave" (click)="uploadFile()">Upload File</button>
+                          </div>
+                          <div *ngIf="attendanceUpdate">{{ uploadSuccessMessage }}</div>
+                           -->
+                          
+
+              </div>
+
+          <!-- Attendance.component.html -->
+  <h6 class="ml-5 mt-3">Attendance info </h6>
+  <div class="row mt-4 ml-3 ">
+    <div class="form-group col-md-2"> 
+      <div class="form-field">
+    
+      <input type="date" id="fromDate" [(ngModel)]="fromDate"><label  for="fromDate">From Date:</label>
+      </div></div>
+      <div class="form-group col-md-2"> 
+      <div class="form-field">
+    <input type="date" id="toDate" [(ngModel)]="toDate"> <label for="toDate">To Date:</label>
+  </div>
+    </div>
+                         
+      
+      <div class="col-md-3 ">  <button (click)="filterByDateRange()"  class="btn btn-sm "><mat-icon>search</mat-icon>
+      Search</button>    
+    
+</div><div *ngIf="attendance">Not Found</div>
+                       
+<div><input  class="search inputserach mt-3" type="search" placeholder="Search By Department/Name" [(ngModel)]="searchTerm" (input)="onSearch()">
+ </div>
+   
+        
+    </div>
+      
+  </div>  
+  <table  class="table table table-responsive table-bordered table-striped  table-sm compact-table mt-3">
+    <thead>
+      <tr>
+  
+        <th>Employee Name</th>
+        <th>Attendance Id </th>
+        <th>Department</th>
+        <th>Date</th>
+        <th>Time Table</th>
+        <th>OnDuty</th>
+        <th>OffDuty</th>
+        <th>Clock In</th>
+        <th>Clock Out</th>
+      
+        <th>Late</th>
+        <th>Early</th>
+        <th>TotalLE</th>
+        <th>Absent</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Use *ngFor to loop through the Attendances and display each Attendance's information -->
+  
+      
+      <div class="loading-overlay" *ngIf="isLoading; else loadedData ">
+
+        <p>Loading......</p>
+      </div>
+      <ng-template #loadedData>
+      <tr *ngFor="let at of filteredAttendances" >
+     
+        <td>{{ capitalizeFirstLetter(getEmployeeName(at.empId) )}}</td>
+        <td>{{ at.attendanceId}}</td>
+        <td>{{ at.department}}</td>
+        <td>{{ at.date| date:'yyyy-MM-dd' }}</td>
+        <td>{{ at.timeTable }}</td>
+        <td>{{ at.onDuty| date:'shortTime'}}</td>
+        <td>{{ at.offDuty | date:'shortTime'}}</td>
+        <td>{{ at.clockIn| date:'shortTime'}}</td>
+        <td>{{ at.clockOut | date:'shortTime'}}</td>
+    
+        <td>{{ at.late | date:'hh:mm' }}</td>
+        <td>{{ at.earl | date:'hh:mm'}}</td>
+        <td>{{at.totalLE |date:'hh:mm'}}</td>
+        <td>{{ at.absentDays }}</td>
+      </tr>
+      </ng-template>
+    </tbody>
+  </table>   </div>
+  </div></div>
+</div>
+    </div>
+
+
+  

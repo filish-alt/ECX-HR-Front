@@ -1,0 +1,161 @@
+
+<app-shared-nav  [buttons]="buttons"></app-shared-nav><div class="main-content  ">
+    <div class="container-fluid ">
+
+
+  
+            <div class="col-md-12">
+              <div class=" mb-5 ">
+                  <div class="card ">
+                       <div class="card-header ">
+                        
+                          <h4 class="card-title ">Monthly PayRolls</h4>
+                          <button  class="btn mt-5 ml-3 btn-sm btndanger" (click)="addTempPayroll()">
+                            <mat-icon>perm_data_setting</mat-icon> Calculate </button>
+                            <div><mat-error *ngIf="errormessage" class=" "> {{getEmployeeName(incompleteEmployee)}} Information Not Completed!</mat-error>
+           </div>
+                            
+                            <div *ngIf="PayRollSaved" class=" btndanger btn-sm pull-right"> successfull!</div>
+           
+                            <h6 class=" mt-5 ml-5 yellow">Monthly info </h6>    
+                             </div>  
+              
+                  
+                      <div [ngClass]="{'blur-background':isLoading}">
+                  <div class="row  " >
+                       
+              
+
+  
+
+     
+</div><div *ngIf="TempPayRoll">Not Found</div>
+                       
+<div><input  class="ml-5 search inputserach mt-3" type="search" placeholder="Search By Name" [(ngModel)]="searchTerm" (input)="onSearch()">
+ </div>
+   
+      
+  </div>  
+
+
+  <table  class="table table table-responsive table-bordered table-striped  table-sm compact-table mt-3">
+    <thead><div class="card ml-3 mt-3">{{end}}</div>
+      <tr>
+  
+        <th>Employee Name</th>
+        <th>Ecx Id </th>
+        <th>Employment Date</th>
+        <th>Position</th>
+        <th>Department</th>
+        <th>Branch Table</th>
+         <th>Step</th>
+        <th>Grade</th>
+        <th>Basic Salary</th>
+        <th>HardShip</th>
+        <th>Telephone </th>
+        <th>Transport</th>
+        <th>TaxExcemptedT</th>
+        <th>housing</th>
+        <th>Living</th>
+         <th>OtherTax</th>
+        <th>OverTime</th>
+        <th>OtDay</th>
+        <th>OtNight </th>
+        <th>OtWeekend </th>
+        <th>OtHoliday</th>
+        <th>SalaryAdvance</th>
+        <th>GrossEarning</th>
+        <th>TaxableAmount</th>
+         <th>IncomeTax</th>
+        <th>Pension7%</th>
+        <th>Pension11%</th>
+        <th>CourtAndOther</th>
+        <th>CreditAssociation </th>
+        <th>Registration</th>
+        <th>Share</th>
+         <th>SavingForCreditAss</th>
+         <th>savingForHousing</th>
+         <th>LoanRefund</th>
+        <th>Penality</th>
+        <th>CostShare</th>
+        <th>ForstreetChildren</th>
+        <th>GebetaLehager </th>
+        <th>Absent</th>
+        <th>TotalDeduction</th>
+        <th>NetPay</th>
+        <th>AmountTransfer</th>
+        <th>PromotionStatus</th>
+         <th>ActingStatus</th>
+        <th>PreviousNet</th>
+   
+      
+    
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Use *ngFor to loop through thepayendances and display eachpayendance's information -->
+  
+      
+      <div class="loading-overlay" *ngIf="isLoading; else loadedData ">
+         <p>Loading......</p>
+      </div>
+
+
+      <ng-template #loadedData>
+      <tr *ngFor="let at of filteredTempPayRolls" >
+        
+        <td>{{ capitalizeFirstLetter(getEmployeeName(at.empId)) }}</td>
+        <td>{{ at.ecxId}}</td>
+        <td>{{ at.dateOfEmployeement}}</td>
+        <td>{{ getPositionName(at.positionID) }}</td>
+        <td>{{ getDepartmentName(at.departmentID) }}</td>
+        <td>{{ getBranchName(at.branchID)}}</td>
+        <td>{{ getStepName(at.stepID) }}</td>
+        <td>{{ getGradeName(at.gradeID)}}</td>
+        <td>{{ at.basicSalary}}</td>
+        <td>{{ at.hardShipA }}</td>
+        <td>{{ at.telephoneA }}</td>
+        <td>{{ at.transportA }}</td>
+        <td>{{ at.taxExcemptedTA }}</td>
+        <td>{{ at.housingA }}</td>
+        <td>{{ at.livingA }}</td>
+        <td>{{ at.otherTaxA }}</td>
+        <td>{{ at.overTime }}</td>
+        <td>{{ at.otDay }}</td>
+        <td>{{ at.otNight }}</td>
+        <td>{{ at.otWeekend }}</td>
+        <td>{{ at.otHoliday }}</td>
+        <td>{{ at.salaryAdvance }}</td>
+        <td>{{ at.grossEarnings }}</td>
+        <td>{{ at.taxableAmount }}</td>
+        <td>{{ at.incomeTax }}</td>
+        <td>{{ at.pensionContribution7 }}</td>
+        <td>{{ at.pensionContribution11 }}</td>
+        <td>{{ at.courtAndOtherD }}</td>
+        <td>{{ at.creditAssociationD }}</td>
+        <td>{{ at.registrationD }}</td>
+        <td>{{ at.shareD }}</td>
+        <td>{{ at.savingForCreditAssD }}</td>
+        <td>{{ at.savingForHousingD }}</td>
+        <td>{{ at.loanRefund }}</td>
+        <td>{{ at.penality }}</td>
+        <td>{{ at.costShareD }}</td>
+        <td>{{ at.forStreetChildrenD }}</td>
+        <td>{{ at.gebetaLehagerD }}</td>
+        <td>{{ at.absentD }}</td>
+        <td>{{ at.totalDeduction }}</td>
+        <td>{{ at.netPay }}</td>
+        <td>{{ at.amtTransfer }}</td>
+        <td>{{ at.promotionStatus }}</td>
+        <td>{{ at.actingStatus }}</td>
+        <td>{{ at.previousNet }}</td>
+      </tr>
+      </ng-template>
+    </tbody>
+  </table>   </div>
+  </div></div>
+</div>
+   
+
+
+  

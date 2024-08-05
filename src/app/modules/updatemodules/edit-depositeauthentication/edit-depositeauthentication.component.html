@@ -1,0 +1,96 @@
+<app-shared-nav  [buttons]="buttons"></app-shared-nav><div class="main-content  ">
+    <div class="container-fluid ">
+  <div class="row  ">
+    <div class="col-md-2 ml-3 mr-5   pt-5 ">
+      <app-edit-nav></app-edit-nav>
+    </div>
+  
+  
+            <div class="col-md-8">
+              <div class="card mt-5 mb-5">
+                  <div class="">
+                      <div class="card-header">
+                          <h4 class="card-title">DepositeAuthentications</h4>
+                          <p class="card-category">CEdityour depositeauthentications</p>
+                      </div>
+                      <div class="card-body">
+                          <form (ngSubmit)="updateDepositeAuthentication()">
+                            <div class="card-body">
+                              <div class="row">
+                                <div class="col-md-4">
+                       
+                                    <mat-select class="form-field select" placeholder="Select Bank" required name="selectedBank" [(ngModel)]="selectedBank" >
+                                      <!-- Replace the options below with your actual division options -->
+                                      <mat-option *ngFor="let bank of Banks" [value]="bank.id">
+                                        {{bank.bankName}}
+                                      </mat-option>
+                                     
+                                    </mat-select>
+                                 
+                                </div>
+                                <div class="col-md-6 form-field">
+                                  <input  placeholder=" " type="text" name="bankBranch" [(ngModel)]="depositeAuthentication.bankBranch">
+                                  <label>Bank Branch</label>
+                                </div>  
+                              </div>
+                            </div>
+                            <div class="card-body">
+                              <div class="row">
+                                <div class="col-md-6 form-field">
+                                  <input placeholder=" " type="text" name="tinNumber" [(ngModel)]="depositeAuthentication.tinNumber">
+                                  <label>Tin Number</label>
+                                </div>
+                                <div class="col-md-6 form-field">
+                                  <input  placeholder=" " name="bankAccount" [(ngModel)]="depositeAuthentication.bankAccount" type="text" required>
+                                  <label>Bank Account</label>
+                                </div>
+                              </div>
+                            </div>
+                   
+                    
+                      <div> <button type="button" class="btn btn-sm btnsave" *ngIf="depositeAuthentication.id!=undefined" (click)="updateDepositeAuthentication()">Update </button>
+                      </div>
+                           <div *ngIf="depositeAuthenticationUpdated"  class=" btndanger btn-sm pull-right">
+                          Updated successfully!
+                         </div> 
+                       
+                          <button type="button" class="btn btn-sm btnsave"  *ngIf="depositeAuthentications.length === 0" (click)="addDepositeAuthentication()">Add</button>
+                     
+                              <div *ngIf="depositeauthenticationSaved" class="alert btndanger btn-sm pull-right">
+                            Added successfully!
+                            </div>
+                  </form>
+              </div>
+          </div>
+          <h6>Deposit Authentication List</h6>
+    <table class="table table-bordered table-striped compact-table ">
+      <thead>
+        <tr>
+          <th>Bank</th>
+          <th>Bank Branch</th>
+          <th>Bank Account</th>
+          <th>TIN Number</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Use *ngFor to loop through the depositeauthentications array and display each deposit authentication record -->
+        <tr *ngFor="let depositeAuthentication of depositeAuthentications" >
+          <td>{{ getBankName(depositeAuthentication.bankId)}}</td>
+          <td>{{ depositeAuthentication.bankBranch }}</td>
+          <td>{{depositeAuthentication.bankAccount }}</td>
+          <td>{{ depositeAuthentication.tinNumber }}</td>
+          <td>
+            <button class="btn btn-sm btnedit" (click)="editDepositeAuthentication(depositeAuthentication)"[ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"> 
+              <mat-icon>edit</mat-icon></button>
+            <button class="btn btn-sm btndanger" (click)="deleteDepositeAuthentication(depositeAuthentication)"[ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"> 
+              <mat-icon>delete</mat-icon></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+      </div>
+     </div></div>
+  </div>
+  </div>
+  
+  

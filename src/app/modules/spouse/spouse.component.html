@@ -1,0 +1,96 @@
+<app-shared-nav  [buttons]="buttons"></app-shared-nav><div class="main-content  ">
+  <div class="container-fluid ">
+<div class="row  ">
+  <div class="col-md-2 ml-3 mr-5  pt-4 ">
+    <app-min-nav></app-min-nav>
+  </div>
+
+          <div class="col-md-9">
+            <div class="card  mb-5">
+            <div class="">
+                <div class="card-header ">
+                    <h4 class="card-title">Spouse</h4>
+                    <p class="card-category">Complete your profile</p>
+                </div>
+                <div class="card-body">
+                    <form>
+                      <div class="row">
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col-md-4 form-field">
+                              <input  placeholder=" " type="text" name="name" [(ngModel)]="spouse.name">
+                              <label>Name</label>
+                            </div>
+                            <div class="col-md-4 form-field">
+                              <input  placeholder=" " type="text" name="relationship" [(ngModel)]="spouse.relationship ">
+                              <label>Relationship</label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                   
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col-md-6 ">
+                            <mat-form-field class="example-full-width" style="height: 65px; width:160px" >
+                              <input matInput [matDatepicker]="dateofbirthPicker" placeholder=" " name="dateOfBirth" [(ngModel)]="spouse.dateOfBirth">
+                              <mat-label>Date Of Birth</mat-label>
+                              <mat-datepicker-toggle matSuffix [for]="dateofbirthPicker"></mat-datepicker-toggle>
+                              <mat-datepicker #dateofbirthPicker></mat-datepicker>
+                            </mat-form-field>
+                             </div></div> 
+                             <button type="button" class="btn btn-sm btnsave" *ngIf="spouse.id!=undefined"  (click)="updateSpouse()">Update</button>
+             
+                             <div *ngIf="spouseUpdated" class="alert btndanger btn-sm pull-right">
+                               Updated successfully!
+                             </div>
+                             <button type="button" class="btn btn-sm btnsave" *ngIf="spouse.id===undefined" (click)="addSpouse()">Add</button>
+                                  
+                             <div *ngIf="spouseSaved" class="alert btndanger btn-sm pull-right">
+                           Added successfully!
+                           </div>   </div>
+                       
+                         
+                        <!-- <button mat-raised-button type="submit" class="btn btn-danger pull-right">save Profile</button> -->
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+            <!-- spouse.component.html -->
+
+<div class="container">
+
+
+
+
+  <h6>Spouse List</h6>
+  <table   class="table table-bordered table-striped compact-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Date of Birth</th>
+        <th>Relationship</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Use *ngFor to loop through the spouses array and display each spouse's information -->
+      <tr *ngFor="let spouse of spouses">
+        <td>{{ spouse.name }}</td>
+        <td>{{ spouse.dateOfBirth }}</td>
+        <td>{{ spouse.relationship }}</td>
+        <td>
+          <button class="btn btn-sm btnedit" (click)="editSpouse(spouse)">
+             <mat-icon>edit</mat-icon>Edit</button>
+          <button class="btn btn-sm btndanger" (click)="deleteSpouse(spouse)">
+            <mat-icon>delete</mat-icon>Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+        </div>
+       
+    </div>
+</div>
+

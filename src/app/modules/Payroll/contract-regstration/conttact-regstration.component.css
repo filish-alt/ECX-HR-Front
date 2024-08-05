@@ -1,0 +1,210 @@
+/* styles.css or styles.scss */
+.nav-button {
+  margin-right: 100px; /* Add desired margin between the buttons */
+}
+/* Use a more specific selector to target .mat-error */
+.mat-form-field .mat-error {
+color: red;
+font-size: 12px;
+ margin-top: 100px;
+}
+.cardhead{
+background-color: rgb(224, 224, 217);
+}
+.select{
+border-bottom: 1px solid #ced4da;
+font-size: 15px;
+}
+.img {
+width:50%;
+height: 90%;
+margin-left: 25%;
+border-radius: 50%;
+}
+.form-field {
+position: relative;
+margin-bottom: 20px;
+}
+
+.form-field input {
+border: none;
+border-bottom: 1px solid #ccc;
+width: 100%;
+padding: 5px;
+font-size: 16px;
+outline: none;
+}
+
+.form-field label {
+position: absolute;
+top: 0;
+left: 5px;
+font-size: 14px;
+color: #747070;
+pointer-events: none;
+transition: 0.2s ease all;
+}
+
+.form-field input:focus ~ label,
+.form-field input:valid ~ label {
+top: -20px;
+left: 5px;
+font-size: 14px;
+color: #333335;
+background-color: #fff;
+padding: 0 5px;
+}
+::ng-deep .mat-datepicker-content .mat-calendar {
+width: 229px!important;
+height: 300px!important;
+}
+
+/* styles.css or your component-specific style file */
+
+.custom-mat-select {
+border: 1px solid #ccc;
+border-radius: 4px;
+padding: 8px;
+}
+.compact-table th {
+font-size: 13px;
+color: black;
+font-weight:650; /* Adjust the font size as needed */
+}
+.compact-table tr {
+font-size: 13px; /* Adjust the font size as needed */
+}
+
+.compact-table th, .compact-table td {
+padding: 4px 8px; 
+}
+td ,th{
+white-space: nowrap; /* Prevent text wrapping */
+}
+
+
+/* styles.css or your component-specific style file */
+
+/* Media query for devices with a maximum width of 768px */
+@media (max-width: 768px) {
+
+/* Adjust form-field styles for smaller screens */
+.form-field {
+  margin-bottom: 10px;
+}
+
+/* Adjust label styles for smaller screens */
+.form-field label {
+  font-size: 12px;
+}
+
+/* Adjust input styles for smaller screens */
+.form-field input {
+  font-size: 14px;
+}
+.sharednav{
+  width:70%;
+}
+}
+
+@media (max-width: 576px) {
+
+.form-field {
+  margin-bottom: 10px;
+}
+
+
+.form-field label {
+  font-size: 12px;
+}
+
+/* Adjust input styles for smaller screens */
+.form-field input {
+  font-size: 14px;
+}
+
+.sharednav{
+  width:70%;
+}
+
+}
+
+
+
+/* Media query for devices with a maximum width of 1200px */
+@media (max-width: 348px) {
+.sharednav{
+  width:50%;
+}
+
+/* Add more adjustments as needed */
+}
+.cardhead{
+  background-color: rgb(224, 224, 217);
+}
+
+
+form-field {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.form-field input {
+  border: none;
+  border-bottom: 1px solid #ccc;
+  width: 100%;
+  padding: 5px;
+  font-size: 16px;
+  outline: none;
+}
+
+.form-field label {
+  position: absolute;
+  top: 0;
+  left: 5px;
+  font-size: 14px;
+color: #696666;
+  pointer-events: none;
+  transition: 0.2s ease all;
+}
+
+.form-field input:focus ~ label,
+.form-field input:valid ~ label {
+  top: -20px;
+  left: 5px;
+  font-size: 14px;
+  color: #007bff;
+  background-color: #fff;
+  padding: 0 5px;
+}
+::ng-deep .mat-datepicker-content .mat-calendar {
+  width: 229px!important;
+  height: 300px!important;
+}
+
+
+.select{
+  border-bottom: 1px solid #ced4da;
+  font-size: 14px;
+}
+.select2{
+  border: none;
+  border-bottom:1px solid #ced4da;
+}
+.compact-table th {
+  font-size: 13px;
+  color: black;
+  font-weight:650; /* Adjust the font size as needed */
+}
+.compact-table tr {
+  font-size: 13px; /* Adjust the font size as needed */
+}
+
+.compact-table th, .compact-table td {
+  padding: 4px 8px; 
+}
+td ,th{
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+

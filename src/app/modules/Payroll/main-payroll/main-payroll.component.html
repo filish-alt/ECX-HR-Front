@@ -1,0 +1,184 @@
+
+<app-shared-nav  [buttons]="buttons"></app-shared-nav><div class="main-content  ">
+    <div class="container-fluid ">
+
+
+  
+            <div class="col-md-12">
+              <div class=" mb-5 ">
+                  <div class="card">
+                       <div class="card-header ">
+                          <h4 class="card-title ">PayRolls</h4>
+                   
+         
+                            <button class="btn mt-5 ml-3 btn-sm btndanger" (click)="addPayroll()">
+                              <mat-icon>perm_data_setting</mat-icon> Generate </button>
+                              <div class="mt-3 ml-3">  <mat-error  *ngIf="!generate" class="  pull-right">OOOPS NOT YET</mat-error >
+                              </div>
+                              <h6 class=" mt-5 ml-5 yellow">PayRoll info </h6>    
+                             </div>  
+              
+                             <div [ngClass]="{'blur-background':isLoading}">
+                      <div [ngClass]="{'blur-background':isLoading}">
+                  <div class="row  " >
+           
+  <div class="col-md-4 ml-5 form-field">
+    <mat-select class="select"  placeholder="Select Month" name="selectedMonth" [(ngModel)]="selectedMonth" required>
+      <mat-option value="September">September</mat-option>
+      <mat-option value="October">October</mat-option>
+      <mat-option value="November">November</mat-option>
+      <mat-option value="December">December</mat-option>
+      <mat-option value="January">January</mat-option>
+      <mat-option value="February">February</mat-option>
+      <mat-option value="March">March</mat-option>
+      <mat-option value="April">April</mat-option>
+      <mat-option value="May">May</mat-option>
+      <mat-option value="June">June</mat-option>
+      <mat-option value="July">July</mat-option>
+      <mat-option value="August">August</mat-option>
+    </mat-select>
+    
+  </div>   
+
+  <div class="col-md-3 ml-3 form-field">
+    <mat-select class="select"  placeholder="Select Year" name="selectedYear" [(ngModel)]="selectedYear">
+        <mat-option value="{{year}}" *ngFor="let year of years">
+{{year}}
+    </mat-option>
+</mat-select>
+   
+    </div>
+     <div class="col-md-3 ">  <button (click)="filterByMonth()"  class="btn btn-sm "><mat-icon>search</mat-icon>
+      Search</button>  
+  </div>       
+      
+     
+</div>
+<mat-error class="ml-5 " *ngIf="PayRoll">Not Found</mat-error>
+                       
+<div><input  class="ml-5 search inputserach mt-3" type="search" placeholder="Search By Name" [(ngModel)]="searchTerm" (input)="onSearch()">
+ </div>
+   
+      
+  </div>  
+  <table  class="table table table-responsive table-bordered table-striped  table-sm compact-table mt-3">
+    <thead> <p class="card ml-3 mt-3">{{selectedMonthStatus || end}}</p>
+      <tr>
+  
+        <th>Employee Name</th>
+        <th>Ecx Id </th>
+        <th>Employment Date</th>
+        <th>Position</th>
+        <th>Department</th>
+        <th>Branch Table</th>
+         <th>Step</th>
+        <th>Grade</th>
+        <th>Basic Salary</th>
+        <th>HardShip</th>
+        <th>Telephone </th>
+        <th>Transport</th>
+        <th>TaxExcemptedT</th>
+        <th>housing</th>
+        <th>Living</th>
+         <th>OtherTax</th>
+        <th>OverTime/th>
+        <th>OtDay</th>
+        <th>OtNight </th>
+        <th>OtWeekend </th>
+        <th>OtHoliday</th>
+        <th>SalaryAdvance</th>
+        <th>GrossEarning</th>
+        <th>TaxableAmount</th>
+         <th>IncomeTax</th>
+        <th>Pension7%</th>
+        <th>Pension11%</th>
+        <th>CourtAndOther</th>
+        <th>CreditAssociation </th>
+        <th>Registration</th>
+        <th>Share</th>
+        <th>SavingForCreditAss</th>
+        <th>SavingForHousing</th>
+         <th>LoanRefund</th>
+        <th>Penality</th>
+        <th>CostShare</th>
+        <th>ForstreetChildren</th>
+        <th>GebetaLehager</th>
+        <th>Absent</th>
+        <th>TotalDeduction</th>
+        <th>NetPay</th>
+        <th>AmountTransfer</th>
+        <th>PromotionStatus</th>
+         <th>ActingStatus</th>
+        <th>PreviousNet</th>
+   
+      
+    
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Use *ngFor to loop through thepayendances and display eachpayendance's information -->
+  
+      
+      <div class="loading-overlay" *ngIf="isLoading; else loadedData ">
+         <p>Loading......</p>
+      </div>
+
+
+      <ng-template #loadedData>
+      <tr *ngFor="let at of filteredPayRolls" >
+        
+        <td>{{ capitalizeFirstLetter(getEmployeeName(at.empId)) }}</td>
+        <td>{{ at.ecxId}}</td>
+        <td>{{ at.dateOfEmployeement}}</td>
+        <td>{{ getPositionName(at.positionID) }}</td>
+        <td>{{ getDepartmentName(at.departmentID) }}</td>
+        <td>{{ getBranchName(at.branchID)}}</td>
+        <td>{{ getStepName(at.stepID) }}</td>
+        <td>{{ getGradeName(at.gradeID)}}</td>
+        <td>{{ at.basicSalary}}</td>
+        <td>{{ at.hardShipA }}</td>
+        <td>{{ at.telephoneA }}</td>
+        <td>{{ at.transportA }}</td>
+        <td>{{ at.taxExcemptedTA }}</td>
+        <td>{{ at.housingA }}</td>
+        <td>{{ at.livingA }}</td>
+        <td>{{ at.otherTaxA }}</td>
+        <td>{{ at.overTime }}</td>
+        <td>{{ at.otDay }}</td>
+        <td>{{ at.otNight }}</td>
+        <td>{{ at.otWeekend }}</td>
+        <td>{{ at.otHoliday }}</td>
+        <td>{{ at.salaryAdvance }}</td>
+        <td>{{ at.grossEarnings }}</td>
+        <td>{{ at.taxableAmount }}</td>
+        <td>{{ at.incomeTax }}</td>
+        <td>{{ at.pensionContribution7 }}</td>
+        <td>{{ at.pensionContribution11 }}</td>
+        <td>{{ at.courtAndOtherD }}</td>
+        <td>{{ at.creditAssociationD }}</td>
+        <td>{{ at.registrationD }}</td>
+        <td>{{ at.shareD }}</td>
+        <td>{{ at.savingForCreditAssD }}</td>
+        <td>{{ at.savingForHousingD }}</td>
+        <td>{{ at.loanRefund }}</td>
+        <td>{{ at.penality }}</td>
+        <td>{{ at.costShareD }}</td>
+        <td>{{ at.forStreetChildrenD }}</td>
+        <td>{{ at.gebetaLehagerD }}</td>
+        <td>{{ at.absentD }}</td>
+        <td>{{ at.totalDeduction }}</td>
+        <td>{{ at.netPay }}</td>
+        <td>{{ at.amtTransfer }}</td>
+        <td>{{ at.promotionStatus }}</td>
+        <td>{{ at.actingStatus }}</td>
+        <td>{{ at.previousNet }}</td>
+      </tr>
+      </ng-template>
+    </tbody>
+  </table>   </div>
+  </div></div>
+</div>
+   
+
+
+  

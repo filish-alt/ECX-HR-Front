@@ -1,0 +1,212 @@
+
+
+<body id="page-top" class="top">
+
+   
+    <div id="wrapper">
+
+     
+        <div id="content-wrapper" class="d-flex flex-column">
+
+          
+            <div id="content">
+
+          
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                   
+
+                </nav>
+              
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <!-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                class="fas fa-download  fa-sm text-white-50"></i> Generate Report</a>
+                    </div> -->
+
+                    <!-- Content Row -->
+                    <div class="row">
+
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary edit shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold edit text-uppercase mb-1">
+                                              Total Number Of Employees</div>
+                                            <div class="h5 mb-0 font-weight-bold edit">{{noemployees}} employees</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold edit text-uppercase mb-1">
+                                         Total Number Of Leaves(this Month)</div>
+                                            <div class="h5 mb-0 font-weight-bold edit">
+                                            {{noleaverequests}} Requests</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-info shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold edit text-uppercase mb-1">Tasks
+                                            </div>
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col-auto">
+                                                    <div class="h5 mb-0 mr-3 font-weight-bold edit">50%</div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="progress progress-sm mr-2">
+                                                        <div class="progress-bar bg-info" role="progressbar"
+                                                            style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                                                            aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pending Requests Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold edit text-uppercase mb-1">
+                                               Promotion(This month)</div>
+                                            <div class="h5 mb-0 font-weight-bold edit">{{nopromotion}}</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content Row -->
+
+                    <div class="row">
+
+                        <!-- Area Chart -->
+                        <div class="col-xl-8 col-lg-8">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->      
+                                <div class="card-header"><h6 class="m-0 font-weight-bold edit">Earnings Overview</h6></div>
+                                <div
+                                    class="card-body py-3 d-flex flex-row align-items-center justify-content-between">
+                              
+                                   <!-- ... (previous code) -->
+                                   <div class="col-lg-8">
+                                    <!-- Display a Highcharts chart -->
+                                    <div id="genderChart" #genderChartContainer></div>
+                                  </div>
+                                </div>
+                            
+                             
+                            </div>
+                        </div>
+                        <div class="card shadow mb-4 col-lg-4 mt-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold edit">Organizational Goal </h6>
+                            </div>
+                            <div class="card-body">
+                                <p>The Ethiopia Commodity Exchange, (ECX), is a marketplace, 
+                                    where buyers and sellers come together to trade, assured of quality, delivery and payment. 
+                                    The vision of ECX is to transform the Ethiopian economy by becoming a global commodity market of choice.
+                                     ECX’s mission is to connect all buyers and sellers in an efficient, reliable, and transparent market by harnessing innovation and technology,
+                                     and based on continuous learning, fairness, and commitment to excellence.</p>
+                              
+                            </div>
+                        </div>
+
+                        <!-- Pie Chart -->
+
+                    </div>
+
+                    <!-- Content Row -->
+                    <div class="row">
+
+                        
+
+                        <div class="col-lg-10 mb-4">
+
+                            <!-- Illustrations -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header">
+                                    <h6 class="m-0 font-weight-bold edit">Illustrations</h6>
+                                </div>
+                               
+                                    <div class="text-center">
+                                        <img class="img-fluid  mt-3 mb-4 ml-4 style" 
+                                            src="/assets/img/ecx.jpg" alt="...">
+                                       
+                                            <img class="img-fluid  mt-3 mb-4 style" 
+                                            src="/assets/img/ecx.jpg" alt="...">
+                                           
+                                    </div>
+                                            
+                        
+                            </div>
+
+                            <!-- Approach -->
+                        
+                        </div>
+                    </div>
+
+                </div>
+            
+
+            </div>
+ 
+
+        </div>
+     
+
+    </div>
+  
+ 
+    
+
+</body>
+
+
+
+
+

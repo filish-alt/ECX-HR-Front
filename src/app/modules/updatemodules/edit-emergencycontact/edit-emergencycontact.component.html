@@ -1,0 +1,112 @@
+<app-shared-nav  [buttons]="buttons"></app-shared-nav><div class="main-content  ">
+    <div class="container-fluid ">
+  <div class="row  ">
+    <div class="col-md-2 ml-3 mr-5  pt-5 ">
+      <app-edit-nav></app-edit-nav>
+    </div>
+  
+  
+            <div class="col-md-8">
+              <div class="card mt-5 mb-5">
+                  <div class="">
+                      <div class="card-header ">
+                          <h4 class="card-title">Emergency Contacts</h4>
+                          <p class="card-category">Edityour emergencycontacts</p>
+                      </div>
+                      <div class="card-body">
+                          <form (ngSubmit)="updateEmergencyContact()">
+                            <div class="card-body">
+                              <div class="row">
+                                <div class="col-md-4 form-field">
+                                  
+                                 <input placeholder=" " type="text" name="name" [(ngModel)]="emergencyContact.name">
+                               <label for="name">Name</label>  </div>
+                                <div class="col-md-4 form-field">
+                                 
+                                  <input placeholder=" " type="text" name="relationship" id="relationship" [(ngModel)]="emergencyContact.relationship">
+                                 <label for="relationship">Relationship</label></div>
+                                <div class="col-md-4 form-field">
+                                  
+                                  <input placeholder=" " id="region" name="region" [(ngModel)]="emergencyContact.region" type="text" required>
+                                <label for="region">Region</label></div>
+                              </div>
+                            </div>
+                  
+                            <div class="card-body">
+                              <div class="row">
+                                <div class="col-md-4 form-field">
+                                
+                                  <input placeholder=" " id="town" type="text" name="town" [(ngModel)]="emergencyContact.town">
+                                  <label for="town">Town</label></div>
+                                <div class="col-md-4 form-field">
+                                  
+                                  <input placeholder=" " id="subcity" type="text" name="subcity" [(ngModel)]="emergencyContact.subCity">
+                              <label for="subcity">Subcity</label>  </div>
+                                <div class="col-md-4 form-field">
+                                  
+                                  <input placeholder=" " type="text" name="kebele" [(ngModel)]="emergencyContact.kebele">
+                                <label for="kebele">Kebele</label></div>
+                              </div>
+                            </div>
+                  
+                            <div class="card-body">
+                              <div class="row">
+                             
+                                <div class="col-md-4 form-field">
+                                    
+                               <input id="houseNumber" placeholder=" " type="text" name="houseNumber" [(ngModel)]="emergencyContact.houseNo">
+                               <label for="houseNumber">House Number</label>  </div>
+                                <div class="col-md-4 form-field">
+                                  <input placeholder=" " name="phoneNumber" [(ngModel)]="emergencyContact.phoneNumber" required>
+                                    <label for="phoneNumber">Phone Number</label>
+                                  <mat-error *ngIf="!emergencyContact.phoneNumber && emergencycontactForm.get('phoneNumber').touched">
+                                    Phone Number is required
+                                  </mat-error>
+                                </div>
+                              </div>
+                            </div>
+                   
+                      
+                      <div> <button type="button" class="btn btn-sm btnsave" *ngIf="emergencyContact.id!=undefined"  (click)="updateEmergencyContact()">Update</button>
+                      </div>
+                           <div *ngIf="emergencyContactUpdated" class="btndanger btn-sm pull-right">
+                          Update successfully!
+                         </div>
+                       
+                         
+                         <button type="button" class="btn btn-sm btnsave" *ngIf="emergencyContact.id===undefined" (click)="addEmergencyContact()">Add</button>
+                     
+                              <div *ngIf="emergencycontactSaved" class=" btndanger btn-sm pull-right">
+                             Added successfully!
+                            </div>
+                  </form>
+              </div>
+          </div>
+          <h6>Emergency Contact List</h6>
+    <table class="table table-bordered table-striped compact-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Phone Number</th>
+          <th>Relationship</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Use *ngFor to loop through the emergencycontacts array and display each emergency contact record -->
+        <tr *ngFor="let emergencyContact of emergencyContacts">
+          <td>{{ emergencyContact.name }}</td>
+          <td>{{ emergencyContact.phoneNumber }}</td>
+          <td>{{emergencyContact.relationship }}</td>
+          <td>
+            <button class="btn btn-sm btnedit" (click)="editEmergencyContact(emergencyContact)"[ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"> <mat-icon>edit</mat-icon></button>
+            <button class="btn btn-sm btndanger" (click)="deleteEmergencyContact(emergencyContact)"[ngStyle]="{'font-size': '12px', 'padding': '4px 8px'}"> <mat-icon>delete</mat-icon></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+      </div>
+     </div></div>
+  </div>
+  </div>
+  
+  

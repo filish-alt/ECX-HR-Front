@@ -1,0 +1,125 @@
+<app-shared-nav class="sharednav"[buttons]="buttons"></app-shared-nav>
+<!-- First Column -->
+<div class="col-md-11 ml-5">
+  <div class="card mb-5">
+    <div class="card-body " >
+      <div class="card-header ">
+        <h4 class="card-title ">OverTime </h4>
+
+      </div>
+    
+      <div class="container mt-3">
+        <button class="btn btndanger" (click)="toggleLeaveForm()" ><mat-icon>add</mat-icon>Fill OverTime Request</button>
+          </div> 
+          <div class="mt-4">
+              <form  *ngIf="showOverTimeForm" >
+               <h6 class="mb-3">OverTime Form</h6>
+           <div class="row ml-2">
+                <div class="col-md-4 form-group">
+                    <mat-select class="select" placeholder="Select Employee" name="selectedEmployee" required [(ngModel)]="selectedEmployee" (ngModelChange)="onemployeeselected()">
+                      <mat-option *ngFor="let employee of Employees" [value]="employee.empId">
+                        {{ employee.firstName + ' ' + employee.middleName + ' ' + employee.lastName }}
+                      </mat-option>
+                    </mat-select>
+                  </div>
+               
+                    <div class="col-md-4 ">
+                                     
+                      <label> Employee Position</label><br>
+                      <input class="form-field select2" placeholder=" " name="selectedPosition"
+                      required [(ngModel)]="selectedPosition" [disabled]="true">
+                        <!-- Use *ngFor on mat-option to loop through departments -->
+                      
+                   
+                  </div>
+              
+                  <div class="col-md-4  ">
+                                     
+                    <label>Department</label><br>
+                    <input class="form-field select2" placeholder=" " name="selectedEmployeeDepartment"
+                    required [(ngModel)]="selectedEmployeeDepartment" [disabled]="true">
+                      <!-- Use *ngFor on mat-option to loop through departments -->
+                    
+                      
+                 
+                </div>
+            </div>
+      
+          <div class="row mt-3">
+            <div class="col-md-3 ml-4 form-field mt-4 ">
+                <input  placeholder="hours" type="text" name="otDay" [(ngModel)]="OverTime.otDay">
+                <label >Ot Day</label>
+              </div>
+              <div   class="col-md-3  ml-4 form-field mt-4">
+             
+                <input placeholder="hours" type="text" name="otNight" [(ngModel)]="OverTime.otNight">
+                   <label>Ot Night</label>
+              </div>
+          </div>
+          <div class="row mt-3">
+         
+            <div class="col-md-3 ml-4 form-field mt-4 ">
+              <input  placeholder="hours" type="text" name="otWeekend" [(ngModel)]="OverTime.otWeekend">
+              <label >Ot Weekend</label>
+            </div>
+            <div   class="col-md-3  ml-4 form-field mt-4">
+           
+              <input placeholder="hours" type="text" name="otHoliday" [(ngModel)]="OverTime.otHoliday">
+                 <label>Ot Holiday</label>
+            </div>
+          
+          </div>
+          <div class="row mt-3">
+      
+                 
+
+              <div class="col-md-4 pt-3">
+                <mat-form-field class="select2">
+                  <mat-label>Upload Date</mat-label>
+                  <input matInput [matDatepicker]="picker" placeholder="Choose a date" required name="joinedDate" [(ngModel)]="OverTime.date" >
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                </div>
+              </div>
+     
+
+
+      <div class="mt-3">
+          <button type="button" class="btn btnsave btn-sm" (click)="updateOverTime()"><mat-icon>add</mat-icon>Add</button>
+        <div *ngIf="OverTimeUpdated" class=" btndanger btn-sm pull-right">Updated successfully!</div>
+      </div>   </form>
+            </div></div>
+        
+            <div><input  class="ml-5 search inputserach mt-3" type="search" placeholder="Search By Name" [(ngModel)]="searchTerm" (input)="onSearch()">
+            </div>
+            <h6 class="mt-5 ml-3 yellow">OverTime Records</h6>
+            <table class="table table-bordered table-striped compact-table">
+              <thead>
+                <tr>
+                  <th>Employee</th>
+                  <th>OtDay</th>
+                  <th>Ot Night</th>
+                  <th>Ot Weekend</th>
+                  <th>Ot Holiday</th>
+                  <th>Percent</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Use *ngFor to loop through the OverTimes array and display each OverTime record -->
+                <tr  *ngFor="let OverTime of filteredOverTimes" >
+                  <td >{{ capitalizeFirstLetter(getEmployeeName(OverTime.empId)) }}</td>
+                  <td >{{ OverTime.otDay}}</td>
+                  <td>{{ OverTime.otNight}}</td>
+                <td >{{ OverTime.otWeekend}}</td>  
+                <td >{{ OverTime.otHoliday}}</td>
+          
+                  <td> <button class="btn btn-sm btnedit" (click)="editOverTime(OverTime)">
+                    <mat-icon class="small">edit</mat-icon></button>
+                    
+                 </td>
+                </tr>
+              </tbody>
+            </table>
+          </div></div>
+
